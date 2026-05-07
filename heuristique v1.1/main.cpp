@@ -119,6 +119,10 @@ pair<int, int> evaluate_max2sat_solution(const vector<Clause>& formula, const ma
 
 vector<Clause> reduce_max2sat_to_implications(const vector<Clause>& clauses) {
     vector<Clause> new_clauses;
+    
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> coin_flip(0, 1);
 
     for (const auto& clause : clauses) {
         int w = clause.weight;
@@ -130,9 +134,15 @@ vector<Clause> reduce_max2sat_to_implications(const vector<Clause>& clauses) {
             int l2 = clause.literals[1];
 
             if (l1 > 0 && l2 > 0) {
+                // 50% chance to swap literals
+                if (coin_flip(gen)) swap(l1, l2);
+                
                 new_clauses.push_back({w, {l2}});
                 new_clauses.push_back({-w, {-l1, l2}});
             } else if (l1 < 0 && l2 < 0) {
+                // 50% chance to swap literals
+                if (coin_flip(gen)) swap(l1, l2);
+                
                 new_clauses.push_back({w, {l1}});
                 new_clauses.push_back({-w, {l1, -l2}});
             } else {
@@ -142,7 +152,6 @@ vector<Clause> reduce_max2sat_to_implications(const vector<Clause>& clauses) {
     }
     return new_clauses;
 }
-
 // --- CPLEX Solvers ---
 
 // 1. Solves the LP relaxation (translates `solve_max2sat_implications`)
@@ -269,10 +278,11 @@ vector<Clause> read_wcnf(const string& file_path, int& out_total_weight) {
         }
     }
     return clauses;
-}void process_folder_to_csv(const string& folder_path, const string& csv_path) {
+}
+void process_folder_to_csv(const string& folder_path, const string& csv_path, double timeout_seconds = 1.0) {
     ofstream csv_file(csv_path);
     
-    csv_file << "Filename,Num_Variables,Num_Clauses,Total_Weight,Satisfied_Weight,Violated_Weight,Elapsed_Time\n";
+    csv_file << "Filename,Num_Variables,Num_Clauses,Total_Weight,Best_Satisfied_Weight,Best_Violated_Weight,Iterations,Elapsed_Time\n";
 
     if (!fs::exists(folder_path) || !fs::is_directory(folder_path)) {
         cerr << "Error: Directory does not exist -> " << folder_path << endl;
@@ -284,7 +294,7 @@ vector<Clause> read_wcnf(const string& file_path, int& out_total_weight) {
             string filepath = entry.path().string();
             string filename = entry.path().filename().string();
             
-            cout << "Processing: " << filename << "..." << endl;
+            cout << "Processing: " << filename << " for " << timeout_seconds << " seconds..." << endl;
 
             int total_weight_from_header = 0;
             vector<Clause> original_clauses = read_wcnf(filepath, total_weight_from_header);
@@ -293,37 +303,58 @@ vector<Clause> read_wcnf(const string& file_path, int& out_total_weight) {
             int num_vars = get_max_var(original_clauses);
             int num_clauses = original_clauses.size();
 
-            vector<Clause> reduced_clauses = reduce_max2sat_to_implications(original_clauses);
-            // --- START TIMER ---
+            // --- START TIMEOUT LOOP ---
             auto start_time = chrono::high_resolution_clock::now();
+            auto current_time = start_time;
+            chrono::duration<double> elapsed_seconds;
 
-            // Solve the LP Relaxation
-            map<int, bool> assignment = solve_max2sat_implications_lp(reduced_clauses);
+            int best_satisfied_weight = -1;
+            int best_violated_weight = -1;
+            int iterations = 0;
 
-            // --- STOP TIMER ---
-            auto end_time = chrono::high_resolution_clock::now();
-            chrono::duration<double> elapsed_seconds = end_time - start_time;
-            int satisfied_weight = 0;
-            int violated_weight = 0;
+            while (true) {
+                current_time = chrono::high_resolution_clock::now();
+                elapsed_seconds = current_time - start_time;
+                
+                // Break if we exceed the timeout limit
+                if (elapsed_seconds.count() >= timeout_seconds) {
+                    break;
+                }
 
-            if (!assignment.empty()) {
-                // Get the exact weights directly from the assignment
-                pair<int, int> weights = evaluate_max2sat_solution(original_clauses, assignment);
-                satisfied_weight = weights.first;
-                violated_weight = weights.second;
+                // Generate a new reduction with random swaps
+                vector<Clause> reduced_clauses = reduce_max2sat_to_implications(original_clauses);
+                
+                // Solve the LP Relaxation
+                map<int, bool> assignment = solve_max2sat_implications_lp(reduced_clauses);
+
+                if (!assignment.empty()) {
+                    pair<int, int> weights = evaluate_max2sat_solution(original_clauses, assignment);
+                    int current_satisfied = weights.first;
+                    int current_violated = weights.second;
+
+                    // Track the best objective found
+                    if (current_satisfied > best_satisfied_weight) {
+                        best_satisfied_weight = current_satisfied;
+                        best_violated_weight = current_violated;
+                    }
+                }
+                iterations++;
             }
 
-            // We calculate the actual total weight dynamically as a sanity check
-            int actual_total_weight = satisfied_weight + violated_weight;
+            int actual_total_weight = best_satisfied_weight + best_violated_weight;
 
             csv_file << filename << "," 
                      << num_vars << "," 
                      << num_clauses << "," 
                      << actual_total_weight << ","
-                     << satisfied_weight << "," 
-                     << violated_weight << ","
+                     << best_satisfied_weight << "," 
+                     << best_violated_weight << ","
+                     << iterations << ","
                      << elapsed_seconds.count() << "\n";
-            cout << "  -> Solved! Violated Weight: " << violated_weight << "\n";
+                     
+            cout << "  -> Solved! Iterations: " << iterations 
+                 << " | Best Satisfied: " << best_satisfied_weight 
+                 << " | Best Violated: " << best_violated_weight << "\n";
         }
     }
     
@@ -331,15 +362,15 @@ vector<Clause> read_wcnf(const string& file_path, int& out_total_weight) {
 }
 // --- Main Execution ---
 int main() {
-    string input_folder = "./test_wcnf_files";   // Change to your folder path
-    string output_csv = "results_random_v1.1.csv";      // The desired output CSV name
+    string input_folder = "./wcnf_files";   // Change to your folder path
+    string output_csv = "results_v1.1_60_sec.csv";      // The desired output CSV name
     
     // Create the folder for testing purposes if it doesn't exist
     if (!fs::exists(input_folder)) {
         fs::create_directory(input_folder);
         cout << "Created directory: " << input_folder << ". Please put your .wcnf files there." << endl;
     } else {
-        process_folder_to_csv(input_folder, output_csv);
+        process_folder_to_csv(input_folder, output_csv, 60);
     }
 
     return 0;

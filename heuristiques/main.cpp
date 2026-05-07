@@ -1,0 +1,592 @@
+#include "main.hpp"
+
+// --- CPLEX Solvers ---
+/**
+ * Solves the Lagrangian relaxation of MAX-2SAT by optimizing
+ * the multipliers via a subgradient algorithm.
+ * @param wcnf_array The clauses of the problem.
+ * @param max_iters Maximum number of subgradient iterations.
+ * @param initial_step Initial step for the update (learning rate).
+ * @return The boolean assignment from the best relaxation.
+ */
+map<int, bool> solve_max2sat_subgradient(const vector<Clause>& wcnf_array, int max_iters, double initial_step) {
+    IloEnv env;
+    map<int, bool> best_assignment;
+
+    try {
+        // 1. Deduce the total number of variables and identify the implications
+        int num_vars = 0;
+        vector<pair<int, int>> D_edges; // Stores the arcs i => j
+        
+        for (const auto& clause : wcnf_array) {
+            for (int lit : clause.literals) {
+                num_vars = max(num_vars, abs(lit));
+            }
+            if (clause.literals.size() == 2) {
+                int lit1 = clause.literals[0];
+                int lit2 = clause.literals[1];
+                int i = (lit1 < 0) ? -lit1 : -lit2;
+                int j = (lit1 > 0) ? lit1 : lit2;
+                D_edges.push_back({i, j});
+            }
+        }
+
+        // 2. Initialization of Lagrangian multipliers to zero
+        map<pair<int, int>, double> lambda;
+        map<pair<int, int>, double> mu;
+        for (auto edge : D_edges) {
+            lambda[edge] = 0.0;
+            mu[edge] = 0.0;
+        }
+
+        // 3. Construction of the static architecture of the CPLEX model
+        IloModel model(env);
+        IloNumVarArray y(env, num_vars + 1, 0.0, 1.0, ILOFLOAT);
+        map<pair<int, int>, IloNumVar> s;
+
+        // Creation of s_ij variables and addition of the strict constraint (1)
+        for (auto edge : D_edges) {
+            if (s.find(edge) == s.end()) {
+                s[edge] = IloNumVar(env, 0.0, 1.0, ILOFLOAT);
+                // Constraint (1): sij + yi - yj <= 1
+                model.add(s[edge] + y[edge.first] - y[edge.second] <= 1.0);
+            }
+        }
+
+        // Objective (empty for now, will be updated dynamically)
+        IloObjective objective = IloMaximize(env);
+        model.add(objective);
+
+        IloCplex cplex(model);
+        cplex.setOut(env.getNullStream()); // Silent mode
+
+        double best_dual_bound = IloInfinity; // Objective to minimize the relaxation
+
+        // =================================================================
+        // 4. SUBGRADIENT LOOP
+        // =================================================================
+        for (int iter = 1; iter <= max_iters; ++iter) {
+            IloExpr obj_expr(env);
+
+            // Construction of the objective function with current lambda and mu
+            for (const auto& clause : wcnf_array) {
+                if (clause.literals.size() == 2) {
+                    int lit1 = clause.literals[0];
+                    int lit2 = clause.literals[1];
+                    int i = (lit1 < 0) ? -lit1 : -lit2;
+                    int j = (lit1 > 0) ? lit1 : lit2;
+                    pair<int, int> edge = {i, j};
+
+                    double w_ij = clause.weight;
+                    double l_ij = lambda[edge];
+                    double m_ij = mu[edge];
+
+                    obj_expr += (w_ij + l_ij + m_ij) * s[edge] - l_ij * y[j] + m_ij * y[i] - m_ij;
+
+                } else if (clause.literals.size() == 1) {
+                    int lit = clause.literals[0];
+                    if (lit > 0) obj_expr += clause.weight * y[lit];
+                    else obj_expr += clause.weight * (1.0 - y[-lit]);
+                }
+            }
+
+            // Update of the objective in CPLEX
+            objective.setExpr(obj_expr);
+            obj_expr.end(); // Memory release
+
+            // Resolution of the iteration
+            if (!cplex.solve()) {
+                cerr << "Error: CPLEX could not solve the iteration " << iter << endl;
+                break;
+            }
+
+            double current_dual = cplex.getObjValue();
+
+            // Recording of the best solution (the smallest upper bound)
+            if (current_dual < best_dual_bound) {
+                best_dual_bound = current_dual;
+                best_assignment.clear();
+                for (int v = 1; v <= num_vars; ++v) {
+                    best_assignment[v] = (cplex.getValue(y[v]) >= 0.5);
+                }
+            }
+
+            // Calculation of the step (Step size): decreases with the square root of iterations
+            double step = initial_step / sqrt(iter);
+
+            // Update of the multipliers via the subgradients (violations)
+            for (auto edge : D_edges) {
+                int i = edge.first;
+                int j = edge.second;
+
+                double val_y_i = cplex.getValue(y[i]);
+                double val_y_j = cplex.getValue(y[j]);
+                double val_s_ij = cplex.getValue(s[edge]);
+
+                // Calculation of violations
+                double violation_2 = val_y_j - val_s_ij;             // For s_ij >= y_j
+                double violation_3 = 1.0 - val_y_i - val_s_ij;       // For s_ij >= 1 - y_i
+
+                // Updating of the multipliers (projected on >= 0)
+                lambda[edge] = max(0.0, lambda[edge] + step * violation_2);
+                mu[edge] = max(0.0, mu[edge] + step * violation_3);
+            }
+            
+            // Optional line to track convergence:
+            // cout << "Iter " << iter << " | Dual Bound: " << current_dual << endl;
+        }
+
+    } catch (IloException& e) {
+        cerr << "Concert Exception: " << e << endl;
+    } catch (...) {
+        cerr << "Unknown error." << endl;
+    }
+
+    env.end(); // Properly releases the entire CPLEX environment
+    return best_assignment;
+}
+// --- Generators and I/O ---
+
+vector<Clause> generate_max_2sat(int num_vars, int num_clauses, int max_weight, bool allow_unit_clauses) {
+    vector<Clause> clauses;
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_real_distribution<> weight_dist(1.0, max_weight);
+    uniform_int_distribution<> bool_dist(0, 1);
+    uniform_int_distribution<> var_dist(1, num_vars);
+
+    for (int i = 0; i < num_clauses; ++i) {
+        int weight = std::round(weight_dist(gen));
+        bool is_unit = allow_unit_clauses && bool_dist(gen);
+
+        if (is_unit) {
+            int var1 = var_dist(gen);
+            int sign1 = bool_dist(gen) ? 1 : -1;
+            clauses.push_back({weight, {sign1 * var1}});
+        } else {
+            int var1 = var_dist(gen);
+            int var2 = var_dist(gen);
+            while (var1 == var2) {
+                var2 = var_dist(gen); // Ensure distinct variables
+            }
+            int sign1 = bool_dist(gen) ? 1 : -1;
+            int sign2 = bool_dist(gen) ? 1 : -1;
+            clauses.push_back({weight, {sign1 * var1, sign2 * var2}});
+        }
+    }
+    return clauses;
+}
+
+void write_wcnf(const vector<Clause>& clauses, const string& file_path) {
+    ofstream f(file_path);
+    if (!f.is_open()) {
+        cerr << "Error opening file for writing." << endl;
+        return;
+    }
+    for (const auto& clause : clauses) {
+        f << clause.weight << " ";
+        for (int lit : clause.literals) {
+            f << lit << " ";
+        }
+        f << "0\n";
+    }
+    f.close();
+}
+
+// --- Utilities ---
+
+int get_max_var(const vector<Clause>& clauses) {
+    int max_var = 0;
+    for (const auto& clause : clauses) {
+        for (int lit : clause.literals) {
+            max_var = max(max_var, abs(lit));
+        }
+    }
+    return max_var;
+}
+// Returns a pair: {satisfied_weight, violated_weight}
+pair<int, int> evaluate_max2sat_solution(const vector<Clause>& formula, const map<int, bool>& solution) {
+    int total_satisfied_weight = 0;
+    int total_violated_weight = 0;
+
+    for (const auto& item : formula) {
+        int weight = item.weight;
+        bool is_satisfied = false;
+
+        for (int lit : item.literals) {
+            int var = abs(lit);
+            bool var_value = false;
+            
+            auto it = solution.find(var);
+            if (it != solution.end()) {
+                var_value = it->second;
+            }
+
+            if ((lit > 0 && var_value) || (lit < 0 && !var_value)) {
+                is_satisfied = true;
+                break;
+            }
+        }
+        
+        // Directly accumulate the exact weights
+        if (is_satisfied) {
+            total_satisfied_weight += weight;
+        } else {
+            total_violated_weight += weight; 
+        }
+    }
+    return {total_satisfied_weight, total_violated_weight};
+}
+// --- Heuristics and Reduction ---
+
+vector<Clause> reduce_max2sat_to_implications_v1_1(const vector<Clause>& clauses) {
+    vector<Clause> new_clauses;
+    
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> coin_flip(0, 1);
+
+    for (const auto& clause : clauses) {
+        int w = clause.weight;
+
+        if (clause.literals.size() == 1) {
+            new_clauses.push_back(clause);
+        } else if (clause.literals.size() == 2) {
+            int l1 = clause.literals[0];
+            int l2 = clause.literals[1];
+
+            if (l1 > 0 && l2 > 0) {
+                // 50% chance to swap literals
+                if (coin_flip(gen)) swap(l1, l2);
+                
+                new_clauses.push_back({w, {l2}});
+                new_clauses.push_back({-w, {-l1, l2}});
+            } else if (l1 < 0 && l2 < 0) {
+                // 50% chance to swap literals
+                if (coin_flip(gen)) swap(l1, l2);
+                
+                new_clauses.push_back({w, {l1}});
+                new_clauses.push_back({-w, {l1, -l2}});
+            } else {
+                new_clauses.push_back(clause);
+            }
+        }
+    }
+    return new_clauses;
+}
+vector<Clause> reduce_max2sat_to_implications_v1_2(const vector<Clause>& clauses) {
+    vector<Clause> reduced_formula;
+
+    for (const auto& clause : clauses) {
+        // Pass through unit clauses as they are already in an acceptable format
+        if (clause.literals.size() == 1) {
+            reduced_formula.push_back(clause);
+        } 
+        else if (clause.literals.size() == 2) {
+            int w = clause.weight;
+            int lit1 = clause.literals[0];
+            int lit2 = clause.literals[1];
+
+            // Case 1: Mixed clause (one positive, one negative literal)
+            // Already an implication clause, so we just pass it through.
+            if ((lit1 > 0 && lit2 < 0) || (lit1 < 0 && lit2 > 0)) {
+                reduced_formula.push_back(clause);
+            }
+            // Case 2: Both literals are positive (x OR y)
+            else if (lit1 > 0 && lit2 > 0) {
+                int x = lit1;
+                int y = lit2;
+                reduced_formula.push_back({-w, {x, -y}});   // Mixed clause
+                reduced_formula.push_back({-w, {-x, y}});   // Mixed clause
+                reduced_formula.push_back({2 * w, {x}});  // Unit clause
+                reduced_formula.push_back({w, {y}});        // Unit clause
+                reduced_formula.push_back({w, {-x}});       // Unit clause
+            }
+            // Case 3: Both literals are negative (!x OR !y)
+            else if (lit1 < 0 && lit2 < 0) {
+                int u = abs(lit1);
+                int v = abs(lit2);
+                reduced_formula.push_back({-w, {u, -v}});   // Mixed clause
+                reduced_formula.push_back({-w, {-u, v}});   // Mixed clause
+                reduced_formula.push_back({w, {u}});        // Unit clause
+                reduced_formula.push_back({2 * w, {-u}}); // Unit clause
+                reduced_formula.push_back({w, {-v}});       // Unit clause
+            }
+        }
+    }
+
+    return reduced_formula;
+}
+// --- CPLEX Solvers ---
+
+// 1. Solves the LP relaxation (translates `solve_max2sat_implications`)
+map<int, bool> solve_max2sat_implications_lp(const vector<Clause>& wcnf_array) {
+    IloEnv env;
+    map<int, bool> assignments;
+    int max_var = get_max_var(wcnf_array);
+
+    try {
+        IloModel model(env);
+        // Continuous variables for the LP relaxation
+        IloNumVarArray y(env, max_var + 1, 0, 1.0, ILOFLOAT);
+        IloExpr objExpr(env);
+
+        for (size_t k = 0; k < wcnf_array.size(); ++k) {
+            int weight = wcnf_array[k].weight;
+            const vector<int>& lits = wcnf_array[k].literals;
+
+            if (lits.size() == 1) {
+                int lit = lits[0];
+                int var_idx = abs(lit);
+                if (lit > 0) {
+                    objExpr += weight * y[var_idx];
+                } else {
+                    objExpr += weight * (1.0 - y[var_idx]);
+                }
+            } else if (lits.size() == 2) {
+                int lit1 = lits[0], lit2 = lits[1];
+                int premise = 0, conclusion = 0;
+
+                if (lit1 < 0 && lit2 > 0) { premise = abs(lit1); conclusion = lit2; }
+                else if (lit2 < 0 && lit1 > 0) { premise = abs(lit2); conclusion = lit1; }
+                else {
+                    cerr << "Error: Clause is not a valid implication." << endl;
+                    continue;
+                }
+
+                // Continuous slack variable s_k
+                IloNumVar s_k(env, 0, 1.0, ILOFLOAT);
+                objExpr += weight * s_k;
+
+                // s_k + y_premise - y_conclusion <= 1
+                model.add(s_k + y[premise] - y[conclusion] <= 1.0);
+            }
+        }
+
+        model.add(IloMaximize(env, objExpr));
+        IloCplex cplex(model);
+        cplex.setOut(env.getNullStream()); // Suppress CPLEX logging
+
+        if (cplex.solve()) {
+            for (int i = 1; i <= max_var; ++i) {
+                assignments[i] = (round(cplex.getValue(y[i])) == 1.0);
+            }
+        } else {
+            cout << "LP Solver Status: " << cplex.getStatus() << endl;
+        }
+
+    } catch (IloException& e) {
+        cerr << "Concert exception caught: " << e << endl;
+    } catch (...) {
+        cerr << "Unknown exception caught" << endl;
+    }
+
+    env.end();
+    return assignments;
+}
+vector<Clause> read_wcnf(const string& file_path, int& out_total_weight) {
+    vector<Clause> clauses;
+    out_total_weight = 0; 
+    
+    ifstream f(file_path);
+    if (!f.is_open()) {
+        cerr << "Error opening file: " << file_path << endl;
+        return clauses;
+    }
+
+    string line;
+    while (getline(f, line)) {
+        if (line.empty()) continue;
+
+        istringstream iss(line);
+        string token;
+        
+        if (!(iss >> token)) continue;
+
+        if (token == "c") continue; 
+        
+        // Parse the header line: p wcnf <vars> <clauses> [<total_weight>]
+        if (token == "p") {
+            string format;
+            int vars, num_clauses;
+            int sum_weight = 0;
+            // The total weight is optional in some formats, so we handle it gracefully
+            if (iss >> format >> vars >> num_clauses) {
+                if (iss >> sum_weight) {
+                    out_total_weight = sum_weight;
+                }
+            }
+            continue; 
+        }
+
+        // Since there are no hard clauses, we attempt to read the weight directly as a int
+        int weight = 0;
+        try {
+            weight = stod(token);
+        } catch (const std::invalid_argument& e) {
+            // If it's not a valid number, we skip this malformed line
+            continue; 
+        }
+
+        vector<int> current_clause;
+        while (iss >> token) {
+            try {
+                int lit = stoi(token);
+                if (lit == 0) {
+                    clauses.push_back({weight, current_clause});
+                    current_clause.clear();
+                    break;
+                } else {
+                    current_clause.push_back(lit);
+                }
+            } catch (const std::invalid_argument& e) {}
+        }
+    }
+    return clauses;
+}
+void process_folder_to_csv(const string& folder_path, const string& csv_path, double timeout_seconds, ReductionFunc reduction_func, SolverFunc solver_func) {
+    ofstream csv_file(csv_path);
+    
+    csv_file << "Filename,Num_Variables,Num_Clauses,Total_Weight,Best_Satisfied_Weight,Best_Violated_Weight,Iterations,Elapsed_Time\n";
+
+    if (!fs::exists(folder_path) || !fs::is_directory(folder_path)) {
+        cerr << "Error: Directory does not exist -> " << folder_path << endl;
+        return;
+    }
+
+    for (const auto& entry : fs::directory_iterator(folder_path)) {
+        if (entry.is_regular_file() && entry.path().extension() == ".wcnf") {
+            string filepath = entry.path().string();
+            string filename = entry.path().filename().string();
+            
+            cout << "Processing: " << filename << " for " << timeout_seconds << " seconds..." << endl;
+
+            int total_weight_from_header = 0;
+            vector<Clause> original_clauses = read_wcnf(filepath, total_weight_from_header);
+            if (original_clauses.empty()) continue;
+
+            int num_vars = get_max_var(original_clauses);
+            int num_clauses = original_clauses.size();
+
+            // --- START TIMEOUT LOOP ---
+            auto start_time = chrono::high_resolution_clock::now();
+            auto current_time = start_time;
+            chrono::duration<double> elapsed_seconds;
+
+            int best_satisfied_weight = -1;
+            int best_violated_weight = -1;
+            int iterations = 0;
+
+            while (true) {
+                current_time = chrono::high_resolution_clock::now();
+                elapsed_seconds = current_time - start_time;
+                
+                // Break if we exceed the timeout limit
+                if (elapsed_seconds.count() >= timeout_seconds) {
+                    break;
+                }
+
+                // Generate a new reduction with random swaps
+                vector<Clause> reduced_clauses = reduction_func(original_clauses);
+                
+                // Solve the LP Relaxation
+                map<int, bool> assignment = solver_func(reduced_clauses);
+
+                if (!assignment.empty()) {
+                    pair<int, int> weights = evaluate_max2sat_solution(original_clauses, assignment);
+                    int current_satisfied = weights.first;
+                    int current_violated = weights.second;
+
+                    // Track the best objective found
+                    if (current_satisfied > best_satisfied_weight) {
+                        best_satisfied_weight = current_satisfied;
+                        best_violated_weight = current_violated;
+                    }
+                }
+                iterations++;
+            }
+
+            int actual_total_weight = best_satisfied_weight + best_violated_weight;
+
+            csv_file << filename << "," 
+                     << num_vars << "," 
+                     << num_clauses << "," 
+                     << actual_total_weight << ","
+                     << best_satisfied_weight << "," 
+                     << best_violated_weight << ","
+                     << iterations << ","
+                     << elapsed_seconds.count() << "\n";
+                     
+            cout << "  -> Solved! Iterations: " << iterations 
+                 << " | Best Satisfied: " << best_satisfied_weight 
+                 << " | Best Violated: " << best_violated_weight << "\n";
+        }
+    }
+    
+    cout << "\nAll files processed. Results saved to " << csv_path << endl;
+}
+// --- Main Execution ---
+int main(int argc, char* argv[]) {
+    string reduction_choice = "v1_1";
+    string solver_choice = "lp";
+    double timeout_seconds = 60.0;
+    string input_folder = "./wcnf_files";
+    string output_csv;
+
+    // Parse command line arguments
+    for (int i = 1; i < argc; ++i) {
+        string arg = argv[i];
+        if (arg == "--reduction" && i + 1 < argc) {
+            reduction_choice = argv[++i];
+        } else if (arg == "--solver" && i + 1 < argc) {
+            solver_choice = argv[++i];
+        } else if (arg == "--timeout" && i + 1 < argc) {
+            timeout_seconds = stod(argv[++i]);
+        } else if (arg == "--input-folder" && i + 1 < argc) {
+            input_folder = argv[++i];
+        } else if (arg == "--output-csv" && i + 1 < argc) {
+            output_csv = argv[++i];
+        } else {
+            cout << "Usage: " << argv[0] << " [--reduction v1_1|v1_2] [--solver subgradient|lp] [--timeout seconds] [--input-folder path] [--output-csv file]" << endl;
+            return 1;
+        }
+    }
+
+    // Choose reduction function
+    ReductionFunc reduction_func;
+    if (reduction_choice == "v1_1") {
+        reduction_func = reduce_max2sat_to_implications_v1_1;
+    } else if (reduction_choice == "v1_2") {
+        reduction_func = reduce_max2sat_to_implications_v1_2;
+    } else {
+        cerr << "Invalid reduction choice: " << reduction_choice << ". Use v1_1 or v1_2." << endl;
+        return 1;
+    }
+
+    // Choose solver function
+    SolverFunc solver_func;
+    if (solver_choice == "subgradient") {
+        solver_func = [](const vector<Clause>& clauses) {
+            return solve_max2sat_subgradient(clauses, 1, 1.0);
+        };
+    } else if (solver_choice == "lp") {
+        solver_func = solve_max2sat_implications_lp;
+    } else {
+        cerr << "Invalid solver choice: " << solver_choice << ". Use subgradient or lp." << endl;
+        return 1;
+    }
+
+    if (output_csv.empty()) {
+        output_csv = "results_" + reduction_choice + "_" + solver_choice + "_" + to_string((int)timeout_seconds) + "_sec.csv";
+    }
+
+    // Create the folder for testing purposes if it doesn't exist
+    if (!fs::exists(input_folder)) {
+        fs::create_directory(input_folder);
+        cout << "Created directory: " << input_folder << ". Please put your .wcnf files there." << endl;
+    } else {
+        process_folder_to_csv(input_folder, output_csv, timeout_seconds, reduction_func, solver_func);
+    }
+
+    return 0;
+}

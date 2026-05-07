@@ -141,25 +141,25 @@ vector<Clause> reduce_max2sat_to_implications(const vector<Clause>& clauses) {
         }
     }
     return new_clauses;
-}
+}    
 
 // --- CPLEX Solvers ---
 /**
- * Résout la relaxation Lagrangienne du MAX-2SAT en optimisant 
- * les multiplicateurs via un algorithme de sous-gradient.
- * * @param wcnf_array Les clauses du problème.
- * @param max_iters Nombre maximum d'itérations du sous-gradient.
- * @param initial_step Pas initial pour la mise à jour (learning rate).
- * @return L'assignement booléen issu de la meilleure relaxation.
+ * Solves the Lagrangian relaxation of MAX-2SAT by optimizing
+ * the multipliers via a subgradient algorithm.
+ * @param wcnf_array The clauses of the problem.
+ * @param max_iters Maximum number of subgradient iterations.
+ * @param initial_step Initial step for the update (learning rate).
+ * @return The boolean assignment from the best relaxation.
  */
 map<int, bool> solve_max2sat_subgradient(const vector<Clause>& wcnf_array, int max_iters = 1, double initial_step = 1.0) {
     IloEnv env;
     map<int, bool> best_assignment;
 
     try {
-        // 1. Déduire le nombre total de variables et identifier les implications
+        // 1. Deduce the total number of variables and identify the implications
         int num_vars = 0;
-        vector<pair<int, int>> D_edges; // Stocke les arcs i => j
+        vector<pair<int, int>> D_edges; // Stores the arcs i => j
         
         for (const auto& clause : wcnf_array) {
             for (int lit : clause.literals) {
@@ -174,7 +174,7 @@ map<int, bool> solve_max2sat_subgradient(const vector<Clause>& wcnf_array, int m
             }
         }
 
-        // 2. Initialisation des multiplicateurs Lagrangiens à zéro
+        // 2. Initialization of Lagrangian multipliers to zero
         map<pair<int, int>, double> lambda;
         map<pair<int, int>, double> mu;
         for (auto edge : D_edges) {
@@ -182,36 +182,36 @@ map<int, bool> solve_max2sat_subgradient(const vector<Clause>& wcnf_array, int m
             mu[edge] = 0.0;
         }
 
-        // 3. Construction de l'architecture statique du modèle CPLEX
+        // 3. Construction of the static architecture of the CPLEX model
         IloModel model(env);
         IloNumVarArray y(env, num_vars + 1, 0.0, 1.0, ILOFLOAT);
         map<pair<int, int>, IloNumVar> s;
 
-        // Création des variables s_ij et ajout de la contrainte (1) stricte
+        // Creation of s_ij variables and addition of the strict constraint (1)
         for (auto edge : D_edges) {
             if (s.find(edge) == s.end()) {
                 s[edge] = IloNumVar(env, 0.0, 1.0, ILOFLOAT);
-                // Contrainte (1) : sij + yi - yj <= 1
+                // Constraint (1): sij + yi - yj <= 1
                 model.add(s[edge] + y[edge.first] - y[edge.second] <= 1.0);
             }
         }
 
-        // Objectif (vide pour l'instant, sera mis à jour dynamiquement)
+        // Objective (empty for now, will be updated dynamically)
         IloObjective objective = IloMaximize(env);
         model.add(objective);
 
         IloCplex cplex(model);
-        cplex.setOut(env.getNullStream()); // Mode silencieux
+        cplex.setOut(env.getNullStream()); // Silent mode
 
-        double best_dual_bound = IloInfinity; // Objectif de minimiser la relaxation
+        double best_dual_bound = IloInfinity; // Objective to minimize the relaxation
 
         // =================================================================
-        // 4. BOUCLE DU SOUS-GRADIENT
+        // 4. SUBGRADIENT LOOP
         // =================================================================
         for (int iter = 1; iter <= max_iters; ++iter) {
             IloExpr obj_expr(env);
 
-            // Construction de la fonction objectif avec lambda et mu actuels
+            // Construction of the objective function with current lambda and mu
             for (const auto& clause : wcnf_array) {
                 if (clause.literals.size() == 2) {
                     int lit1 = clause.literals[0];
@@ -233,19 +233,19 @@ map<int, bool> solve_max2sat_subgradient(const vector<Clause>& wcnf_array, int m
                 }
             }
 
-            // Mise à jour de l'objectif dans CPLEX
+            // Update of the objective in CPLEX
             objective.setExpr(obj_expr);
-            obj_expr.end(); // Libération mémoire
+            obj_expr.end(); // Memory release
 
-            // Résolution de l'itération
+            // Resolution of the iteration
             if (!cplex.solve()) {
-                cerr << "Erreur: CPLEX n'a pas pu résoudre l'itération " << iter << endl;
+                cerr << "Error: CPLEX could not solve the iteration " << iter << endl;
                 break;
             }
 
             double current_dual = cplex.getObjValue();
 
-            // Enregistrement de la meilleure solution (la plus petite borne supérieure)
+            // Recording of the best solution (the smallest upper bound)
             if (current_dual < best_dual_bound) {
                 best_dual_bound = current_dual;
                 best_assignment.clear();
@@ -254,10 +254,10 @@ map<int, bool> solve_max2sat_subgradient(const vector<Clause>& wcnf_array, int m
                 }
             }
 
-            // Calcul du pas (Step size) : décroît avec la racine carrée des itérations
+            // Calculation of the step (Step size): decreases with the square root of iterations
             double step = initial_step / sqrt(iter);
 
-            // Mise à jour des multiplicateurs via les sous-gradients (violations)
+            // Update of the multipliers via the subgradients (violations)
             for (auto edge : D_edges) {
                 int i = edge.first;
                 int j = edge.second;
@@ -266,26 +266,26 @@ map<int, bool> solve_max2sat_subgradient(const vector<Clause>& wcnf_array, int m
                 double val_y_j = cplex.getValue(y[j]);
                 double val_s_ij = cplex.getValue(s[edge]);
 
-                // Calcul des violations
-                double violation_2 = val_y_j - val_s_ij;             // Pour s_ij >= y_j
-                double violation_3 = 1.0 - val_y_i - val_s_ij;       // Pour s_ij >= 1 - y_i
+                // Calculation of violations
+                double violation_2 = val_y_j - val_s_ij;             // For s_ij >= y_j
+                double violation_3 = 1.0 - val_y_i - val_s_ij;       // For s_ij >= 1 - y_i
 
-                // Actualisation des multiplicateurs (projetés sur >= 0)
+                // Updating of the multipliers (projected on >= 0)
                 lambda[edge] = max(0.0, lambda[edge] + step * violation_2);
                 mu[edge] = max(0.0, mu[edge] + step * violation_3);
             }
             
-            // Ligne optionnelle pour tracker la convergence :
+            // Optional line to track convergence:
             // cout << "Iter " << iter << " | Dual Bound: " << current_dual << endl;
         }
 
     } catch (IloException& e) {
-        cerr << "Exception Concert : " << e << endl;
+        cerr << "Concert Exception: " << e << endl;
     } catch (...) {
-        cerr << "Erreur inconnue." << endl;
+        cerr << "Unknown error." << endl;
     }
 
-    env.end(); // Libère proprement tout l'environnement CPLEX
+    env.end(); // Properly releases the entire CPLEX environment
     return best_assignment;
 }
 vector<Clause> read_wcnf(const string& file_path, int& out_total_weight) {
