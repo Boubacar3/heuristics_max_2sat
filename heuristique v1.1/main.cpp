@@ -361,16 +361,16 @@ void process_folder_to_csv(const string& folder_path, const string& csv_path, do
     cout << "\nAll files processed. Results saved to " << csv_path << endl;
 }
 // --- Main Execution ---
-int main() {
-    string input_folder = "./wcnf_files";   // Change to your folder path
-    string output_csv = "results_v1.1_60_sec.csv";      // The desired output CSV name
+int main(int argc, char* argv[]) {
+    string input_folder = argv[1];   // Change to your folder path
+    string output_csv = argv[2];      // The desired output CSV name
     
     // Create the folder for testing purposes if it doesn't exist
     if (!fs::exists(input_folder)) {
         fs::create_directory(input_folder);
         cout << "Created directory: " << input_folder << ". Please put your .wcnf files there." << endl;
     } else {
-        process_folder_to_csv(input_folder, output_csv, 60);
+        process_folder_to_csv(input_folder, output_csv, atoi(argv[3]));
     }
 
     return 0;

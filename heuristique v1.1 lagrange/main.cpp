@@ -148,13 +148,18 @@ vector<Clause> reduce_max2sat_to_implications(const vector<Clause>& clauses) {
  * Solves the Lagrangian relaxation of MAX-2SAT by optimizing
  * the multipliers via a subgradient algorithm.
  * @param wcnf_array The clauses of the problem.
- * @param max_iters Maximum number of subgradient iterations.
+ * @param timeout_seconds Maximum total time for the subgradient loop in seconds.
  * @param initial_step Initial step for the update (learning rate).
  * @return The boolean assignment from the best relaxation.
  */
-map<int, bool> solve_max2sat_subgradient(const vector<Clause>& wcnf_array, int max_iters = 1, double initial_step = 1.0) {
+map<int, bool> solve_max2sat_subgradient(const vector<Clause>& wcnf_array, double timeout_seconds = 1.0, double initial_step = 1.0) {
     IloEnv env;
     map<int, bool> best_assignment;
+    
+    // Initialize random number generator for random rounding
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_real_distribution<> prob_dist(0.0, 1.0);
 
     try {
         // 1. Deduce the total number of variables and identify the implications
@@ -208,7 +213,8 @@ map<int, bool> solve_max2sat_subgradient(const vector<Clause>& wcnf_array, int m
         // =================================================================
         // 4. SUBGRADIENT LOOP
         // =================================================================
-        for (int iter = 1; iter <= max_iters; ++iter) {
+        auto loop_start = chrono::high_resolution_clock::now();
+        for (int iter = 1; ; ++iter) {
             IloExpr obj_expr(env);
 
             // Construction of the objective function with current lambda and mu
@@ -250,7 +256,9 @@ map<int, bool> solve_max2sat_subgradient(const vector<Clause>& wcnf_array, int m
                 best_dual_bound = current_dual;
                 best_assignment.clear();
                 for (int v = 1; v <= num_vars; ++v) {
-                    best_assignment[v] = (cplex.getValue(y[v]) >= 0.5);
+                    double value = cplex.getValue(y[v]);
+                    // Random rounding: set to 1 with probability equal to the fractional value
+                    best_assignment[v] = (prob_dist(gen) < value);
                 }
             }
 
@@ -273,6 +281,12 @@ map<int, bool> solve_max2sat_subgradient(const vector<Clause>& wcnf_array, int m
                 // Updating of the multipliers (projected on >= 0)
                 lambda[edge] = max(0.0, lambda[edge] + step * violation_2);
                 mu[edge] = max(0.0, mu[edge] + step * violation_3);
+            }
+
+            auto loop_now = chrono::high_resolution_clock::now();
+            double elapsed = chrono::duration<double>(loop_now - loop_start).count();
+            if (elapsed >= timeout_seconds) {
+                break;
             }
             
             // Optional line to track convergence:
@@ -347,7 +361,7 @@ vector<Clause> read_wcnf(const string& file_path, int& out_total_weight) {
         }
     }
     return clauses;
-}void process_folder_to_csv(const string& folder_path, const string& csv_path) {
+}void process_folder_to_csv(const string& folder_path, const string& csv_path, double timeout_seconds = 1.0) {
     ofstream csv_file(csv_path);
     
     csv_file << "Filename,Num_Variables,Num_Clauses,Total_Weight,Satisfied_Weight,Violated_Weight,Elapsed_Time\n";
@@ -376,7 +390,7 @@ vector<Clause> read_wcnf(const string& file_path, int& out_total_weight) {
             auto start_time = chrono::high_resolution_clock::now();
 
             // Solve the Subgradient Relaxation
-            map<int, bool> assignment = solve_max2sat_subgradient(reduced_clauses);
+            map<int, bool> assignment = solve_max2sat_subgradient(reduced_clauses, timeout_seconds);
 
             // --- STOP TIMER ---
             auto end_time = chrono::high_resolution_clock::now();
@@ -407,17 +421,16 @@ vector<Clause> read_wcnf(const string& file_path, int& out_total_weight) {
     
     cout << "\nAll files processed. Results saved to " << csv_path << endl;
 }
-// --- Main Execution ---
-int main() {
-    string input_folder = "./test_wcnf_files_20000_100000";   // Change to your folder path
-    string output_csv = "results_random_v1.1.csv";      // The desired output CSV name
+int main(int argc, char* argv[]) {
+    string input_folder = argv[1];   // Change to your folder path
+    string output_csv = argv[2];      // The desired output CSV name
     
     // Create the folder for testing purposes if it doesn't exist
     if (!fs::exists(input_folder)) {
         fs::create_directory(input_folder);
         cout << "Created directory: " << input_folder << ". Please put your .wcnf files there." << endl;
     } else {
-        process_folder_to_csv(input_folder, output_csv);
+        process_folder_to_csv(input_folder, output_csv, atoi(argv[3]));
     }
 
     return 0;

@@ -1,0 +1,137 @@
+c WARNING: setting fbeq=true because oll=true and oll_lpcores=true
+c MaxHS 5.0.0
+c Instance: max_cut/max_cut.wcnf
+c Running MAXPRE
+c MAXPRE took 0.1246s.
+c MAXPRE returns 87686 soft clauses. Original #soft = 88424 and 87808 hard clauses. Original #hards = 1
+c not using MAXPRE formula
+c Using original input instance
+c Instance: max_cut/max_cut.wcnf
+c #vars: 4966
+c #Clauses: 88426
+c Total Soft Cls Wt: 436158
+c HARD: #Clauses = 2, Total Lits = 2, Ave Len = 1.0000 #units = 1
+c SOFT: #Clauses = 88424, Total Lits = 176848, Ave Len = 2.0000
+c Total Soft Clause Weight (+ basecost): 436158 (+ 0 from 0 false softs)
+c SOFT%: 99.9977%
+c #distinct weights: 167, mean = 4.9326, std. dev = 12.3233, min = 1, max = 328
+c Parse time: 0.1733 secs.
+c Wcnf Space Required: 1.3492MB
+c ================================
+c transitionWts = [ ] (0)
+c WCNF sat_solver found 1 hard units after simplification
+c getting all clauses from sat solver
+c obtained 0 clauses and 0 units from extension stack
+c obtained 0 clauses and 0 units from internal clauses
+c obtains 0 clauses and 0 units from sat solver
+c WCNF: Units and equality reduced #hard clauses by 1, total lits in hard clauses by 1 and increased units by 0
+c WCNF: Units and equality reduced #soft clauses by 8, total lits in soft clauses by 24, and increased base cost by 0 (base_cost = 0) falsifying 0 softs
+c WCNF: removed 0 softs by resolution and found 0 unit soft resolutions
+c WCNF: rm_subsumed_softs reduced #soft clauses by0, total lits in soft clauses by 0, and increased base cost by 0 (base_cost = 0)
+c WCNF: found 1 pure literals
+c WCNF mutexes: #mutexes found = 0
+c WCNF mx finder used 88415 calls to UP engine
+c WCNF mutexes: original #softs 88415 #softs after mx-transforms 88415
+c WCNF mutexes: reduction in softs 0
+c After WCNF Simplification
+c VARS: #vars = 4953
+c HARD: #Clauses = 0, Total Lits = 0, Ave Len = 0.0000
+c SOFT: #Clauses = 88415, Total Lits = 176823, Ave Len = 1.9999
+c Total Soft Clause Weight (+ basecost): 436140 (+ 0 from 0 false softs)
+c #distinct weights: 167, mean = 4.9329, std. dev = 12.3239, min = 1, max = 328
+c Total Clauses: 88415
+c Wcnf Space Required: 2.8294MB
+c ================================
+c Added 176816 extra binary clauses for Fbeq theory
+c Before solving sat solver has 265224 clauses: 0 redundant, 265224 irredundant.
+c New UB found 125114
+c Elapsed time 0.0770
+c Hards are SAT (feasible solutions exist)
+c Initial SAT solve took 0.0778
+c UB from initial solve = 125114
+c Using IBM CPLEX version 22.1.2.0 under IBM's Academic Initiative licencing program
+c OLL requires exact integer bounds; setting absGap from 0.75 to 0
+c Init Bnds: SAT Time 0.0369
+c Init Bnds: LB =0 UB = 125114
+c Init Bnds: Forced 0 literals.
+c Seeding type = 3
+c EqSeed: found 30 seedable constraints.
+c EqSeed: 15 cores 0 non-cores 15 mixed-cores 0 ordinary clauses
+c EqSeed: #seeded constraints 30
+c EqSeed: cores            15 Ave length 3.0000
+c EqSeed: non-cores        0 Ave length 0.0000
+c EqSeed: mixed cores      15 Ave length 3.0000
+c EqSeed: ordinary clauses 0 Ave length 0.0000
+c Seeding clauses found = 30
+c Initial stratification threshold 256
+c Initial LP optimum = 7 (rat 6.5)
+c Action: OLL
+c **********OLL Iter: 1 Elapsed Time = 0.0990 LB = 7 UB = 125114 gap = 125107 (1787242.857143 %) strat = 256.000000 rank = 0 bvars = 88415 touts = 60
+c Disjoint Phase
+c New UB found 124104
+c Elapsed time 0.1165
+c Dsjnt: #Cores 0 with total weight 0.000000 LB 7 UB 124104
+c Got 0 cores
+c OLL opt = 0 LP opt = 7 (rat 6.5) incr = 0
+c Increasing rank limit to -1
+c Action: OLL
+c **********OLL Iter: 2 Elapsed Time = 0.1255 LB = 7 UB = 124104 gap = 124097 (1772814.285714 %) strat = 256.000000 rank = -1 bvars = 88415 touts = 60
+c Disjoint Phase
+c Dsjnt: #Cores 0 with total weight 0.000000 LB 7 UB 124104
+c Got 0 cores
+c OLL opt = 0 LP opt = 7 (rat 6.5) incr = 0
+c Lowering stratification threshold to 128
+c Resetting rank limit to 0
+c Action: OLL
+c **********OLL Iter: 3 Elapsed Time = 0.1505 LB = 7 UB = 124104 gap = 124097 (1772814.285714 %) strat = 128.000000 rank = 0 bvars = 88415 touts = 60
+c Disjoint Phase
+c Conflict size = 6 solve time = 0.034198000000000006 minwt = 131, lb = 137.5
+c Conflict size = 6 solve time = 0.03486299999999998 minwt = 129, lb = 266.5
+c Conflict size = 6 solve time = 0.03549200000000008 minwt = 135, lb = 401.5
+c Conflict size = 6 solve time = 0.03369 minwt = 209, lb = 610.5
+c Conflict size = 6 solve time = 0.03282699999999994 minwt = 147, lb = 757.5
+c Conflict size = 6 solve time = 0.03379399999999999 minwt = 136, lb = 893.5
+c Conflict size = 6 solve time = 0.031093000000000037 minwt = 136, lb = 1029.5
+c New UB found 118673
+c Elapsed time 0.4034
+c Dsjnt: #Cores 7 with total weight 1023.000000 LB 7 UB 118673
+c Dsjnt: Avg Core Size 6.0000
+c Dsjnt: Time 0.2429
+c Got 7 cores
+c OLL opt = 1023 LP opt = 1030 (rat 1029.5) incr = 1023
+c Action: OLL
+c **********OLL Iter: 4 Elapsed Time = 0.4131 LB = 1030 UB = 118673 gap = 117643 (11421.650485 %) strat = 128.000000 rank = 0 bvars = 88415 touts = 95
+c Disjoint Phase
+c Dsjnt: #Cores 0 with total weight 0.000000 LB 1030 UB 118673
+c Got 0 cores
+c OLL opt = 1023 LP opt = 1030 (rat 1029.5) incr = 0
+c Increasing rank limit to -1
+c Action: OLL
+c **********OLL Iter: 5 Elapsed Time = 0.4383 LB = 1030 UB = 118673 gap = 117643 (11421.650485 %) strat = 128.000000 rank = -1 bvars = 88415 touts = 95
+c Disjoint Phase
+c Dsjnt: #Cores 0 with total weight 0.000000 LB 1030 UB 118673
+c Got 0 cores
+c OLL opt = 1023 LP opt = 1030 (rat 1029.5) incr = 0
+c Lowering stratification threshold to 64
+c Resetting rank limit to 0
+c Action: OLL
+c **********OLL Iter: 6 Elapsed Time = 0.4642 LB = 1030 UB = 118673 gap = 117643 (11421.650485 %) strat = 64.000000 rank = 0 bvars = 88415 touts = 95
+c Disjoint Phase
+c Conflict size = 6 solve time = 0.03276499999999993 minwt = 72, lb = 1101.5
+c Conflict size = 6 solve time = 0.03319900000000009 minwt = 72, lb = 1173.5
+c Conflict size = 6 solve time = 0.03243099999999999 minwt = 66, lb = 1239.5
+c Conflict size = 6 solve time = 0.03308699999999998 minwt = 89, lb = 1328.5
+c Conflict size = 6 solve time = 0.035023000000000026 minwt = 69, lb = 1397.5
+c INTERRUPTED signal 24
+c unsolved
+c Best LB Found: 1030
+c Best UB Found: 118673
+o 118673
+s UNKNOWN
+c Number of falsified softs = 22365
+c SAT: #calls 93
+c SAT: Total time 0.4536
+c SAT: #muser calls 12 (100.0000 % successful)
+c SAT: Minimize time 0.3985 (87.8531%)
+c SAT: Avg constraint minimization 0.1667
+c SAT: number of variables substituted cadical: fatal error: invalid API usage of 'int64_t CaDiCaL::Solver::n_substituted() const' in '/home/bopelage/MIAT/Documents/OLLLP_depot/cadical/src/solver.cpp': solver in invalid state

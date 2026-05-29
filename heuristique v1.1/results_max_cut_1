@@ -1,0 +1,2 @@
+Filename,Num_Variables,Num_Clauses,Total_Weight,Best_Satisfied_Weight,Best_Violated_Weight,Iterations,Elapsed_Time
+max_cut.wcnf,4966,88425,654237,442377,211860,6,1.03377

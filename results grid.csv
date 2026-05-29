@@ -1,0 +1,22 @@
+Tests de l’heuristique v1 randomisée sur 1 seconde,,
+File,Randomized heuristics,OLLLP Results
+grid40x40.f10_direct.wcnf,780845,862459
+grid40x40.f5_direct.wcnf,416934,471610
+grid80x80.f10_direct.wcnf,3256634,3322266
+grid20x20.f15.wrap_direct.wcnf,253479,153949
+grid80x80.f15.wrap_direct.wcnf,4945410,5108657
+grid40x40.f10.wrap_direct.wcnf,836726,934635
+grid80x80.f5.wrap_direct.wcnf,1815260,1866498
+grid80x80.f5_direct.wcnf,1794141,1859824
+grid20x20.f10_direct.wcnf,165630,98511
+grid80x80.f2.wrap_direct.wcnf,864290,948534
+grid80x80.f15_direct.wcnf,4780755,4827719
+grid80x80.f10.wrap_direct.wcnf,3354858,3412185
+grid40x40.f2.wrap_direct.wcnf,211780,234830
+grid80x80.f2_direct.wcnf,853487,932871
+grid20x20.f10.wrap_direct.wcnf,169753,130575
+grid40x40.f15_direct.wcnf,1105628,1253321
+grid20x20.f5.wrap_direct.wcnf,97932,60095
+grid40x40.f5.wrap_direct.wcnf,445288,486984
+grid40x40.f15.wrap_direct.wcnf,1214055,1359798
+grid40x40.f2_direct.wcnf,199325,237266

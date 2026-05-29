@@ -1,0 +1,118 @@
+c WARNING: setting fbeq=true because oll=true and oll_lpcores=true
+c MaxHS 5.0.0
+c Instance: pedigree/connell.cfn
+c Instance: pedigree/connell.cfn
+c #vars: 1176
+c #Clauses: 6851
+c Total Soft Cls Wt: 35
+c HARD: #Clauses = 6816, Total Lits = 13680, Ave Len = 2.0070 #units = 1104
+c SOFT: #Clauses = 35, Total Lits = 35, Ave Len = 1.0000
+c Total Soft Clause Weight (+ basecost): 35 (+ 0 from 0 false softs)
+c SOFT%: 0.5109%
+c #distinct weights: 1, mean = 1.0000, std. dev = 0.0000, min = 1, max = 1
+c Parse time: 0.0009 secs.
+c Wcnf Space Required: 0.0484MB
+c ================================
+c transitionWts = [ ] (0)
+c WCNF sat_solver found 1104 hard units after simplification
+c getting all clauses from sat solver
+c obtained 0 clauses and 0 units from extension stack
+c obtained 1176 clauses and 0 units from internal clauses
+c obtains 1176 clauses and 0 units from sat solver
+c WCNF: Units and equality reduced #hard clauses by 4536, total lits in hard clauses by 9216 and increased units by 0
+c WCNF: Units and equality reduced #soft clauses by 0, total lits in soft clauses by 0, and increased base cost by 0 (base_cost = 0) falsifying 0 softs
+c WCNF: removed 0 softs by resolution and found 0 unit soft resolutions
+c WCNF: rm_subsumed_softs reduced #soft clauses by0, total lits in soft clauses by 0, and increased base cost by 0 (base_cost = 0)
+c WCNF: found 0 pure literals
+c WCNF mutexes: #mutexes found = 0
+c WCNF mx finder used 35 calls to UP engine
+c WCNF mutexes: original #softs 35 #softs after mx-transforms 35
+c WCNF mutexes: reduction in softs 0
+c After WCNF Simplification
+c VARS: #vars = 1176
+c HARD: #Clauses = 1176, Total Lits = 3360, Ave Len = 2.8571
+c SOFT: #Clauses = 35, Total Lits = 35, Ave Len = 1.0000
+c Total Soft Clause Weight (+ basecost): 35 (+ 0 from 0 false softs)
+c #distinct weights: 1, mean = 1.0000, std. dev = 0.0000, min = 1, max = 1
+c Total Clauses: 1211
+c Wcnf Space Required: 0.0139MB
+c ================================
+c Added 0 extra binary clauses for Fbeq theory
+c Before solving sat solver has 1176 clauses: 0 redundant, 1176 irredundant.
+c New UB found 7 (internal 7)
+c Elapsed time 0.0003
+c Hards are SAT (feasible solutions exist)
+c Initial SAT solve took 0.0003
+c UB from initial solve = 7 (internal 7)
+c Using IBM CPLEX version 22.1.2.0 under IBM's Academic Initiative licencing program
+c OLL requires exact integer bounds; setting absGap from 0.75 to 0
+c Init Bnds: SAT Time 0.0000
+c Init Bnds: LB =0 (internal 0) UB = 7 (internal 7)
+c Init Bnds: Forced 0 literals.
+c Seeding type = 3
+c EqSeed: found 70 seedable constraints.
+c EqSeed: 0 cores 70 non-cores 0 mixed-cores 0 ordinary clauses
+c EqSeed: #seeded constraints 70
+c EqSeed: cores            0 Ave length 0.0000
+c EqSeed: non-cores        70 Ave length 2.0000
+c EqSeed: mixed cores      0 Ave length 0.0000
+c EqSeed: ordinary clauses 0 Ave length 0.0000
+c Seeding clauses found = 70
+c Initial stratification threshold 1
+c Initial LP optimum = 0 (rat 0)
+c Action: OLL
+c **********OLL Iter: 1 Elapsed Time = 0.0015 LB = 0 (internal 0) UB = 7 (internal 7) gap = 7 (internal 7) (0.000000 %) strat = 1.000000 rank = 0 bvars = 35 touts = 70
+c Disjoint Phase
+c Dsjnt: #Cores 0 with total weight 0.000000 LB 0 UB 7
+c Got 0 cores
+c OLL opt = 0 LP opt = 0 (rat 0) incr = 0
+c Lowering stratification threshold to 0.5
+c Resetting rank limit to 0
+c Action: OLL
+c **********OLL Iter: 2 Elapsed Time = 0.0022 LB = 0 (internal 0) UB = 7 (internal 7) gap = 7 (internal 7) (0.000000 %) strat = 0.500000 rank = 0 bvars = 35 touts = 70
+c Disjoint Phase
+c Conflict size = 23 solve time = 0.0022159999999999992 minwt = 1, lb = 1
+c New UB found 2 (internal 2)
+c Elapsed time 0.0045
+c Dsjnt: #Cores 1 with total weight 1.000000 LB 0 UB 2
+c Dsjnt: Avg Core Size 23.0000
+c Dsjnt: Time 0.0023
+c Got 1 cores
+c OLL opt = 1 LP opt = 1 (rat 1) incr = 1
+c Action: OLL
+c **********OLL Iter: 3 Elapsed Time = 0.0050 LB = 1 (internal 1) UB = 2 (internal 2) gap = 1 (internal 1) (100.000000 %) strat = 0.500000 rank = 0 bvars = 35 touts = 92
+c Disjoint Phase
+c Dsjnt: #Cores 0 with total weight 0.000000 LB 1 UB 2
+c Got 0 cores
+c OLL opt = 1 LP opt = 1 (rat 1) incr = 0
+c Increasing rank limit to -1
+c Action: OLL
+c **********OLL Iter: 4 Elapsed Time = 0.0053 LB = 1 (internal 1) UB = 2 (internal 2) gap = 1 (internal 1) (100.000000 %) strat = 0.500000 rank = -1 bvars = 35 touts = 92
+c Disjoint Phase
+c New UB found 1 (internal 1)
+c Elapsed time 0.0056
+c Dsjnt: #Cores 0 with total weight 0.000000 LB 1 UB 1
+c Got 0 cores
+c Solved by LB >= UB.
+o 1
+c Internal objective cost: 1
+s OPTIMUM FOUND
+c Solved: Number of falsified softs = 1
+c SAT: #calls 37
+c SAT: Total time 0.0028
+c SAT: #muser calls 1 (100.0000 % successful)
+c SAT: Minimize time 0.0021 (74.1410%)
+c SAT: Avg constraint minimization 12.0000
+c SAT: number of variables substituted 0
+c GREEDY: #calls 0
+c GREEDY: Total time 0.0000
+c CPLEX: #calls 0
+c CPLEX: Total time 0.0000
+c CPLEX: #constraints 1
+c CPLEX: Avg constraint size 1.0000
+c CPLEX: #non-core constraints 0
+c LP-Bounds: Total time 0.0010
+c LP-Bounds: #calls 4
+c LP-Bounds: Forced 0 variables
+c MEM MB: 38.0000
+c CPU: 0.0111
