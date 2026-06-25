@@ -1,0 +1,41 @@
+
+Welcome to IBM(R) ILOG(R) CPLEX(R) Interactive Optimizer 22.1.2.0
+  with Simplex, Mixed Integer & Barrier Optimizers
+5725-A06 5725-A29 5724-Y48 5724-Y49 5724-Y54 5724-Y55 5655-Y21
+Copyright IBM Corp. 1988, 2024.  All Rights Reserved.
+
+Type 'help' for a list of available commands.
+Type 'help' followed by a command name for more
+information on commands.
+
+CPLEX> Command '###' does not exist.  Type 'help' for a list of commands.
+CPLEX> Command 'started:' does not exist.  Type 'help' for a list of commands.
+CPLEX> Problem 'Grid/grid80x80.f10_direct.lp' read.
+Read time = 0.04 sec. (3.12 ticks)
+CPLEX> New value for default parallel thread count: 1
+CPLEX> Version identifier: 22.1.2.0 | 2024-11-26 | 0edbb82fd
+CPXPARAM_Threads                                 1
+Found incumbent of value 2.5354319e+07 after 0.00 sec. (1.58 ticks)
+Tried aggregator 1 time.
+MIP Presolve eliminated 0 rows and 1 columns.
+Reduced MIP has 25266 rows, 31666 columns, and 75798 nonzeros.
+Reduced MIP has 6400 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.03 sec. (32.07 ticks)
+Probing time = 0.01 sec. (5.57 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 25266 rows, 31666 columns, and 75798 nonzeros.
+Reduced MIP has 31666 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.05 sec. (48.81 ticks)
+Probing time = 0.01 sec. (5.57 ticks)
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Root relaxation solution time = 0.08 sec. (129.68 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                       2.53543e+07        0.0000           100.00%
+      0     0   317668.5000  6400   2.53543e+07   317668.5000     6938   98.75%
+*     0+    0                      2441868.0000   317668.5000            86.99%

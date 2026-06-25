@@ -1,0 +1,2276 @@
+
+Log for '' Clone_2 (V22.1.2.0) Wed Jun  3 12:57:10 2026
+
+
+Log for './Grid/grid20x20.f10.wrap_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 12:57:15 2026
+
+
+Log for './Grid/grid20x20.f15_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 12:57:19 2026
+
+
+Log for '' Clone_2 (V22.1.2.0) Wed Jun  3 12:57:25 2026
+
+
+Log for './Grid/grid40x40.f10_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 12:57:50 2026
+
+
+Log for './Grid/grid40x40.f10.wrap_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 12:58:30 2026
+
+
+Log for './Grid/grid40x40.f15_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 12:59:05 2026
+
+
+Log for './wcnf_files/grid20x20.f10_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 12:59:10 2026
+
+Tried aggregator 1 time.
+Reduced LP has 3088 rows, 1920 columns, and 7696 nonzeros.
+Presolve time = 0.00 sec. (2.58 ticks)
+Symmetry aggregator did 1568 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =           780.000000
+Iteration:   420    Infeasibility =           147.999905
+Switched to devex.
+Iteration:   686    Objective     =       -104029.500000
+Iteration:  1267    Objective     =        432716.000000
+Iteration:  1558    Objective     =        555762.000000
+Iteration:  1709    Objective     =        619253.000000
+Iteration:  1936    Objective     =        702518.500000
+Iteration:  2113    Objective     =        740640.000000
+Iteration:  2292    Objective     =        763715.500000
+Primal superbasis not built.
+
+Dual simplex solved model.
+
+
+Log for './wcnf_files/grid20x20.f10.wrap_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 12:59:11 2026
+
+Tried aggregator 1 time.
+Reduced LP has 4800 rows, 2000 columns, and 11200 nonzeros.
+Presolve time = 0.00 sec. (3.64 ticks)
+Symmetry aggregator did 1620 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          1600.000000
+Iteration:   169    Infeasibility =           171.000000
+Switched to devex.
+Iteration:   456    Infeasibility =            72.499865
+Iteration:   627    Objective     =        363556.500000
+Iteration:   912    Objective     =        470221.500000
+Iteration:   948    Objective     =        546818.500000
+Iteration:  1111    Objective     =        624810.500000
+Iteration:  1274    Objective     =        680309.500000
+Iteration:  1440    Objective     =        714791.000000
+Iteration:  1612    Objective     =        758411.000000
+Iteration:  1758    Objective     =        770074.500000
+
+Primal crossover.
+  Primal:  Fixed no variables.
+  Dual:  Fixing 420 variables.
+
+Dual simplex solved model.
+
+
+Log for './wcnf_files/grid20x20.f15.wrap_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 12:59:11 2026
+
+Tried aggregator 1 time.
+Reduced LP has 3220 rows, 2000 columns, and 8040 nonzeros.
+Presolve time = 0.00 sec. (2.69 ticks)
+Symmetry aggregator did 1620 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =           810.000000
+Iteration:    74    Infeasibility =             8.000000
+Switched to devex.
+Iteration:    85    Objective     =       -527084.000000
+Iteration:   714    Objective     =        424103.000000
+Iteration:   798    Objective     =        769128.000000
+Iteration:   971    Objective     =        799862.000000
+Iteration:  1126    Objective     =        799862.000000
+
+Dual simplex solved model.
+
+
+Log for './wcnf_files/grid20x20.f5.wrap_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 12:59:11 2026
+
+Tried aggregator 1 time.
+Reduced LP has 4800 rows, 2000 columns, and 11200 nonzeros.
+Presolve time = 0.00 sec. (3.65 ticks)
+Symmetry aggregator did 1620 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          1600.000000
+Iteration:   169    Infeasibility =           171.000000
+Switched to devex.
+Iteration:   456    Infeasibility =            72.499865
+Iteration:   627    Objective     =        191391.000000
+Iteration:   917    Objective     =        246175.500000
+Iteration:   953    Objective     =        283046.000000
+Iteration:  1119    Objective     =        327784.000000
+Iteration:  1277    Objective     =        351633.500000
+Iteration:  1435    Objective     =        372488.500000
+Iteration:  1606    Objective     =        388199.000000
+
+Dual simplex solved model.
+
+
+Log for './wcnf_files/grid40x40.f10_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 12:59:11 2026
+
+Tried aggregator 1 time.
+Reduced LP has 12370 rows, 7834 columns, and 30974 nonzeros.
+Presolve time = 0.01 sec. (10.58 ticks)
+Symmetry aggregator did 6136 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          3068.000000
+Iteration:   287    Infeasibility =            10.000000
+Switched to devex.
+Iteration:   301    Objective     =      -1403402.000000
+Iteration:   877    Objective     =       1848437.000000
+Iteration:  1008    Objective     =       2045103.000000
+Iteration:  1612    Objective     =       2368773.000000
+Iteration:  2195    Objective     =       2596686.500000
+Iteration:  2715    Objective     =       2689407.000000
+Iteration:  3165    Objective     =       2742855.000000
+Iteration:  3574    Objective     =       2766832.500000
+Iteration:  3981    Objective     =       2825779.500000
+Iteration:  4265    Objective     =       2857497.500000
+Iteration:  4578    Objective     =       2879870.500000
+Iteration:  4895    Objective     =       2921896.000000
+Iteration:  5217    Objective     =       2997636.500000
+Iteration:  5524    Objective     =       3064848.000000
+Iteration:  5810    Objective     =       3087110.000000
+Iteration:  6112    Objective     =       3173465.500000
+
+Dual simplex solved model.
+
+
+Log for './wcnf_files/grid40x40.f10.wrap_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 12:59:11 2026
+
+Tried aggregator 1 time.
+Reduced LP has 12846 rows, 7998 columns, and 32090 nonzeros.
+Presolve time = 0.01 sec. (10.92 ticks)
+Symmetry aggregator did 6448 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          3218.000000
+Iteration:   298    Infeasibility =            10.000000
+Switched to devex.
+Iteration:   316    Objective     =      -1552125.000000
+Iteration:   902    Objective     =       1697994.000000
+Iteration:  1036    Objective     =       1907692.000000
+Iteration:  1656    Objective     =       2221854.500000
+Iteration:  2211    Objective     =       2475589.500000
+Iteration:  2734    Objective     =       2594789.000000
+Iteration:  3211    Objective     =       2686074.500000
+Iteration:  3646    Objective     =       2739877.000000
+Iteration:  4027    Objective     =       2788508.500000
+Iteration:  4392    Objective     =       2848653.000000
+Iteration:  4761    Objective     =       2887121.500000
+Iteration:  5101    Objective     =       2960276.500000
+Iteration:  5415    Objective     =       3016812.500000
+Iteration:  5718    Objective     =       3044881.000000
+Iteration:  6023    Objective     =       3142473.000000
+Iteration:  6294    Objective     =       3189248.000000
+Iteration:  6562    Objective     =       3239382.500000
+Iteration:  6823    Objective     =       3247135.500000
+Iteration:  7081    Objective     =       3252419.000000
+
+Dual simplex solved model.
+
+
+Log for './wcnf_files/grid40x40.f15_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 12:59:11 2026
+
+Tried aggregator 1 time.
+Reduced LP has 18708 rows, 7836 columns, and 43652 nonzeros.
+Presolve time = 0.01 sec. (14.30 ticks)
+Symmetry aggregator did 6136 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          6236.000000
+Iteration:   664    Infeasibility =           682.000000
+Iteration:   752    Infeasibility =           620.000000
+Switched to devex.
+Iteration:  1343    Infeasibility =           361.999599
+Iteration:  2054    Infeasibility =            12.500000
+Iteration:  2097    Objective     =       2250916.500000
+Iteration:  2931    Objective     =       2511141.000000
+Iteration:  3087    Objective     =       2906947.500000
+Iteration:  3688    Objective     =       3314096.500000
+Iteration:  4316    Objective     =       3624688.000000
+Iteration:  4931    Objective     =       3841923.500000
+Iteration:  5491    Objective     =       4024015.500000
+Iteration:  5987    Objective     =       4144931.000000
+Iteration:  6493    Objective     =       4263776.000000
+Iteration:  6903    Objective     =       4346984.000000
+Iteration:  7315    Objective     =       4473804.000000
+
+Dual simplex solved model.
+
+
+Log for './wcnf_files/grid40x40.f15.wrap_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 12:59:11 2026
+
+Tried aggregator 1 time.
+Reduced LP has 19194 rows, 7998 columns, and 44786 nonzeros.
+Presolve time = 0.01 sec. (14.66 ticks)
+Symmetry aggregator did 6448 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          6398.000000
+Iteration:   676    Infeasibility =           657.000000
+Iteration:   765    Infeasibility =           590.000000
+Switched to devex.
+Iteration:  1362    Infeasibility =           363.499609
+Iteration:  2034    Infeasibility =            27.500000
+Iteration:  2099    Objective     =       2192438.000000
+Iteration:  2938    Objective     =       2449536.500000
+Iteration:  3099    Objective     =       2757294.500000
+Iteration:  3677    Objective     =       3152535.000000
+Iteration:  4279    Objective     =       3510516.000000
+Iteration:  4872    Objective     =       3699117.500000
+Iteration:  5365    Objective     =       3861556.500000
+Iteration:  5862    Objective     =       4018095.000000
+Iteration:  6345    Objective     =       4122139.500000
+Iteration:  6798    Objective     =       4220160.000000
+Iteration:  7227    Objective     =       4303399.000000
+Iteration:  7623    Objective     =       4399001.000000
+
+Dual simplex solved model.
+
+
+Log for './wcnf_files/grid40x40.f2_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 12:59:12 2026
+
+Tried aggregator 1 time.
+Reduced LP has 18660 rows, 7820 columns, and 43540 nonzeros.
+Presolve time = 0.01 sec. (14.54 ticks)
+Symmetry aggregator did 6128 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          6220.000000
+Iteration:   663    Infeasibility =           680.000000
+Iteration:   749    Infeasibility =           620.000000
+Switched to devex.
+Iteration:  1345    Infeasibility =           352.999615
+Iteration:  2039    Objective     =        372316.500000
+Iteration:  2869    Objective     =        406417.000000
+Iteration:  3028    Objective     =        456394.000000
+Iteration:  3618    Objective     =        505385.000000
+Iteration:  4223    Objective     =        557813.500000
+Iteration:  4760    Objective     =        580578.000000
+Iteration:  5366    Objective     =        611256.500000
+Iteration:  5910    Objective     =        628450.000000
+Iteration:  6410    Objective     =        641688.500000
+Iteration:  6863    Objective     =        656065.000000
+Iteration:  7332    Objective     =        666854.000000
+Iteration:  7772    Objective     =        678749.000000
+Iteration:  8165    Objective     =        689646.500000
+
+Dual simplex solved model.
+
+
+Log for './wcnf_files/grid40x40.f2.wrap_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 12:59:12 2026
+
+Tried aggregator 1 time.
+Reduced LP has 12866 rows, 7986 columns, and 32118 nonzeros.
+Presolve time = 0.01 sec. (11.10 ticks)
+Symmetry aggregator did 6480 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          3234.000000
+Iteration:   303    Objective     =       -249597.000000
+Iteration:   881    Objective     =        394724.000000
+Iteration:  1014    Objective     =        428527.000000
+Switched to devex.
+Iteration:  1734    Objective     =        524847.000000
+Iteration:  2258    Objective     =        547624.500000
+Iteration:  2756    Objective     =        574563.500000
+Iteration:  3276    Objective     =        596315.500000
+Iteration:  3713    Objective     =        607030.000000
+Iteration:  4116    Objective     =        616846.500000
+Iteration:  4472    Objective     =        625483.000000
+Iteration:  4828    Objective     =        634536.500000
+Iteration:  5143    Objective     =        642907.500000
+Iteration:  5483    Objective     =        659708.000000
+Iteration:  5780    Objective     =        669169.000000
+Iteration:  6089    Objective     =        676172.500000
+Iteration:  6396    Objective     =        687348.500000
+Iteration:  6674    Objective     =        694628.000000
+Switched to steepest-edge.
+Iteration:  6970    Objective     =        697583.500000
+
+Dual simplex solved model.
+
+
+Log for './wcnf_files/grid40x40.f5_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 12:59:12 2026
+
+Tried aggregator 1 time.
+Reduced LP has 12370 rows, 7834 columns, and 30974 nonzeros.
+Presolve time = 0.01 sec. (10.64 ticks)
+Symmetry aggregator did 6136 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          3068.000000
+Iteration:   288    Infeasibility =            10.000000
+Switched to devex.
+Iteration:   302    Objective     =       -662622.000000
+Iteration:   879    Objective     =        962647.000000
+Iteration:  1011    Objective     =       1054547.000000
+Iteration:  1618    Objective     =       1224273.500000
+Iteration:  2177    Objective     =       1330491.500000
+Iteration:  2695    Objective     =       1382997.500000
+Iteration:  3139    Objective     =       1405982.000000
+Iteration:  3556    Objective     =       1431141.000000
+Iteration:  3913    Objective     =       1461189.500000
+Iteration:  4274    Objective     =       1473734.500000
+Iteration:  4613    Objective     =       1520537.500000
+Iteration:  4919    Objective     =       1550142.500000
+Iteration:  5221    Objective     =       1565595.000000
+Iteration:  5531    Objective     =       1611294.000000
+Iteration:  5838    Objective     =       1626349.500000
+Iteration:  6152    Objective     =       1645904.000000
+Iteration:  6430    Objective     =       1657504.500000
+Iteration:  6703    Objective     =       1658630.500000
+
+Dual simplex solved model.
+
+
+Log for './wcnf_files/grid40x40.f5.wrap_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 12:59:12 2026
+
+Tried aggregator 1 time.
+Reduced LP has 19188 rows, 7996 columns, and 44772 nonzeros.
+Presolve time = 0.01 sec. (14.81 ticks)
+Symmetry aggregator did 6496 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          6396.000000
+Iteration:   674    Infeasibility =           689.000000
+Iteration:   764    Infeasibility =           624.000000
+Switched to devex.
+Iteration:  1325    Infeasibility =           395.999632
+Iteration:  1986    Infeasibility =            32.499572
+Iteration:  2071    Objective     =        749018.000000
+Iteration:  2914    Objective     =        832031.000000
+Iteration:  3086    Objective     =        968294.500000
+Iteration:  3737    Objective     =       1129105.500000
+Iteration:  4287    Objective     =       1217527.000000
+Iteration:  4833    Objective     =       1277246.000000
+Iteration:  5337    Objective     =       1341645.500000
+Iteration:  5827    Objective     =       1401471.000000
+Iteration:  6280    Objective     =       1431258.000000
+Iteration:  6720    Objective     =       1470929.000000
+Iteration:  7148    Objective     =       1508155.000000
+Iteration:  7567    Objective     =       1536402.500000
+
+Dual simplex solved model.
+
+
+Log for './wcnf_files/grid80x80.f10_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 12:59:12 2026
+
+Tried aggregator 1 time.
+Reduced LP has 50338 rows, 31666 columns, and 125942 nonzeros.
+Presolve time = 0.05 sec. (43.92 ticks)
+Symmetry aggregator did 25072 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =         12536.000000
+Iteration:  1163    Infeasibility =            22.000000
+Switched to devex.
+Iteration:  1193    Objective     =      -5836487.000000
+Iteration:  3518    Objective     =       7122505.000000
+Iteration:  4039    Objective     =       7840664.000000
+Iteration:  4490    Objective     =       8996554.000000
+Iteration:  4834    Objective     =       9600542.000000
+Iteration:  5111    Objective     =      10001380.000000
+Iteration:  5352    Objective     =      10265115.500000
+Iteration:  6224    Objective     =      10407634.500000
+Iteration:  6787    Objective     =      10574462.000000
+Iteration:  7417    Objective     =      10733098.000000
+Iteration:  7998    Objective     =      10856347.500000
+Iteration:  8604    Objective     =      10992838.500000
+Iteration:  9261    Objective     =      11116391.500000
+Iteration:  9899    Objective     =      11207133.500000
+Iteration: 10595    Objective     =      11457230.500000
+Iteration: 11198    Objective     =      11638472.000000
+Iteration: 11831    Objective     =      11794851.000000
+Iteration: 12437    Objective     =      11932994.500000
+Iteration: 13034    Objective     =      11998321.000000
+Iteration: 13604    Objective     =      12068893.000000
+Iteration: 14228    Objective     =      12312246.000000
+Iteration: 14815    Objective     =      12479126.500000
+Iteration: 15359    Objective     =      12549271.000000
+Iteration: 15926    Objective     =      12611109.000000
+Iteration: 16491    Objective     =      12750766.500000
+Iteration: 17053    Objective     =      12816756.500000
+Iteration: 17589    Objective     =      12847221.500000
+
+Barrier solved model.
+
+
+Log for './wcnf_files/grid80x80.f10.wrap_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 12:59:13 2026
+
+Tried aggregator 1 time.
+Reduced LP has 51404 rows, 31984 columns, and 128392 nonzeros.
+Presolve time = 0.05 sec. (44.72 ticks)
+Symmetry aggregator did 25820 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =         12904.000000
+Iteration:  1191    Infeasibility =            22.000000
+Switched to devex.
+Iteration:  1223    Objective     =      -5972040.000000
+Iteration:  3552    Objective     =       7153633.000000
+Iteration:  4069    Objective     =       7918925.000000
+Iteration:  4523    Objective     =       9059523.000000
+Iteration:  4870    Objective     =       9684202.000000
+Iteration:  5164    Objective     =      10140414.500000
+Iteration:  5412    Objective     =      10422634.500000
+Iteration:  6307    Objective     =      10533083.500000
+Iteration:  6845    Objective     =      10610749.500000
+Iteration:  7153    Objective     =      10758388.500000
+Iteration:  7664    Objective     =      10827584.000000
+Iteration:  8277    Objective     =      10993890.000000
+Iteration:  8895    Objective     =      11118829.500000
+Iteration:  9565    Objective     =      11247134.500000
+Iteration: 10116    Objective     =      11317682.500000
+Iteration: 10821    Objective     =      11486685.000000
+Iteration: 11411    Objective     =      11646910.500000
+Iteration: 12061    Objective     =      11880878.000000
+Iteration: 12693    Objective     =      12028053.500000
+Iteration: 13269    Objective     =      12100476.500000
+Iteration: 13858    Objective     =      12173585.500000
+Iteration: 14490    Objective     =      12460555.500000
+Iteration: 15102    Objective     =      12649935.000000
+Iteration: 15681    Objective     =      12721074.500000
+Iteration: 16241    Objective     =      12766551.500000
+Iteration: 16809    Objective     =      12857600.000000
+Iteration: 17390    Objective     =      12972518.000000
+Iteration: 17945    Objective     =      12992519.000000
+
+Barrier solved model.
+
+
+Log for './wcnf_files/grid80x80.f15_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 12:59:14 2026
+
+Tried aggregator 1 time.
+Reduced LP has 50352 rows, 31672 columns, and 125976 nonzeros.
+Presolve time = 0.05 sec. (43.78 ticks)
+Symmetry aggregator did 25080 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =         12536.000000
+Iteration:  1164    Infeasibility =            22.000000
+Switched to devex.
+Iteration:  1193    Objective     =      -8920518.000000
+Iteration:  3518    Objective     =      10518384.000000
+Iteration:  4041    Objective     =      11621498.000000
+Iteration:  4492    Objective     =      13334158.000000
+Iteration:  4839    Objective     =      14269475.000000
+Iteration:  5115    Objective     =      14866553.000000
+Iteration:  5359    Objective     =      15248159.500000
+Iteration:  6247    Objective     =      15447469.500000
+Iteration:  6869    Objective     =      15729080.500000
+Iteration:  7181    Objective     =      15876159.000000
+Iteration:  7764    Objective     =      16102703.000000
+Iteration:  8421    Objective     =      16317108.000000
+Iteration:  9079    Objective     =      16492921.500000
+Iteration:  9690    Objective     =      16617063.500000
+Iteration: 10308    Objective     =      16749305.000000
+Iteration: 10990    Objective     =      17137717.000000
+Iteration: 11590    Objective     =      17463522.500000
+Iteration: 12210    Objective     =      17755286.000000
+Iteration: 12797    Objective     =      17884711.000000
+Iteration: 13346    Objective     =      18077675.500000
+Iteration: 13950    Objective     =      18454728.500000
+Iteration: 14521    Objective     =      18651688.000000
+Iteration: 15087    Objective     =      18715740.000000
+Iteration: 15624    Objective     =      18773641.000000
+Iteration: 16166    Objective     =      18891317.500000
+Iteration: 16750    Objective     =      19079104.000000
+Iteration: 17295    Objective     =      19127926.000000
+Iteration: 17837    Objective     =      19140719.000000
+Iteration: 18382    Objective     =      19148465.000000
+Iteration: 18928    Objective     =      19151141.500000
+Iteration: 19471    Objective     =      19155666.500000
+Primal superbasis not built.
+
+Barrier solved model.
+
+
+Log for './wcnf_files/grid80x80.f15.wrap_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 12:59:15 2026
+
+Tried aggregator 1 time.
+Reduced LP has 50944 rows, 31996 columns, and 127484 nonzeros.
+Presolve time = 0.06 sec. (44.29 ticks)
+Symmetry aggregator did 25348 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =         12674.000000
+Iteration:  1177    Infeasibility =            16.000000
+Switched to devex.
+Iteration:  1200    Objective     =      -9128507.000000
+Iteration:  3555    Objective     =      10693702.000000
+Iteration:  4077    Objective     =      11698670.000000
+Iteration:  4533    Objective     =      13595414.000000
+Iteration:  4875    Objective     =      14463218.000000
+Iteration:  5155    Objective     =      15049121.000000
+Iteration:  5401    Objective     =      15443074.500000
+Iteration:  6273    Objective     =      15632729.000000
+Iteration:  6877    Objective     =      15938835.500000
+Iteration:  7361    Objective     =      16119959.000000
+Iteration:  7864    Objective     =      16249246.500000
+Iteration:  8290    Objective     =      16478260.500000
+Iteration:  8913    Objective     =      16651536.000000
+Iteration:  9521    Objective     =      16775813.500000
+Iteration: 10193    Objective     =      17021833.500000
+Iteration: 10787    Objective     =      17374538.500000
+Iteration: 11394    Objective     =      17662050.000000
+Iteration: 12013    Objective     =      17913582.500000
+Iteration: 12597    Objective     =      18072825.000000
+Iteration: 13172    Objective     =      18355222.500000
+Iteration: 13771    Objective     =      18735092.000000
+Iteration: 14351    Objective     =      18953931.500000
+Iteration: 14913    Objective     =      19045281.500000
+Iteration: 15465    Objective     =      19095528.500000
+Iteration: 16032    Objective     =      19285623.000000
+Iteration: 16584    Objective     =      19414201.500000
+Iteration: 17137    Objective     =      19471811.500000
+Iteration: 17696    Objective     =      19507777.500000
+Iteration: 18225    Objective     =      19533494.000000
+Iteration: 18762    Objective     =      19537281.000000
+
+Barrier solved model.
+
+
+Log for './wcnf_files/grid80x80.f2_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 12:59:16 2026
+
+Tried aggregator 1 time.
+Reduced LP has 50378 rows, 31630 columns, and 125986 nonzeros.
+Presolve time = 0.06 sec. (44.46 ticks)
+Symmetry aggregator did 25148 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =         12570.000000
+Iteration:  1173    Infeasibility =            14.000000
+Switched to devex.
+Iteration:  1194    Objective     =       -941673.000000
+Iteration:  4463    Objective     =        -33027.000000
+Iteration:  6390    Objective     =       1752062.000000
+Iteration:  6915    Objective     =       1883276.000000
+Iteration:  7355    Objective     =       2090063.000000
+Iteration:  7710    Objective     =       2228623.000000
+Iteration:  8002    Objective     =       2308478.500000
+Iteration:  8246    Objective     =       2358813.500000
+Iteration:  8747    Objective     =       2378594.500000
+Iteration:  9392    Objective     =       2402349.500000
+Iteration:  9921    Objective     =       2433289.500000
+Iteration: 10546    Objective     =       2460778.000000
+Iteration: 11156    Objective     =       2494056.000000
+Iteration: 11791    Objective     =       2519370.000000
+Iteration: 12390    Objective     =       2532527.000000
+Iteration: 13059    Objective     =       2565937.500000
+Iteration: 13711    Objective     =       2598017.500000
+Iteration: 14342    Objective     =       2628849.500000
+Iteration: 14964    Objective     =       2650801.000000
+Iteration: 15597    Objective     =       2684625.500000
+Iteration: 16222    Objective     =       2717433.000000
+Iteration: 16813    Objective     =       2733882.000000
+Iteration: 17383    Objective     =       2744163.500000
+Iteration: 17962    Objective     =       2752457.500000
+Iteration: 18572    Objective     =       2787929.000000
+Iteration: 19139    Objective     =       2802251.500000
+Iteration: 19718    Objective     =       2815560.000000
+Iteration: 20270    Objective     =       2818984.000000
+
+Barrier solved model.
+
+
+Log for './wcnf_files/grid80x80.f2.wrap_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 12:59:17 2026
+
+Tried aggregator 1 time.
+Reduced LP has 51008 rows, 31948 columns, and 127564 nonzeros.
+Presolve time = 0.06 sec. (45.02 ticks)
+Symmetry aggregator did 25460 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =         12730.000000
+Iteration:  1181    Infeasibility =            28.000000
+Switched to devex.
+Iteration:  1224    Objective     =       -948475.000000
+Iteration:  5336    Objective     =        179574.000000
+Iteration:  7208    Objective     =       1816600.000000
+Iteration:  7729    Objective     =       1949796.000000
+Iteration:  8155    Objective     =       2133664.000000
+Iteration:  8500    Objective     =       2261332.000000
+Iteration:  8790    Objective     =       2338975.000000
+Iteration:  9035    Objective     =       2398671.000000
+Iteration:  9510    Objective     =       2412075.500000
+Iteration: 10235    Objective     =       2431781.500000
+Iteration: 10736    Objective     =       2458062.000000
+Iteration: 11335    Objective     =       2497944.000000
+Iteration: 11990    Objective     =       2531208.000000
+Iteration: 12661    Objective     =       2560354.500000
+Iteration: 13346    Objective     =       2587363.000000
+Iteration: 13994    Objective     =       2624870.500000
+Iteration: 14624    Objective     =       2652855.500000
+Iteration: 15261    Objective     =       2673944.500000
+Iteration: 15894    Objective     =       2693125.000000
+Iteration: 16518    Objective     =       2723508.500000
+Iteration: 17126    Objective     =       2750297.500000
+Iteration: 17703    Objective     =       2771555.000000
+Iteration: 18284    Objective     =       2785212.000000
+Iteration: 18841    Objective     =       2792878.000000
+Iteration: 19419    Objective     =       2818789.500000
+Iteration: 20024    Objective     =       2840598.000000
+Iteration: 20587    Objective     =       2850933.500000
+Iteration: 21158    Objective     =       2867873.000000
+
+Barrier solved model.
+
+
+Log for './wcnf_files/grid80x80.f5_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 12:59:17 2026
+
+Tried aggregator 1 time.
+Reduced LP has 50696 rows, 31648 columns, and 126640 nonzeros.
+Presolve time = 0.07 sec. (44.36 ticks)
+Symmetry aggregator did 25448 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =         12720.000000
+Iteration:  1181    Infeasibility =             8.000000
+Switched to devex.
+Iteration:  1195    Objective     =      -2828940.000000
+Iteration:  4659    Objective     =       -467005.000000
+Iteration:  6560    Objective     =       3894108.000000
+Iteration:  7092    Objective     =       4220016.000000
+Iteration:  7540    Objective     =       4727964.000000
+Iteration:  7888    Objective     =       4996192.000000
+Iteration:  8180    Objective     =       5203321.500000
+Iteration:  8425    Objective     =       5327930.500000
+Iteration:  8904    Objective     =       5363447.500000
+Iteration:  9453    Objective     =       5403199.500000
+Iteration: 10061    Objective     =       5455287.500000
+Iteration: 10626    Objective     =       5536061.000000
+Iteration: 11189    Objective     =       5610724.000000
+Iteration: 11783    Objective     =       5690763.500000
+Iteration: 12423    Objective     =       5766645.500000
+Iteration: 13035    Objective     =       5799584.000000
+Iteration: 13707    Objective     =       5906094.000000
+Iteration: 14361    Objective     =       6021534.000000
+Iteration: 15007    Objective     =       6110770.500000
+Iteration: 15614    Objective     =       6168491.500000
+Iteration: 16218    Objective     =       6212997.000000
+Iteration: 16796    Objective     =       6268895.000000
+Iteration: 17443    Objective     =       6393377.000000
+Iteration: 18036    Objective     =       6445598.500000
+Iteration: 18601    Objective     =       6473388.000000
+Iteration: 19145    Objective     =       6492993.000000
+Iteration: 19729    Objective     =       6552925.000000
+Iteration: 20291    Objective     =       6580681.000000
+Iteration: 20827    Objective     =       6586103.000000
+
+Barrier solved model.
+
+
+Log for './wcnf_files/grid80x80.f5.wrap_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 12:59:18 2026
+
+Tried aggregator 1 time.
+Reduced LP has 51384 rows, 31972 columns, and 128340 nonzeros.
+Presolve time = 0.06 sec. (44.96 ticks)
+Symmetry aggregator did 25812 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =         12906.000000
+Iteration:  1191    Infeasibility =            22.000000
+Switched to devex.
+Iteration:  1222    Objective     =      -2823375.000000
+Iteration:  5507    Objective     =         99735.000000
+Iteration:  7346    Objective     =       3962803.000000
+Iteration:  7877    Objective     =       4282463.000000
+Iteration:  8323    Objective     =       4779910.500000
+Iteration:  8665    Objective     =       5040271.000000
+Iteration:  8955    Objective     =       5232018.000000
+Iteration:  9203    Objective     =       5365780.000000
+Iteration:  9676    Objective     =       5389899.500000
+Iteration: 10295    Objective     =       5438456.500000
+Iteration: 10753    Objective     =       5511536.000000
+Iteration: 11231    Objective     =       5593318.500000
+Iteration: 11773    Objective     =       5662133.000000
+Iteration: 12323    Objective     =       5723805.500000
+Iteration: 12967    Objective     =       5789288.000000
+Iteration: 13574    Objective     =       5831307.000000
+Iteration: 14187    Objective     =       5903859.500000
+Iteration: 14843    Objective     =       6054706.500000
+Iteration: 15474    Objective     =       6147924.500000
+Iteration: 16088    Objective     =       6213253.500000
+Iteration: 16682    Objective     =       6263784.000000
+Iteration: 17263    Objective     =       6293618.500000
+Iteration: 17844    Objective     =       6350777.500000
+Iteration: 18458    Objective     =       6487272.500000
+Iteration: 19044    Objective     =       6539133.500000
+Iteration: 19615    Objective     =       6560247.000000
+Iteration: 20172    Objective     =       6580553.500000
+Iteration: 20748    Objective     =       6635045.500000
+Switched to steepest-edge.
+Iteration: 21299    Objective     =       6649067.500000
+Iteration: 21692    Objective     =       6666021.000000
+
+Barrier solved model.
+
+
+Log for '' Clone_2 (V22.1.2.0) Wed Jun  3 13:23:06 2026
+
+
+Log for '' Clone_2 (V22.1.2.0) Wed Jun  3 13:24:02 2026
+
+
+Log for './Grid/grid80x80.f5_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 13:28:10 2026
+
+
+Log for './Grid/grid80x80.f5.wrap_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 13:32:57 2026
+
+
+Log for './wcnf_files/grid20x20.f10_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 13:33:26 2026
+
+Tried aggregator 1 time.
+Reduced LP has 3088 rows, 1920 columns, and 7696 nonzeros.
+Presolve time = 0.00 sec. (2.58 ticks)
+Symmetry aggregator did 1568 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =           780.000000
+Iteration:   420    Infeasibility =           147.999905
+Switched to devex.
+Iteration:   686    Objective     =       -104029.500000
+Iteration:  1267    Objective     =        432716.000000
+Iteration:  1558    Objective     =        555762.000000
+Iteration:  1709    Objective     =        619253.000000
+Iteration:  1936    Objective     =        702518.500000
+Iteration:  2113    Objective     =        740640.000000
+Iteration:  2292    Objective     =        763715.500000
+
+Dual simplex solved model.
+
+
+Log for './wcnf_files/grid20x20.f10.wrap_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 13:33:26 2026
+
+Tried aggregator 1 time.
+Reduced LP has 4800 rows, 2000 columns, and 11200 nonzeros.
+Presolve time = 0.00 sec. (3.64 ticks)
+Symmetry aggregator did 1620 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          1600.000000
+Iteration:   169    Infeasibility =           171.000000
+Switched to devex.
+Iteration:   456    Infeasibility =            72.499865
+Iteration:   627    Objective     =        363556.500000
+Iteration:   912    Objective     =        470221.500000
+Iteration:   948    Objective     =        546818.500000
+Iteration:  1111    Objective     =        624810.500000
+Iteration:  1274    Objective     =        680309.500000
+Iteration:  1440    Objective     =        714791.000000
+Iteration:  1612    Objective     =        758411.000000
+Iteration:  1758    Objective     =        770074.500000
+
+Primal crossover.
+  Primal:  Fixed no variables.
+  Dual:  Fixing 420 variables.
+
+Dual simplex solved model.
+
+
+Log for './wcnf_files/grid20x20.f15.wrap_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 13:33:26 2026
+
+Tried aggregator 1 time.
+Reduced LP has 3220 rows, 2000 columns, and 8040 nonzeros.
+Presolve time = 0.00 sec. (2.69 ticks)
+Symmetry aggregator did 1620 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =           810.000000
+Iteration:    74    Infeasibility =             8.000000
+Switched to devex.
+Iteration:    85    Objective     =       -527084.000000
+Iteration:   714    Objective     =        424103.000000
+Iteration:   798    Objective     =        769128.000000
+Iteration:   971    Objective     =        799862.000000
+Iteration:  1126    Objective     =        799862.000000
+Iteration:  1193    Objective     =        991461.500000
+Iteration:  1306    Objective     =       1029168.500000
+
+Dual simplex solved model.
+
+
+Log for './wcnf_files/grid20x20.f5.wrap_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 13:33:26 2026
+
+Tried aggregator 1 time.
+Reduced LP has 4800 rows, 2000 columns, and 11200 nonzeros.
+Presolve time = 0.00 sec. (3.65 ticks)
+Symmetry aggregator did 1620 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          1600.000000
+Iteration:   169    Infeasibility =           171.000000
+Switched to devex.
+Iteration:   456    Infeasibility =            72.499865
+Iteration:   627    Objective     =        191391.000000
+Iteration:   917    Objective     =        246175.500000
+Iteration:   953    Objective     =        283046.000000
+Iteration:  1119    Objective     =        327784.000000
+Iteration:  1277    Objective     =        351633.500000
+Iteration:  1435    Objective     =        372488.500000
+Iteration:  1606    Objective     =        388199.000000
+
+Dual simplex solved model.
+
+
+Log for './wcnf_files/grid40x40.f10_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 13:33:26 2026
+
+Tried aggregator 1 time.
+Reduced LP has 12370 rows, 7834 columns, and 30974 nonzeros.
+Presolve time = 0.01 sec. (10.58 ticks)
+Symmetry aggregator did 6136 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          3068.000000
+Iteration:   287    Infeasibility =            10.000000
+Switched to devex.
+Iteration:   301    Objective     =      -1403402.000000
+Iteration:   877    Objective     =       1848437.000000
+Iteration:  1008    Objective     =       2045103.000000
+Iteration:  1612    Objective     =       2368773.000000
+Iteration:  2195    Objective     =       2596686.500000
+Iteration:  2715    Objective     =       2689407.000000
+Iteration:  3165    Objective     =       2742855.000000
+Iteration:  3574    Objective     =       2766832.500000
+Iteration:  3981    Objective     =       2825779.500000
+Iteration:  4265    Objective     =       2857497.500000
+Iteration:  4578    Objective     =       2879870.500000
+Iteration:  4895    Objective     =       2921896.000000
+Iteration:  5217    Objective     =       2997636.500000
+Iteration:  5524    Objective     =       3064848.000000
+Iteration:  5810    Objective     =       3087110.000000
+Iteration:  6112    Objective     =       3173465.500000
+
+Dual simplex solved model.
+
+
+Log for './wcnf_files/grid40x40.f10.wrap_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 13:33:26 2026
+
+Tried aggregator 1 time.
+Reduced LP has 12846 rows, 7998 columns, and 32090 nonzeros.
+Presolve time = 0.01 sec. (10.92 ticks)
+Symmetry aggregator did 6448 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          3218.000000
+Iteration:   298    Infeasibility =            10.000000
+Switched to devex.
+Iteration:   316    Objective     =      -1552125.000000
+Iteration:   902    Objective     =       1697994.000000
+Iteration:  1036    Objective     =       1907692.000000
+Iteration:  1656    Objective     =       2221854.500000
+Iteration:  2211    Objective     =       2475589.500000
+Iteration:  2734    Objective     =       2594789.000000
+Iteration:  3211    Objective     =       2686074.500000
+Iteration:  3646    Objective     =       2739877.000000
+Iteration:  4027    Objective     =       2788508.500000
+Iteration:  4392    Objective     =       2848653.000000
+Iteration:  4761    Objective     =       2887121.500000
+Iteration:  5101    Objective     =       2960276.500000
+Iteration:  5415    Objective     =       3016812.500000
+Iteration:  5718    Objective     =       3044881.000000
+Iteration:  6023    Objective     =       3142473.000000
+Iteration:  6294    Objective     =       3189248.000000
+Iteration:  6562    Objective     =       3239382.500000
+
+Dual simplex solved model.
+
+
+Log for './wcnf_files/grid40x40.f15_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 13:33:26 2026
+
+Tried aggregator 1 time.
+Reduced LP has 18708 rows, 7836 columns, and 43652 nonzeros.
+Presolve time = 0.01 sec. (14.30 ticks)
+Symmetry aggregator did 6136 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          6236.000000
+Iteration:   664    Infeasibility =           682.000000
+Iteration:   752    Infeasibility =           620.000000
+Switched to devex.
+Iteration:  1343    Infeasibility =           361.999599
+Iteration:  2054    Infeasibility =            12.500000
+Iteration:  2097    Objective     =       2250916.500000
+Iteration:  2931    Objective     =       2511141.000000
+Iteration:  3087    Objective     =       2906947.500000
+Iteration:  3688    Objective     =       3314096.500000
+Iteration:  4316    Objective     =       3624688.000000
+Iteration:  4931    Objective     =       3841923.500000
+Iteration:  5491    Objective     =       4024015.500000
+Iteration:  5987    Objective     =       4144931.000000
+Iteration:  6493    Objective     =       4263776.000000
+Iteration:  6903    Objective     =       4346984.000000
+Iteration:  7315    Objective     =       4473804.000000
+
+Dual simplex solved model.
+
+
+Log for './wcnf_files/grid40x40.f15.wrap_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 13:33:26 2026
+
+Tried aggregator 1 time.
+Reduced LP has 19194 rows, 7998 columns, and 44786 nonzeros.
+Presolve time = 0.01 sec. (14.66 ticks)
+Symmetry aggregator did 6448 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          6398.000000
+Iteration:   676    Infeasibility =           657.000000
+Iteration:   765    Infeasibility =           590.000000
+Switched to devex.
+Iteration:  1362    Infeasibility =           363.499609
+Iteration:  2034    Infeasibility =            27.500000
+Iteration:  2099    Objective     =       2192438.000000
+Iteration:  2938    Objective     =       2449536.500000
+Iteration:  3099    Objective     =       2757294.500000
+Iteration:  3677    Objective     =       3152535.000000
+Iteration:  4279    Objective     =       3510516.000000
+Iteration:  4872    Objective     =       3699117.500000
+Iteration:  5365    Objective     =       3861556.500000
+Iteration:  5862    Objective     =       4018095.000000
+Iteration:  6345    Objective     =       4122139.500000
+Iteration:  6798    Objective     =       4220160.000000
+Iteration:  7227    Objective     =       4303399.000000
+Iteration:  7623    Objective     =       4399001.000000
+
+Dual simplex solved model.
+
+
+Log for './wcnf_files/grid40x40.f2_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 13:33:27 2026
+
+Tried aggregator 1 time.
+Reduced LP has 18660 rows, 7820 columns, and 43540 nonzeros.
+Presolve time = 0.01 sec. (14.54 ticks)
+Symmetry aggregator did 6128 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          6220.000000
+Iteration:   663    Infeasibility =           680.000000
+Iteration:   749    Infeasibility =           620.000000
+Switched to devex.
+Iteration:  1345    Infeasibility =           352.999615
+Iteration:  2039    Objective     =        372316.500000
+Iteration:  2869    Objective     =        406417.000000
+Iteration:  3028    Objective     =        456394.000000
+Iteration:  3618    Objective     =        505385.000000
+Iteration:  4223    Objective     =        557813.500000
+Iteration:  4760    Objective     =        580578.000000
+Iteration:  5366    Objective     =        611256.500000
+Iteration:  5910    Objective     =        628450.000000
+Iteration:  6410    Objective     =        641688.500000
+Iteration:  6863    Objective     =        656065.000000
+Iteration:  7332    Objective     =        666854.000000
+Iteration:  7772    Objective     =        678749.000000
+Iteration:  8165    Objective     =        689646.500000
+
+Dual simplex solved model.
+
+
+Log for './wcnf_files/grid40x40.f2.wrap_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 13:33:27 2026
+
+Tried aggregator 1 time.
+Reduced LP has 12866 rows, 7986 columns, and 32118 nonzeros.
+Presolve time = 0.01 sec. (11.10 ticks)
+Symmetry aggregator did 6480 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          3234.000000
+Iteration:   303    Objective     =       -249597.000000
+Iteration:   881    Objective     =        394724.000000
+Iteration:  1014    Objective     =        428527.000000
+Switched to devex.
+Iteration:  1734    Objective     =        524847.000000
+Iteration:  2258    Objective     =        547624.500000
+Iteration:  2756    Objective     =        574563.500000
+Iteration:  3276    Objective     =        596315.500000
+Iteration:  3713    Objective     =        607030.000000
+Iteration:  4116    Objective     =        616846.500000
+Iteration:  4472    Objective     =        625483.000000
+Iteration:  4828    Objective     =        634536.500000
+Iteration:  5143    Objective     =        642907.500000
+Iteration:  5483    Objective     =        659708.000000
+Iteration:  5780    Objective     =        669169.000000
+Iteration:  6089    Objective     =        676172.500000
+Iteration:  6396    Objective     =        687348.500000
+Iteration:  6674    Objective     =        694628.000000
+
+Dual simplex solved model.
+
+
+Log for './wcnf_files/grid40x40.f5_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 13:33:27 2026
+
+Tried aggregator 1 time.
+Reduced LP has 12370 rows, 7834 columns, and 30974 nonzeros.
+Presolve time = 0.01 sec. (10.64 ticks)
+Symmetry aggregator did 6136 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          3068.000000
+Iteration:   288    Infeasibility =            10.000000
+Switched to devex.
+Iteration:   302    Objective     =       -662622.000000
+Iteration:   879    Objective     =        962647.000000
+Iteration:  1011    Objective     =       1054547.000000
+Iteration:  1618    Objective     =       1224273.500000
+Iteration:  2177    Objective     =       1330491.500000
+Iteration:  2695    Objective     =       1382997.500000
+Iteration:  3139    Objective     =       1405982.000000
+Iteration:  3556    Objective     =       1431141.000000
+Iteration:  3913    Objective     =       1461189.500000
+Iteration:  4274    Objective     =       1473734.500000
+Iteration:  4613    Objective     =       1520537.500000
+Iteration:  4919    Objective     =       1550142.500000
+Iteration:  5221    Objective     =       1565595.000000
+Iteration:  5531    Objective     =       1611294.000000
+Iteration:  5838    Objective     =       1626349.500000
+
+Dual simplex solved model.
+
+
+Log for './wcnf_files/grid40x40.f5.wrap_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 13:33:27 2026
+
+Tried aggregator 1 time.
+Reduced LP has 19188 rows, 7996 columns, and 44772 nonzeros.
+Presolve time = 0.01 sec. (14.81 ticks)
+Symmetry aggregator did 6496 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          6396.000000
+Iteration:   674    Infeasibility =           689.000000
+Iteration:   764    Infeasibility =           624.000000
+Switched to devex.
+Iteration:  1325    Infeasibility =           395.999632
+Iteration:  1986    Infeasibility =            32.499572
+Iteration:  2071    Objective     =        749018.000000
+Iteration:  2914    Objective     =        832031.000000
+Iteration:  3086    Objective     =        968294.500000
+Iteration:  3737    Objective     =       1129105.500000
+Iteration:  4287    Objective     =       1217527.000000
+Iteration:  4833    Objective     =       1277246.000000
+Iteration:  5337    Objective     =       1341645.500000
+Iteration:  5827    Objective     =       1401471.000000
+Iteration:  6280    Objective     =       1431258.000000
+Iteration:  6720    Objective     =       1470929.000000
+Iteration:  7148    Objective     =       1508155.000000
+Iteration:  7567    Objective     =       1536402.500000
+
+Dual simplex solved model.
+
+
+Log for './wcnf_files/grid80x80.f10_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 13:33:28 2026
+
+Tried aggregator 1 time.
+Reduced LP has 50338 rows, 31666 columns, and 125942 nonzeros.
+Presolve time = 0.05 sec. (43.92 ticks)
+Symmetry aggregator did 25072 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =         12536.000000
+Iteration:  1163    Infeasibility =            22.000000
+Switched to devex.
+Iteration:  1193    Objective     =      -5836487.000000
+Iteration:  3518    Objective     =       7122505.000000
+Iteration:  4039    Objective     =       7840664.000000
+Iteration:  4490    Objective     =       8996554.000000
+Iteration:  4834    Objective     =       9600542.000000
+Iteration:  5111    Objective     =      10001380.000000
+Iteration:  5352    Objective     =      10265115.500000
+Iteration:  6224    Objective     =      10407634.500000
+Iteration:  6787    Objective     =      10574462.000000
+Iteration:  7417    Objective     =      10733098.000000
+Iteration:  7998    Objective     =      10856347.500000
+Iteration:  8604    Objective     =      10992838.500000
+Iteration:  9261    Objective     =      11116391.500000
+Iteration:  9899    Objective     =      11207133.500000
+Iteration: 10595    Objective     =      11457230.500000
+Iteration: 11198    Objective     =      11638472.000000
+Iteration: 11831    Objective     =      11794851.000000
+Iteration: 12437    Objective     =      11932994.500000
+Iteration: 13034    Objective     =      11998321.000000
+Iteration: 13604    Objective     =      12068893.000000
+Iteration: 14228    Objective     =      12312246.000000
+Iteration: 14815    Objective     =      12479126.500000
+Iteration: 15359    Objective     =      12549271.000000
+Iteration: 15926    Objective     =      12611109.000000
+Iteration: 16491    Objective     =      12750766.500000
+Iteration: 17053    Objective     =      12816756.500000
+Iteration: 17589    Objective     =      12847221.500000
+Iteration: 18150    Objective     =      12857593.000000
+
+Barrier solved model.
+
+
+Log for './wcnf_files/grid80x80.f10.wrap_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 13:33:28 2026
+
+Tried aggregator 1 time.
+Reduced LP has 51404 rows, 31984 columns, and 128392 nonzeros.
+Presolve time = 0.06 sec. (44.72 ticks)
+Symmetry aggregator did 25820 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =         12904.000000
+Iteration:  1191    Infeasibility =            22.000000
+Switched to devex.
+Iteration:  1223    Objective     =      -5972040.000000
+Iteration:  3552    Objective     =       7153633.000000
+Iteration:  4069    Objective     =       7918925.000000
+Iteration:  4523    Objective     =       9059523.000000
+Iteration:  4870    Objective     =       9684202.000000
+Iteration:  5164    Objective     =      10140414.500000
+Iteration:  5412    Objective     =      10422634.500000
+Iteration:  6307    Objective     =      10533083.500000
+Iteration:  6845    Objective     =      10610749.500000
+Iteration:  7153    Objective     =      10758388.500000
+Iteration:  7664    Objective     =      10827584.000000
+Iteration:  8277    Objective     =      10993890.000000
+Iteration:  8895    Objective     =      11118829.500000
+Iteration:  9565    Objective     =      11247134.500000
+Iteration: 10116    Objective     =      11317682.500000
+Iteration: 10821    Objective     =      11486685.000000
+Iteration: 11411    Objective     =      11646910.500000
+Iteration: 12061    Objective     =      11880878.000000
+Iteration: 12693    Objective     =      12028053.500000
+Iteration: 13269    Objective     =      12100476.500000
+Iteration: 13858    Objective     =      12173585.500000
+Iteration: 14490    Objective     =      12460555.500000
+Iteration: 15102    Objective     =      12649935.000000
+Iteration: 15681    Objective     =      12721074.500000
+Iteration: 16241    Objective     =      12766551.500000
+Iteration: 16809    Objective     =      12857600.000000
+Iteration: 17390    Objective     =      12972518.000000
+Iteration: 17945    Objective     =      12992519.000000
+Iteration: 18478    Objective     =      13010276.000000
+Iteration: 19036    Objective     =      13022616.500000
+Iteration: 19574    Objective     =      13025884.000000
+
+Barrier solved model.
+
+
+Log for './wcnf_files/grid80x80.f15_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 13:33:30 2026
+
+Tried aggregator 1 time.
+Reduced LP has 50352 rows, 31672 columns, and 125976 nonzeros.
+Presolve time = 0.06 sec. (43.78 ticks)
+Symmetry aggregator did 25080 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =         12536.000000
+Iteration:  1164    Infeasibility =            22.000000
+Switched to devex.
+Iteration:  1193    Objective     =      -8920518.000000
+Iteration:  3518    Objective     =      10518384.000000
+Iteration:  4041    Objective     =      11621498.000000
+Iteration:  4492    Objective     =      13334158.000000
+Iteration:  4839    Objective     =      14269475.000000
+Iteration:  5115    Objective     =      14866553.000000
+Iteration:  5359    Objective     =      15248159.500000
+Iteration:  6247    Objective     =      15447469.500000
+Iteration:  6869    Objective     =      15729080.500000
+Iteration:  7181    Objective     =      15876159.000000
+Iteration:  7764    Objective     =      16102703.000000
+Iteration:  8421    Objective     =      16317108.000000
+Iteration:  9079    Objective     =      16492921.500000
+Iteration:  9690    Objective     =      16617063.500000
+Iteration: 10308    Objective     =      16749305.000000
+Iteration: 10990    Objective     =      17137717.000000
+Iteration: 11590    Objective     =      17463522.500000
+Iteration: 12210    Objective     =      17755286.000000
+Iteration: 12797    Objective     =      17884711.000000
+Iteration: 13346    Objective     =      18077675.500000
+Iteration: 13950    Objective     =      18454728.500000
+Iteration: 14521    Objective     =      18651688.000000
+Iteration: 15087    Objective     =      18715740.000000
+Iteration: 15624    Objective     =      18773641.000000
+Iteration: 16166    Objective     =      18891317.500000
+Iteration: 16750    Objective     =      19079104.000000
+Iteration: 17295    Objective     =      19127926.000000
+Iteration: 17837    Objective     =      19140719.000000
+Iteration: 18382    Objective     =      19148465.000000
+
+Barrier solved model.
+
+
+Log for './wcnf_files/grid80x80.f15.wrap_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 13:33:31 2026
+
+Tried aggregator 1 time.
+Reduced LP has 50944 rows, 31996 columns, and 127484 nonzeros.
+Presolve time = 0.06 sec. (44.29 ticks)
+Symmetry aggregator did 25348 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =         12674.000000
+Iteration:  1177    Infeasibility =            16.000000
+Switched to devex.
+Iteration:  1200    Objective     =      -9128507.000000
+Iteration:  3555    Objective     =      10693702.000000
+Iteration:  4077    Objective     =      11698670.000000
+Iteration:  4533    Objective     =      13595414.000000
+Iteration:  4875    Objective     =      14463218.000000
+Iteration:  5155    Objective     =      15049121.000000
+Iteration:  5401    Objective     =      15443074.500000
+Iteration:  6273    Objective     =      15632729.000000
+Iteration:  6877    Objective     =      15938835.500000
+Iteration:  7361    Objective     =      16119959.000000
+Iteration:  7864    Objective     =      16249246.500000
+Iteration:  8290    Objective     =      16478260.500000
+Iteration:  8913    Objective     =      16651536.000000
+Iteration:  9521    Objective     =      16775813.500000
+Iteration: 10193    Objective     =      17021833.500000
+Iteration: 10787    Objective     =      17374538.500000
+Iteration: 11394    Objective     =      17662050.000000
+Iteration: 12013    Objective     =      17913582.500000
+Iteration: 12597    Objective     =      18072825.000000
+Iteration: 13172    Objective     =      18355222.500000
+Iteration: 13771    Objective     =      18735092.000000
+Iteration: 14351    Objective     =      18953931.500000
+Iteration: 14913    Objective     =      19045281.500000
+Iteration: 15465    Objective     =      19095528.500000
+Iteration: 16032    Objective     =      19285623.000000
+Iteration: 16584    Objective     =      19414201.500000
+Iteration: 17137    Objective     =      19471811.500000
+
+Barrier solved model.
+
+
+Log for './wcnf_files/grid80x80.f2_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 13:33:32 2026
+
+Tried aggregator 1 time.
+Reduced LP has 50378 rows, 31630 columns, and 125986 nonzeros.
+Presolve time = 0.06 sec. (44.46 ticks)
+Symmetry aggregator did 25148 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =         12570.000000
+Iteration:  1173    Infeasibility =            14.000000
+Switched to devex.
+Iteration:  1194    Objective     =       -941673.000000
+Iteration:  4463    Objective     =        -33027.000000
+Iteration:  6390    Objective     =       1752062.000000
+Iteration:  6915    Objective     =       1883276.000000
+Iteration:  7355    Objective     =       2090063.000000
+Iteration:  7710    Objective     =       2228623.000000
+Iteration:  8002    Objective     =       2308478.500000
+Iteration:  8246    Objective     =       2358813.500000
+Iteration:  8747    Objective     =       2378594.500000
+Iteration:  9392    Objective     =       2402349.500000
+Iteration:  9921    Objective     =       2433289.500000
+Iteration: 10546    Objective     =       2460778.000000
+Iteration: 11156    Objective     =       2494056.000000
+Iteration: 11791    Objective     =       2519370.000000
+Iteration: 12390    Objective     =       2532527.000000
+Iteration: 13059    Objective     =       2565937.500000
+Iteration: 13711    Objective     =       2598017.500000
+Iteration: 14342    Objective     =       2628849.500000
+Iteration: 14964    Objective     =       2650801.000000
+Iteration: 15597    Objective     =       2684625.500000
+Iteration: 16222    Objective     =       2717433.000000
+Iteration: 16813    Objective     =       2733882.000000
+Iteration: 17383    Objective     =       2744163.500000
+Iteration: 17962    Objective     =       2752457.500000
+Iteration: 18572    Objective     =       2787929.000000
+Iteration: 19139    Objective     =       2802251.500000
+Iteration: 19718    Objective     =       2815560.000000
+Iteration: 20270    Objective     =       2818984.000000
+Iteration: 20809    Objective     =       2822669.500000
+
+Barrier solved model.
+
+
+Log for './wcnf_files/grid80x80.f2.wrap_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 13:33:33 2026
+
+Tried aggregator 1 time.
+Reduced LP has 51008 rows, 31948 columns, and 127564 nonzeros.
+Presolve time = 0.07 sec. (45.02 ticks)
+Symmetry aggregator did 25460 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =         12730.000000
+Iteration:  1181    Infeasibility =            28.000000
+Switched to devex.
+Iteration:  1224    Objective     =       -948475.000000
+Iteration:  5336    Objective     =        179574.000000
+Iteration:  7208    Objective     =       1816600.000000
+Iteration:  7729    Objective     =       1949796.000000
+Iteration:  8155    Objective     =       2133664.000000
+Iteration:  8500    Objective     =       2261332.000000
+Iteration:  8790    Objective     =       2338975.000000
+Iteration:  9035    Objective     =       2398671.000000
+Iteration:  9510    Objective     =       2412075.500000
+Iteration: 10235    Objective     =       2431781.500000
+Iteration: 10736    Objective     =       2458062.000000
+Iteration: 11335    Objective     =       2497944.000000
+Iteration: 11990    Objective     =       2531208.000000
+Iteration: 12661    Objective     =       2560354.500000
+Iteration: 13346    Objective     =       2587363.000000
+Iteration: 13994    Objective     =       2624870.500000
+Iteration: 14624    Objective     =       2652855.500000
+Iteration: 15261    Objective     =       2673944.500000
+Iteration: 15894    Objective     =       2693125.000000
+Iteration: 16518    Objective     =       2723508.500000
+Iteration: 17126    Objective     =       2750297.500000
+Iteration: 17703    Objective     =       2771555.000000
+Iteration: 18284    Objective     =       2785212.000000
+Iteration: 18841    Objective     =       2792878.000000
+Iteration: 19419    Objective     =       2818789.500000
+Iteration: 20024    Objective     =       2840598.000000
+Iteration: 20587    Objective     =       2850933.500000
+Iteration: 21158    Objective     =       2867873.000000
+Iteration: 21703    Objective     =       2872026.000000
+
+Barrier solved model.
+
+
+Log for './wcnf_files/grid80x80.f5_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 13:33:34 2026
+
+Tried aggregator 1 time.
+Reduced LP has 50696 rows, 31648 columns, and 126640 nonzeros.
+Presolve time = 0.06 sec. (44.36 ticks)
+Symmetry aggregator did 25448 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =         12720.000000
+Iteration:  1181    Infeasibility =             8.000000
+Switched to devex.
+Iteration:  1195    Objective     =      -2828940.000000
+Iteration:  4659    Objective     =       -467005.000000
+Iteration:  6560    Objective     =       3894108.000000
+Iteration:  7092    Objective     =       4220016.000000
+Iteration:  7540    Objective     =       4727964.000000
+Iteration:  7888    Objective     =       4996192.000000
+Iteration:  8180    Objective     =       5203321.500000
+Iteration:  8425    Objective     =       5327930.500000
+Iteration:  8904    Objective     =       5363447.500000
+Iteration:  9453    Objective     =       5403199.500000
+Iteration: 10061    Objective     =       5455287.500000
+Iteration: 10626    Objective     =       5536061.000000
+Iteration: 11189    Objective     =       5610724.000000
+Iteration: 11783    Objective     =       5690763.500000
+Iteration: 12423    Objective     =       5766645.500000
+Iteration: 13035    Objective     =       5799584.000000
+Iteration: 13707    Objective     =       5906094.000000
+Iteration: 14361    Objective     =       6021534.000000
+Iteration: 15007    Objective     =       6110770.500000
+Iteration: 15614    Objective     =       6168491.500000
+Iteration: 16218    Objective     =       6212997.000000
+Iteration: 16796    Objective     =       6268895.000000
+Iteration: 17443    Objective     =       6393377.000000
+Iteration: 18036    Objective     =       6445598.500000
+Iteration: 18601    Objective     =       6473388.000000
+Iteration: 19145    Objective     =       6492993.000000
+Iteration: 19729    Objective     =       6552925.000000
+Iteration: 20291    Objective     =       6580681.000000
+Iteration: 20827    Objective     =       6586103.000000
+Iteration: 21373    Objective     =       6591379.500000
+
+Barrier solved model.
+
+
+Log for './wcnf_files/grid80x80.f5.wrap_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 13:33:34 2026
+
+Tried aggregator 1 time.
+Reduced LP has 51384 rows, 31972 columns, and 128340 nonzeros.
+Presolve time = 0.07 sec. (44.96 ticks)
+Symmetry aggregator did 25812 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =         12906.000000
+Iteration:  1191    Infeasibility =            22.000000
+Switched to devex.
+Iteration:  1222    Objective     =      -2823375.000000
+Iteration:  5507    Objective     =         99735.000000
+Iteration:  7346    Objective     =       3962803.000000
+Iteration:  7877    Objective     =       4282463.000000
+Iteration:  8323    Objective     =       4779910.500000
+Iteration:  8665    Objective     =       5040271.000000
+Iteration:  8955    Objective     =       5232018.000000
+Iteration:  9203    Objective     =       5365780.000000
+Iteration:  9676    Objective     =       5389899.500000
+Iteration: 10295    Objective     =       5438456.500000
+Iteration: 10753    Objective     =       5511536.000000
+Iteration: 11231    Objective     =       5593318.500000
+Iteration: 11773    Objective     =       5662133.000000
+Iteration: 12323    Objective     =       5723805.500000
+Iteration: 12967    Objective     =       5789288.000000
+Iteration: 13574    Objective     =       5831307.000000
+Iteration: 14187    Objective     =       5903859.500000
+Iteration: 14843    Objective     =       6054706.500000
+Iteration: 15474    Objective     =       6147924.500000
+Iteration: 16088    Objective     =       6213253.500000
+Iteration: 16682    Objective     =       6263784.000000
+Iteration: 17263    Objective     =       6293618.500000
+Iteration: 17844    Objective     =       6350777.500000
+Iteration: 18458    Objective     =       6487272.500000
+Iteration: 19044    Objective     =       6539133.500000
+Iteration: 19615    Objective     =       6560247.000000
+Iteration: 20172    Objective     =       6580553.500000
+
+Barrier solved model.
+
+
+Log for '' Clone_2 (V22.1.2.0) Wed Jun  3 14:42:39 2026
+
+
+Log for '' Clone_2 (V22.1.2.0) Wed Jun  3 14:43:26 2026
+
+
+Log for './Grid/grid80x80.f5_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 14:46:59 2026
+
+
+Log for './Grid/grid80x80.f5.wrap_direct.lp' Clone_2 (V22.1.2.0) Wed Jun  3 14:51:11 2026
+
+
+Log for './grid80x80/grid80x80.f2_direct.lp' Clone_2 (V22.1.2.0) Thu Jun 11 10:35:54 2026
+
+Tried aggregator 1 time.
+Reduced LP has 50378 rows, 31630 columns, and 125986 nonzeros.
+Presolve time = 0.06 sec. (44.46 ticks)
+Symmetry aggregator did 25148 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =         12570.000000
+Iteration:  1173    Infeasibility =            14.000000
+Switched to devex.
+Iteration:  1194    Objective     =      -3480541.000000
+Iteration:  4463    Objective     =      -2571895.000000
+Iteration:  6390    Objective     =       -786806.000000
+Iteration:  6915    Objective     =       -655592.000000
+Iteration:  7355    Objective     =       -448805.000000
+Iteration:  7710    Objective     =       -310245.000000
+Iteration:  8002    Objective     =       -230389.500000
+Iteration:  8246    Objective     =       -180054.500000
+Iteration:  8747    Objective     =       -160273.500000
+Iteration:  9392    Objective     =       -136518.500000
+Iteration:  9921    Objective     =       -105578.500000
+Iteration: 10546    Objective     =        -78090.000000
+Iteration: 11156    Objective     =        -44812.000000
+Iteration: 11791    Objective     =        -19498.000000
+Iteration: 12390    Objective     =         -6341.000000
+Iteration: 13059    Objective     =         27069.500000
+Iteration: 13711    Objective     =         59149.500000
+Iteration: 14342    Objective     =         89981.500000
+Iteration: 14964    Objective     =        111933.000000
+Iteration: 15597    Objective     =        145757.500000
+Iteration: 16222    Objective     =        178565.000000
+Iteration: 16813    Objective     =        195014.000000
+Iteration: 17383    Objective     =        205295.500000
+Iteration: 17962    Objective     =        213589.500000
+Iteration: 18572    Objective     =        249061.000000
+Iteration: 19139    Objective     =        263383.500000
+Iteration: 19718    Objective     =        276692.000000
+Iteration: 20270    Objective     =        280116.000000
+Iteration: 20809    Objective     =        283801.500000
+
+Barrier solved model.
+
+
+Log for './grid80x80/grid80x80.f2.wrap_direct.lp' Clone_2 (V22.1.2.0) Thu Jun 11 10:41:12 2026
+
+Tried aggregator 1 time.
+Reduced LP has 51008 rows, 31948 columns, and 127564 nonzeros.
+Presolve time = 0.07 sec. (45.02 ticks)
+Symmetry aggregator did 25460 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =         12730.000000
+Iteration:  1181    Infeasibility =            28.000000
+Switched to devex.
+Iteration:  1224    Objective     =      -3497869.000000
+Iteration:  5336    Objective     =      -2369820.000000
+Iteration:  7208    Objective     =       -732794.000000
+Iteration:  7729    Objective     =       -599598.000000
+Iteration:  8155    Objective     =       -415730.000000
+Iteration:  8500    Objective     =       -288062.000000
+Iteration:  8790    Objective     =       -210419.000000
+Iteration:  9035    Objective     =       -150723.000000
+Iteration:  9510    Objective     =       -137318.500000
+Iteration: 10235    Objective     =       -117612.500000
+Iteration: 10736    Objective     =        -91332.000000
+Iteration: 11335    Objective     =        -51450.000000
+Iteration: 11990    Objective     =        -18186.000000
+Iteration: 12661    Objective     =         10960.500000
+Iteration: 13346    Objective     =         37969.000000
+Iteration: 13994    Objective     =         75476.500000
+Iteration: 14624    Objective     =        103461.500000
+Iteration: 15261    Objective     =        124550.500000
+Iteration: 15894    Objective     =        143731.000000
+Iteration: 16518    Objective     =        174114.500000
+Iteration: 17126    Objective     =        200903.500000
+Iteration: 17703    Objective     =        222161.000000
+Iteration: 18284    Objective     =        235818.000000
+Iteration: 18841    Objective     =        243484.000000
+Iteration: 19419    Objective     =        269395.500000
+Iteration: 20024    Objective     =        291204.000000
+Iteration: 20587    Objective     =        301539.500000
+Iteration: 21158    Objective     =        318479.000000
+
+Barrier solved model.
+
+
+Log for './Grid/grid80x80.f10_direct.lp' Clone_2 (V22.1.2.0) Mon Jun 15 16:38:10 2026
+
+Tried aggregator 1 time.
+LP Presolve eliminated 0 rows and 1 columns.
+Reduced LP has 25266 rows, 31666 columns, and 75798 nonzeros.
+Presolve time = 0.07 sec. (29.65 ticks)
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          6267.000000
+Iteration:  1324    Objective     =       6560128.000000
+Iteration:  1885    Objective     =       6483594.000000
+Iteration:  2191    Objective     =       5193946.000000
+Iteration:  2558    Objective     =       3822729.500000
+Iteration:  2875    Objective     =       3362113.000000
+Iteration:  3144    Objective     =       3099210.000000
+Iteration:  3375    Objective     =       2922615.000000
+Switched to devex.
+Iteration:  4117    Objective     =       2910915.500000
+
+Dual simplex solved model.
+
+
+Log for './Grid/grid80x80.f10.wrap_direct.lp' Clone_2 (V22.1.2.0) Mon Jun 15 16:38:11 2026
+
+Tried aggregator 1 time.
+LP Presolve eliminated 0 rows and 1 columns.
+Reduced LP has 25584 rows, 31984 columns, and 76752 nonzeros.
+Presolve time = 0.12 sec. (30.02 ticks)
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          6454.000000
+Iteration:  1353    Objective     =       6698056.000000
+Iteration:  1934    Objective     =       6634517.000000
+Iteration:  2246    Objective     =       5384641.000000
+Iteration:  2616    Objective     =       4014553.500000
+Iteration:  2936    Objective     =       3474594.000000
+
+Dual simplex solved model.
+
+
+Log for './Grid/grid80x80.f15_direct.lp' Clone_2 (V22.1.2.0) Mon Jun 15 16:38:11 2026
+
+Tried aggregator 1 time.
+LP Presolve eliminated 0 rows and 1 columns.
+Reduced LP has 25272 rows, 31672 columns, and 75816 nonzeros.
+Presolve time = 0.07 sec. (29.58 ticks)
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          6269.000000
+Iteration:  1323    Objective     =       9681958.000000
+Iteration:  1886    Objective     =       9541576.000000
+Iteration:  2196    Objective     =       7542571.000000
+Iteration:  2562    Objective     =       5557233.500000
+Iteration:  2879    Objective     =       4844988.000000
+Iteration:  3147    Objective     =       4447180.500000
+Iteration:  3377    Objective     =       4201200.000000
+Switched to devex.
+Iteration:  4114    Objective     =       4183300.500000
+Iteration:  4719    Objective     =       4101471.000000
+Iteration:  4959    Objective     =       4101471.000000
+
+Dual simplex solved model.
+
+
+Log for './Grid/grid80x80.f15.wrap_direct.lp' Clone_2 (V22.1.2.0) Mon Jun 15 16:38:12 2026
+
+Tried aggregator 1 time.
+LP Presolve eliminated 0 rows and 1 columns.
+Reduced LP has 25596 rows, 31996 columns, and 76788 nonzeros.
+Presolve time = 0.07 sec. (29.95 ticks)
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          6336.000000
+Iteration:  1338    Objective     =       9845397.000000
+Iteration:  1911    Objective     =       9745925.000000
+Iteration:  2210    Objective     =       8002462.000000
+Iteration:  2575    Objective     =       5970536.000000
+Iteration:  2894    Objective     =       5146349.000000
+Iteration:  3165    Objective     =       4737527.500000
+Iteration:  3396    Objective     =       4429319.000000
+Switched to devex.
+Iteration:  4127    Objective     =       4421657.000000
+Iteration:  4795    Objective     =       4335507.500000
+Iteration:  5038    Objective     =       4335507.500000
+
+Dual simplex solved model.
+
+
+Log for './Grid/grid80x80.f2_direct.lp' Clone_2 (V22.1.2.0) Mon Jun 15 16:38:12 2026
+
+Tried aggregator 1 time.
+LP Presolve eliminated 0 rows and 1 columns.
+Reduced LP has 25230 rows, 31630 columns, and 75690 nonzeros.
+Presolve time = 0.07 sec. (29.81 ticks)
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          6286.000000
+Iteration:  1326    Objective     =       1585556.000000
+Iteration:  1921    Objective     =       1563729.000000
+Iteration:  2247    Objective     =       1263483.000000
+Iteration:  2620    Objective     =       1004020.500000
+Iteration:  2930    Objective     =        908522.500000
+Iteration:  3191    Objective     =        849580.000000
+Iteration:  3420    Objective     =        808760.500000
+Switched to devex.
+Iteration:  4155    Objective     =        805612.500000
+Iteration:  4773    Objective     =        797850.000000
+Iteration:  5064    Objective     =        797850.000000
+Iteration:  5301    Objective     =        797850.000000
+
+Dual simplex solved model.
+
+
+Log for './Grid/grid80x80.f2.wrap_direct.lp' Clone_2 (V22.1.2.0) Mon Jun 15 16:38:13 2026
+
+Tried aggregator 1 time.
+LP Presolve eliminated 0 rows and 1 columns.
+Reduced LP has 25548 rows, 31948 columns, and 76644 nonzeros.
+Presolve time = 0.07 sec. (30.17 ticks)
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          6364.000000
+Iteration:  1340    Objective     =       1586413.000000
+Iteration:  1944    Objective     =       1562856.000000
+Iteration:  2273    Objective     =       1262566.000000
+Iteration:  2635    Objective     =       1025838.000000
+Iteration:  2947    Objective     =        923363.000000
+Iteration:  3207    Objective     =        869165.000000
+Iteration:  3434    Objective     =        827771.000000
+Switched to devex.
+Iteration:  4187    Objective     =        823894.500000
+Iteration:  4846    Objective     =        813575.500000
+Iteration:  5260    Objective     =        813575.500000
+Iteration:  5488    Objective     =        813575.500000
+Iteration:  5776    Objective     =        813575.500000
+
+Dual simplex solved model.
+
+
+Log for './Grid/grid80x80.f5_direct.lp' Clone_2 (V22.1.2.0) Mon Jun 15 16:38:14 2026
+
+Tried aggregator 1 time.
+LP Presolve eliminated 0 rows and 1 columns.
+Reduced LP has 25248 rows, 31648 columns, and 75744 nonzeros.
+Presolve time = 0.07 sec. (29.74 ticks)
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          6361.000000
+Iteration:  1338    Objective     =       3502690.000000
+Iteration:  1914    Objective     =       3460158.000000
+Iteration:  2228    Objective     =       2780999.000000
+Iteration:  2603    Objective     =       2122493.000000
+Iteration:  2922    Objective     =       1852756.000000
+Iteration:  3196    Objective     =       1699001.000000
+Iteration:  3425    Objective     =       1606309.500000
+Switched to devex.
+Iteration:  4141    Objective     =       1593185.000000
+Iteration:  4680    Objective     =       1573769.500000
+Iteration:  4920    Objective     =       1501892.500000
+
+Dual simplex solved model.
+
+
+Log for './Grid/grid80x80.f5.wrap_direct.lp' Clone_2 (V22.1.2.0) Mon Jun 15 16:38:14 2026
+
+Tried aggregator 1 time.
+LP Presolve eliminated 0 rows and 1 columns.
+Reduced LP has 25572 rows, 31972 columns, and 76716 nonzeros.
+Presolve time = 0.10 sec. (30.10 ticks)
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          6452.000000
+Iteration:  1352    Objective     =       3510611.000000
+Iteration:  1940    Objective     =       3472125.000000
+Iteration:  2256    Objective     =       2802233.000000
+Iteration:  2627    Objective     =       2144675.500000
+Iteration:  2943    Objective     =       1872916.000000
+Iteration:  3207    Objective     =       1739363.000000
+Iteration:  3438    Objective     =       1650269.000000
+Switched to devex.
+Iteration:  4185    Objective     =       1641154.500000
+Iteration:  4887    Objective     =       1598460.500000
+Iteration:  5167    Objective     =       1598460.500000
+
+Dual simplex solved model.
+
+
+Log for './grid80x80/grid80x80.f10_direct.lp' Clone_2 (V22.1.2.0) Mon Jun 15 16:40:32 2026
+
+Tried aggregator 1 time.
+Reduced LP has 50338 rows, 31666 columns, and 125942 nonzeros.
+Presolve time = 0.08 sec. (43.92 ticks)
+Symmetry aggregator did 25072 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =         12536.000000
+Iteration:  1163    Infeasibility =            22.000000
+Switched to devex.
+Iteration:  1193    Objective     =      -5836487.000000
+Iteration:  3518    Objective     =       7122505.000000
+Iteration:  4039    Objective     =       7840664.000000
+Iteration:  4490    Objective     =       8996554.000000
+Iteration:  4834    Objective     =       9600542.000000
+Iteration:  5111    Objective     =      10001380.000000
+Iteration:  5352    Objective     =      10265115.500000
+Iteration:  6224    Objective     =      10407634.500000
+Iteration:  6787    Objective     =      10574462.000000
+Iteration:  7417    Objective     =      10733098.000000
+Iteration:  7998    Objective     =      10856347.500000
+Iteration:  8604    Objective     =      10992838.500000
+Iteration:  9261    Objective     =      11116391.500000
+Iteration:  9899    Objective     =      11207133.500000
+Iteration: 10595    Objective     =      11457230.500000
+Iteration: 11198    Objective     =      11638472.000000
+Iteration: 11831    Objective     =      11794851.000000
+Iteration: 12437    Objective     =      11932994.500000
+Iteration: 13034    Objective     =      11998321.000000
+Iteration: 13604    Objective     =      12068893.000000
+Iteration: 14228    Objective     =      12312246.000000
+Iteration: 14815    Objective     =      12479126.500000
+Iteration: 15359    Objective     =      12549271.000000
+Iteration: 15926    Objective     =      12611109.000000
+Iteration: 16491    Objective     =      12750766.500000
+Iteration: 17053    Objective     =      12816756.500000
+Iteration: 17589    Objective     =      12847221.500000
+Iteration: 18150    Objective     =      12857593.000000
+Iteration: 18688    Objective     =      12868101.000000
+Iteration: 19214    Objective     =      12873075.500000
+Iteration: 19753    Objective     =      12874954.500000
+Primal superbasis not built.
+
+Barrier solved model.
+
+
+Log for './grid80x80/grid80x80.f10.wrap_direct.lp' Clone_2 (V22.1.2.0) Mon Jun 15 16:40:33 2026
+
+Tried aggregator 1 time.
+Reduced LP has 51404 rows, 31984 columns, and 128392 nonzeros.
+Presolve time = 0.07 sec. (44.72 ticks)
+Symmetry aggregator did 25820 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =         12904.000000
+Iteration:  1191    Infeasibility =            22.000000
+Switched to devex.
+Iteration:  1223    Objective     =      -5972040.000000
+Iteration:  3552    Objective     =       7153633.000000
+Iteration:  4069    Objective     =       7918925.000000
+Iteration:  4523    Objective     =       9059523.000000
+Iteration:  4870    Objective     =       9684202.000000
+Iteration:  5164    Objective     =      10140414.500000
+Iteration:  5412    Objective     =      10422634.500000
+Iteration:  6307    Objective     =      10533083.500000
+Iteration:  6845    Objective     =      10610749.500000
+Iteration:  7153    Objective     =      10758388.500000
+Iteration:  7664    Objective     =      10827584.000000
+Iteration:  8277    Objective     =      10993890.000000
+Iteration:  8895    Objective     =      11118829.500000
+Iteration:  9565    Objective     =      11247134.500000
+Iteration: 10116    Objective     =      11317682.500000
+Iteration: 10821    Objective     =      11486685.000000
+Iteration: 11411    Objective     =      11646910.500000
+Iteration: 12061    Objective     =      11880878.000000
+Iteration: 12693    Objective     =      12028053.500000
+Iteration: 13269    Objective     =      12100476.500000
+Iteration: 13858    Objective     =      12173585.500000
+Iteration: 14490    Objective     =      12460555.500000
+Iteration: 15102    Objective     =      12649935.000000
+Iteration: 15681    Objective     =      12721074.500000
+Iteration: 16241    Objective     =      12766551.500000
+Iteration: 16809    Objective     =      12857600.000000
+Iteration: 17390    Objective     =      12972518.000000
+Iteration: 17945    Objective     =      12992519.000000
+Iteration: 18478    Objective     =      13010276.000000
+
+Barrier solved model.
+
+
+Log for './grid80x80/grid80x80.f15_direct.lp' Clone_2 (V22.1.2.0) Mon Jun 15 16:40:33 2026
+
+Tried aggregator 1 time.
+Reduced LP has 50352 rows, 31672 columns, and 125976 nonzeros.
+Presolve time = 0.07 sec. (43.78 ticks)
+Symmetry aggregator did 25080 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =         12536.000000
+Iteration:  1164    Infeasibility =            22.000000
+Switched to devex.
+Iteration:  1193    Objective     =      -8920518.000000
+Iteration:  3518    Objective     =      10518384.000000
+Iteration:  4041    Objective     =      11621498.000000
+Iteration:  4492    Objective     =      13334158.000000
+Iteration:  4839    Objective     =      14269475.000000
+Iteration:  5115    Objective     =      14866553.000000
+Iteration:  5359    Objective     =      15248159.500000
+Iteration:  6247    Objective     =      15447469.500000
+Iteration:  6869    Objective     =      15729080.500000
+Iteration:  7181    Objective     =      15876159.000000
+Iteration:  7764    Objective     =      16102703.000000
+Iteration:  8421    Objective     =      16317108.000000
+Iteration:  9079    Objective     =      16492921.500000
+Iteration:  9690    Objective     =      16617063.500000
+Iteration: 10308    Objective     =      16749305.000000
+Iteration: 10990    Objective     =      17137717.000000
+Iteration: 11590    Objective     =      17463522.500000
+Iteration: 12210    Objective     =      17755286.000000
+Iteration: 12797    Objective     =      17884711.000000
+Iteration: 13346    Objective     =      18077675.500000
+Iteration: 13950    Objective     =      18454728.500000
+Iteration: 14521    Objective     =      18651688.000000
+Iteration: 15087    Objective     =      18715740.000000
+Iteration: 15624    Objective     =      18773641.000000
+Iteration: 16166    Objective     =      18891317.500000
+Iteration: 16750    Objective     =      19079104.000000
+Iteration: 17295    Objective     =      19127926.000000
+Iteration: 17837    Objective     =      19140719.000000
+Iteration: 18382    Objective     =      19148465.000000
+Iteration: 18928    Objective     =      19151141.500000
+
+Barrier solved model.
+
+
+Log for './grid80x80/grid80x80.f15.wrap_direct.lp' Clone_2 (V22.1.2.0) Mon Jun 15 16:40:34 2026
+
+Tried aggregator 1 time.
+Reduced LP has 50944 rows, 31996 columns, and 127484 nonzeros.
+Presolve time = 0.08 sec. (44.29 ticks)
+Symmetry aggregator did 25348 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =         12674.000000
+Iteration:  1177    Infeasibility =            16.000000
+Switched to devex.
+Iteration:  1200    Objective     =      -9128507.000000
+Iteration:  3555    Objective     =      10693702.000000
+Iteration:  4077    Objective     =      11698670.000000
+Iteration:  4533    Objective     =      13595414.000000
+Iteration:  4875    Objective     =      14463218.000000
+Iteration:  5155    Objective     =      15049121.000000
+Iteration:  5401    Objective     =      15443074.500000
+Iteration:  6273    Objective     =      15632729.000000
+Iteration:  6877    Objective     =      15938835.500000
+Iteration:  7361    Objective     =      16119959.000000
+Iteration:  7864    Objective     =      16249246.500000
+Iteration:  8290    Objective     =      16478260.500000
+Iteration:  8913    Objective     =      16651536.000000
+Iteration:  9521    Objective     =      16775813.500000
+Iteration: 10193    Objective     =      17021833.500000
+Iteration: 10787    Objective     =      17374538.500000
+Iteration: 11394    Objective     =      17662050.000000
+Iteration: 12013    Objective     =      17913582.500000
+Iteration: 12597    Objective     =      18072825.000000
+Iteration: 13172    Objective     =      18355222.500000
+Iteration: 13771    Objective     =      18735092.000000
+Iteration: 14351    Objective     =      18953931.500000
+Iteration: 14913    Objective     =      19045281.500000
+Iteration: 15465    Objective     =      19095528.500000
+Iteration: 16032    Objective     =      19285623.000000
+Iteration: 16584    Objective     =      19414201.500000
+Iteration: 17137    Objective     =      19471811.500000
+Iteration: 17696    Objective     =      19507777.500000
+Iteration: 18225    Objective     =      19533494.000000
+Iteration: 18762    Objective     =      19537281.000000
+Iteration: 19291    Objective     =      19542021.000000
+Iteration: 19881    Objective     =      19546295.000000
+
+Barrier solved model.
+
+
+Log for './grid80x80/grid80x80.f2_direct.lp' Clone_2 (V22.1.2.0) Mon Jun 15 16:40:35 2026
+
+Tried aggregator 1 time.
+Reduced LP has 50378 rows, 31630 columns, and 125986 nonzeros.
+Presolve time = 0.08 sec. (44.46 ticks)
+Symmetry aggregator did 25148 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =         12570.000000
+Iteration:  1173    Infeasibility =            14.000000
+Switched to devex.
+Iteration:  1194    Objective     =       -941673.000000
+Iteration:  4463    Objective     =        -33027.000000
+Iteration:  6390    Objective     =       1752062.000000
+Iteration:  6915    Objective     =       1883276.000000
+Iteration:  7355    Objective     =       2090063.000000
+Iteration:  7710    Objective     =       2228623.000000
+Iteration:  8002    Objective     =       2308478.500000
+Iteration:  8246    Objective     =       2358813.500000
+Iteration:  8747    Objective     =       2378594.500000
+Iteration:  9392    Objective     =       2402349.500000
+Iteration:  9921    Objective     =       2433289.500000
+Iteration: 10546    Objective     =       2460778.000000
+Iteration: 11156    Objective     =       2494056.000000
+Iteration: 11791    Objective     =       2519370.000000
+Iteration: 12390    Objective     =       2532527.000000
+Iteration: 13059    Objective     =       2565937.500000
+Iteration: 13711    Objective     =       2598017.500000
+Iteration: 14342    Objective     =       2628849.500000
+Iteration: 14964    Objective     =       2650801.000000
+Iteration: 15597    Objective     =       2684625.500000
+Iteration: 16222    Objective     =       2717433.000000
+Iteration: 16813    Objective     =       2733882.000000
+Iteration: 17383    Objective     =       2744163.500000
+Iteration: 17962    Objective     =       2752457.500000
+Iteration: 18572    Objective     =       2787929.000000
+Iteration: 19139    Objective     =       2802251.500000
+Iteration: 19718    Objective     =       2815560.000000
+Iteration: 20270    Objective     =       2818984.000000
+Iteration: 20809    Objective     =       2822669.500000
+Iteration: 21344    Objective     =       2826313.500000
+Iteration: 21877    Objective     =       2828338.000000
+Switched to steepest-edge.
+Iteration: 22411    Objective     =       2829300.000000
+
+Primal crossover.
+  Primal:  Fixed no variables.
+  Dual:  Fixing 6932 variables.
+     6931 DMoves:  Infeasibility  3.77750000e+02  Objective  2.82941600e+06
+     6814 DMoves:  Infeasibility  3.39500000e+02  Objective  2.82941600e+06
+     6071 DMoves:  Infeasibility  2.46500000e+02  Objective  2.82941600e+06
+     5392 DMoves:  Infeasibility  1.35500000e+02  Objective  2.82941600e+06
+     4436 DMoves:  Infeasibility  9.95000000e+01  Objective  2.82941600e+06
+
+Barrier solved model.
+
+
+Log for './grid80x80/grid80x80.f2.wrap_direct.lp' Clone_2 (V22.1.2.0) Mon Jun 15 16:40:36 2026
+
+Tried aggregator 1 time.
+Reduced LP has 51008 rows, 31948 columns, and 127564 nonzeros.
+Presolve time = 0.08 sec. (45.02 ticks)
+Symmetry aggregator did 25460 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =         12730.000000
+Iteration:  1181    Infeasibility =            28.000000
+Switched to devex.
+Iteration:  1224    Objective     =       -948475.000000
+Iteration:  5336    Objective     =        179574.000000
+Iteration:  7208    Objective     =       1816600.000000
+Iteration:  7729    Objective     =       1949796.000000
+Iteration:  8155    Objective     =       2133664.000000
+Iteration:  8500    Objective     =       2261332.000000
+Iteration:  8790    Objective     =       2338975.000000
+Iteration:  9035    Objective     =       2398671.000000
+Iteration:  9510    Objective     =       2412075.500000
+Iteration: 10235    Objective     =       2431781.500000
+Iteration: 10736    Objective     =       2458062.000000
+Iteration: 11335    Objective     =       2497944.000000
+Iteration: 11990    Objective     =       2531208.000000
+Iteration: 12661    Objective     =       2560354.500000
+Iteration: 13346    Objective     =       2587363.000000
+Iteration: 13994    Objective     =       2624870.500000
+Iteration: 14624    Objective     =       2652855.500000
+Iteration: 15261    Objective     =       2673944.500000
+Iteration: 15894    Objective     =       2693125.000000
+Iteration: 16518    Objective     =       2723508.500000
+Iteration: 17126    Objective     =       2750297.500000
+Iteration: 17703    Objective     =       2771555.000000
+Iteration: 18284    Objective     =       2785212.000000
+Iteration: 18841    Objective     =       2792878.000000
+Iteration: 19419    Objective     =       2818789.500000
+Iteration: 20024    Objective     =       2840598.000000
+Iteration: 20587    Objective     =       2850933.500000
+Iteration: 21158    Objective     =       2867873.000000
+Iteration: 21703    Objective     =       2872026.000000
+Iteration: 22258    Objective     =       2876597.000000
+Iteration: 22808    Objective     =       2879187.000000
+Iteration: 23379    Objective     =       2880768.500000
+
+Barrier solved model.
+
+
+Log for './grid80x80/grid80x80.f5_direct.lp' Clone_2 (V22.1.2.0) Mon Jun 15 16:40:37 2026
+
+Tried aggregator 1 time.
+Reduced LP has 50696 rows, 31648 columns, and 126640 nonzeros.
+Presolve time = 0.07 sec. (44.36 ticks)
+Symmetry aggregator did 25448 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =         12720.000000
+Iteration:  1181    Infeasibility =             8.000000
+Switched to devex.
+Iteration:  1195    Objective     =      -2828940.000000
+Iteration:  4659    Objective     =       -467005.000000
+Iteration:  6560    Objective     =       3894108.000000
+Iteration:  7092    Objective     =       4220016.000000
+Iteration:  7540    Objective     =       4727964.000000
+Iteration:  7888    Objective     =       4996192.000000
+Iteration:  8180    Objective     =       5203321.500000
+Iteration:  8425    Objective     =       5327930.500000
+Iteration:  8904    Objective     =       5363447.500000
+Iteration:  9453    Objective     =       5403199.500000
+Iteration: 10061    Objective     =       5455287.500000
+Iteration: 10626    Objective     =       5536061.000000
+Iteration: 11189    Objective     =       5610724.000000
+Iteration: 11783    Objective     =       5690763.500000
+Iteration: 12423    Objective     =       5766645.500000
+Iteration: 13035    Objective     =       5799584.000000
+Iteration: 13707    Objective     =       5906094.000000
+Iteration: 14361    Objective     =       6021534.000000
+Iteration: 15007    Objective     =       6110770.500000
+Iteration: 15614    Objective     =       6168491.500000
+Iteration: 16218    Objective     =       6212997.000000
+Iteration: 16796    Objective     =       6268895.000000
+Iteration: 17443    Objective     =       6393377.000000
+Iteration: 18036    Objective     =       6445598.500000
+Iteration: 18601    Objective     =       6473388.000000
+Iteration: 19145    Objective     =       6492993.000000
+Iteration: 19729    Objective     =       6552925.000000
+Iteration: 20291    Objective     =       6580681.000000
+Iteration: 20827    Objective     =       6586103.000000
+Iteration: 21373    Objective     =       6591379.500000
+
+Barrier solved model.
+
+
+Log for './grid80x80/grid80x80.f5.wrap_direct.lp' Clone_2 (V22.1.2.0) Mon Jun 15 16:40:38 2026
+
+Tried aggregator 1 time.
+Reduced LP has 51384 rows, 31972 columns, and 128340 nonzeros.
+Presolve time = 0.07 sec. (44.96 ticks)
+Symmetry aggregator did 25812 additional substitutions.
+
+Iteration log . . .
+Iteration:     1    Infeasibility =         12906.000000
+Iteration:  1191    Infeasibility =            22.000000
+Switched to devex.
+Iteration:  1222    Objective     =      -2823375.000000
+Iteration:  5507    Objective     =         99735.000000
+Iteration:  7346    Objective     =       3962803.000000
+Iteration:  7877    Objective     =       4282463.000000
+Iteration:  8323    Objective     =       4779910.500000
+Iteration:  8665    Objective     =       5040271.000000
+Iteration:  8955    Objective     =       5232018.000000
+Iteration:  9203    Objective     =       5365780.000000
+Iteration:  9676    Objective     =       5389899.500000
+Iteration: 10295    Objective     =       5438456.500000
+Iteration: 10753    Objective     =       5511536.000000
+Iteration: 11231    Objective     =       5593318.500000
+Iteration: 11773    Objective     =       5662133.000000
+Iteration: 12323    Objective     =       5723805.500000
+Iteration: 12967    Objective     =       5789288.000000
+Iteration: 13574    Objective     =       5831307.000000
+Iteration: 14187    Objective     =       5903859.500000
+Iteration: 14843    Objective     =       6054706.500000
+Iteration: 15474    Objective     =       6147924.500000
+Iteration: 16088    Objective     =       6213253.500000
+Iteration: 16682    Objective     =       6263784.000000
+Iteration: 17263    Objective     =       6293618.500000
+Iteration: 17844    Objective     =       6350777.500000
+Iteration: 18458    Objective     =       6487272.500000
+Iteration: 19044    Objective     =       6539133.500000
+Iteration: 19615    Objective     =       6560247.000000
+Iteration: 20172    Objective     =       6580553.500000
+Iteration: 20748    Objective     =       6635045.500000
+Switched to steepest-edge.
+Iteration: 21299    Objective     =       6649067.500000
+Iteration: 21692    Objective     =       6666021.000000
+Iteration: 22087    Objective     =       6666422.000000
+
+Barrier solved model.
+
+
+Log for './Grid/grid80x80.f10.wrap_direct.lp' Clone_2 (V22.1.2.0) Mon Jun 15 16:43:29 2026
+
+
+Log for './Grid/grid80x80.f10_direct.lp' Clone_2 (V22.1.2.0) Mon Jun 15 16:48:19 2026
+
+Tried aggregator 1 time.
+LP Presolve eliminated 0 rows and 1 columns.
+Reduced LP has 25266 rows, 31666 columns, and 75798 nonzeros.
+Presolve time = 0.30 sec. (29.65 ticks)
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          6267.000000
+Iteration:  1324    Objective     =       6560128.000000
+Iteration:  1885    Objective     =       6483594.000000
+Iteration:  2191    Objective     =       5193946.000000
+Iteration:  2558    Objective     =       3822729.500000
+Iteration:  2875    Objective     =       3362113.000000
+Iteration:  3144    Objective     =       3099210.000000
+Iteration:  3375    Objective     =       2922615.000000
+Switched to devex.
+Iteration:  4117    Objective     =       2910915.500000
+Iteration:  4791    Objective     =       2853509.500000
+Iteration:  5036    Objective     =       2853509.500000
+
+Dual simplex solved model.
+
+
+Log for './Grid/grid80x80.f10.wrap_direct.lp' Clone_2 (V22.1.2.0) Mon Jun 15 16:48:20 2026
+
+Tried aggregator 1 time.
+LP Presolve eliminated 0 rows and 1 columns.
+Reduced LP has 25584 rows, 31984 columns, and 76752 nonzeros.
+Presolve time = 0.19 sec. (30.02 ticks)
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          6454.000000
+Iteration:  1353    Objective     =       6698056.000000
+Iteration:  1934    Objective     =       6634517.000000
+Iteration:  2246    Objective     =       5384641.000000
+Iteration:  2616    Objective     =       4014553.500000
+Iteration:  2936    Objective     =       3474594.000000
+Iteration:  3203    Objective     =       3207637.000000
+Iteration:  3434    Objective     =       3005210.000000
+Switched to devex.
+Iteration:  4171    Objective     =       3001829.500000
+Iteration:  4765    Objective     =       2943425.500000
+Iteration:  5070    Objective     =       2943425.500000
+Iteration:  5399    Objective     =       2943425.500000
+
+Dual simplex solved model.
+
+
+Log for './Grid/grid80x80.f15_direct.lp' Clone_2 (V22.1.2.0) Mon Jun 15 16:48:22 2026
+
+Tried aggregator 1 time.
+LP Presolve eliminated 0 rows and 1 columns.
+Reduced LP has 25272 rows, 31672 columns, and 75816 nonzeros.
+Presolve time = 0.19 sec. (29.58 ticks)
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          6269.000000
+Iteration:  1323    Objective     =       9681958.000000
+Iteration:  1886    Objective     =       9541576.000000
+Iteration:  2196    Objective     =       7542571.000000
+Iteration:  2562    Objective     =       5557233.500000
+Iteration:  2879    Objective     =       4844988.000000
+Iteration:  3147    Objective     =       4447180.500000
+Iteration:  3377    Objective     =       4201200.000000
+Switched to devex.
+Iteration:  4114    Objective     =       4183300.500000
+Iteration:  4719    Objective     =       4101471.000000
+Iteration:  4959    Objective     =       4101471.000000
+
+Dual simplex solved model.
+
+
+Log for './Grid/grid80x80.f15.wrap_direct.lp' Clone_2 (V22.1.2.0) Mon Jun 15 16:48:23 2026
+
+Tried aggregator 1 time.
+LP Presolve eliminated 0 rows and 1 columns.
+Reduced LP has 25596 rows, 31996 columns, and 76788 nonzeros.
+Presolve time = 0.17 sec. (29.95 ticks)
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          6336.000000
+Iteration:  1338    Objective     =       9845397.000000
+Iteration:  1911    Objective     =       9745925.000000
+Iteration:  2210    Objective     =       8002462.000000
+Iteration:  2575    Objective     =       5970536.000000
+Iteration:  2894    Objective     =       5146349.000000
+Iteration:  3165    Objective     =       4737527.500000
+Iteration:  3396    Objective     =       4429319.000000
+Switched to devex.
+Iteration:  4127    Objective     =       4421657.000000
+Iteration:  4795    Objective     =       4335507.500000
+
+Dual simplex solved model.
+
+
+Log for './Grid/grid80x80.f2_direct.lp' Clone_2 (V22.1.2.0) Mon Jun 15 16:48:24 2026
+
+Tried aggregator 1 time.
+LP Presolve eliminated 0 rows and 1 columns.
+Reduced LP has 25230 rows, 31630 columns, and 75690 nonzeros.
+Presolve time = 0.26 sec. (29.81 ticks)
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          6286.000000
+Iteration:  1326    Objective     =       1585556.000000
+Iteration:  1921    Objective     =       1563729.000000
+Iteration:  2247    Objective     =       1263483.000000
+Iteration:  2620    Objective     =       1004020.500000
+Iteration:  2930    Objective     =        908522.500000
+Iteration:  3191    Objective     =        849580.000000
+Iteration:  3420    Objective     =        808760.500000
+Switched to devex.
+Iteration:  4155    Objective     =        805612.500000
+Iteration:  4773    Objective     =        797850.000000
+Iteration:  5064    Objective     =        797850.000000
+
+Dual simplex solved model.
+
+
+Log for './Grid/grid80x80.f2.wrap_direct.lp' Clone_2 (V22.1.2.0) Mon Jun 15 16:48:25 2026
+
+Tried aggregator 1 time.
+LP Presolve eliminated 0 rows and 1 columns.
+Reduced LP has 25548 rows, 31948 columns, and 76644 nonzeros.
+Presolve time = 0.30 sec. (30.17 ticks)
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          6364.000000
+Iteration:  1340    Objective     =       1586413.000000
+Iteration:  1944    Objective     =       1562856.000000
+Iteration:  2273    Objective     =       1262566.000000
+Iteration:  2635    Objective     =       1025838.000000
+Iteration:  2947    Objective     =        923363.000000
+Iteration:  3207    Objective     =        869165.000000
+Iteration:  3434    Objective     =        827771.000000
+Switched to devex.
+Iteration:  4187    Objective     =        823894.500000
+Iteration:  4846    Objective     =        813575.500000
+Iteration:  5260    Objective     =        813575.500000
+Iteration:  5488    Objective     =        813575.500000
+Iteration:  5776    Objective     =        813575.500000
+Iteration:  5980    Objective     =        813575.500000
+
+Dual simplex solved model.
+
+
+Log for './Grid/grid80x80.f5_direct.lp' Clone_2 (V22.1.2.0) Mon Jun 15 16:48:27 2026
+
+Tried aggregator 1 time.
+LP Presolve eliminated 0 rows and 1 columns.
+Reduced LP has 25248 rows, 31648 columns, and 75744 nonzeros.
+Presolve time = 0.19 sec. (29.74 ticks)
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          6361.000000
+Iteration:  1338    Objective     =       3502690.000000
+Iteration:  1914    Objective     =       3460158.000000
+Iteration:  2228    Objective     =       2780999.000000
+Iteration:  2603    Objective     =       2122493.000000
+Iteration:  2922    Objective     =       1852756.000000
+Iteration:  3196    Objective     =       1699001.000000
+Iteration:  3425    Objective     =       1606309.500000
+Switched to devex.
+Iteration:  4141    Objective     =       1593185.000000
+Iteration:  4680    Objective     =       1573769.500000
+Iteration:  4920    Objective     =       1501892.500000
+
+Dual simplex solved model.
+
+
+Log for './Grid/grid80x80.f5.wrap_direct.lp' Clone_2 (V22.1.2.0) Mon Jun 15 16:48:28 2026
+
+Tried aggregator 1 time.
+LP Presolve eliminated 0 rows and 1 columns.
+Reduced LP has 25572 rows, 31972 columns, and 76716 nonzeros.
+Presolve time = 0.32 sec. (30.10 ticks)
+
+Iteration log . . .
+Iteration:     1    Infeasibility =          6452.000000
+Iteration:  1352    Objective     =       3510611.000000
+Iteration:  1940    Objective     =       3472125.000000
+Iteration:  2256    Objective     =       2802233.000000
+Iteration:  2627    Objective     =       2144675.500000
+Iteration:  2943    Objective     =       1872916.000000
+Iteration:  3207    Objective     =       1739363.000000
+
+Dual simplex solved model.
+

@@ -1,0 +1,6 @@
+CPLEX Parameter File Version 12.7.1.0
+CPX_PARAM_THREADS                1
+CPX_PARAM_EPAGAP                 0.00000000000000e+00   
+CPX_PARAM_EPGAP                  0.00000000000000e+00   
+CPX_PARAM_EPINT                  0.00000000000000e+00   
+CPX_PARAM_EPRHS			1e-9

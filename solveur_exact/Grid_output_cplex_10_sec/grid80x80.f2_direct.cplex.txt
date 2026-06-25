@@ -1,0 +1,52 @@
+
+Welcome to IBM(R) ILOG(R) CPLEX(R) Interactive Optimizer 22.1.2.0
+  with Simplex, Mixed Integer & Barrier Optimizers
+5725-A06 5725-A29 5724-Y48 5724-Y49 5724-Y54 5724-Y55 5655-Y21
+Copyright IBM Corp. 1988, 2024.  All Rights Reserved.
+
+Type 'help' for a list of available commands.
+Type 'help' followed by a command name for more
+information on commands.
+
+CPLEX> Command '###' does not exist.  Type 'help' for a list of commands.
+CPLEX> Command 'started:' does not exist.  Type 'help' for a list of commands.
+CPLEX> Problem 'Grid/grid80x80.f2_direct.lp' read.
+Read time = 0.03 sec. (3.11 ticks)
+CPLEX> New value for default parallel thread count: 1
+CPLEX> Version identifier: 22.1.2.0 | 2024-11-26 | 0edbb82fd
+CPXPARAM_Threads                                 1
+Found incumbent of value 5370286.000000 after 0.00 sec. (1.58 ticks)
+Tried aggregator 1 time.
+MIP Presolve eliminated 0 rows and 1 columns.
+Reduced MIP has 25230 rows, 31630 columns, and 75690 nonzeros.
+Reduced MIP has 6400 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.03 sec. (32.03 ticks)
+Probing time = 0.02 sec. (5.56 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 25230 rows, 31630 columns, and 75690 nonzeros.
+Reduced MIP has 31630 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.05 sec. (48.86 ticks)
+Probing time = 0.02 sec. (5.56 ticks)
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Root relaxation solution time = 0.09 sec. (169.04 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                      5370286.0000        0.0000           100.00%
+      0     0   318124.0000  6413  5370286.0000   318124.0000     8576   94.08%
+*     0+    0                       739500.0000   318124.0000            56.98%
+      0     0   347028.5000  7093   739500.0000    Cuts: 2693    11167   53.07%
+      0     0   369854.5000  7565   739500.0000    Cuts: 2528    13887   49.99%
+      0     0   385997.4167  7921   739500.0000 ZeroHalf: 2232    16323   47.80%
+*     0+    0                       739275.0000   385997.4167            47.79%
+      0     0  -1.00000e+75     0   739275.0000   385997.4167    16323   47.79%
+      0     0   401941.0000  8268   739275.0000 ZeroHalf: 2356    18747   45.63%
+      0     0   414776.9583  8547   739275.0000 ZeroHalf: 2038    21035   43.89%
+Detecting symmetries...
+      0     0   427303.2833  8790   739275.0000 ZeroHalf: 2246    23390   42.20%
+      0     0   437231.1917  9235   739275.0000 ZeroHalf: 1948    25712   40.86%
+      0     0   445804.2014  9276   739275.0000 ZeroHalf: 1879    27861   39.70%

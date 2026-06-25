@@ -1,0 +1,9 @@
+file,objective,status,solve_seconds
+grid80x80.f10_direct.lp,0,Dual simplex - Optimal:  Objective =  3.1766850000e+05,1.17884
+grid80x80.f10.wrap_direct.lp,0,Dual simplex - Optimal:  Objective =  3.1536700000e+05,1.27435
+grid80x80.f15_direct.lp,0,Dual simplex - Optimal:  Objective =  3.1766850000e+05,1.22094
+grid80x80.f15.wrap_direct.lp,0,Dual simplex - Optimal:  Objective =  3.1617200000e+05,0.953607
+grid80x80.f2_direct.lp,0,Dual simplex - Optimal:  Objective =  3.1812400000e+05,1.20663
+grid80x80.f2.wrap_direct.lp,0,Dual simplex - Optimal:  Objective =  3.1888200000e+05,1.51627
+grid80x80.f5_direct.lp,0,Dual simplex - Optimal:  Objective =  3.1275000000e+05,1.0708
+grid80x80.f5.wrap_direct.lp,0,Dual simplex - Optimal:  Objective =  3.1532950000e+05,1.13846

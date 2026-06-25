@@ -220,17 +220,19 @@ map<int, bool> solve_max2sat_subgradient(const vector<Clause>& wcnf_array, doubl
             // Construction of the objective function with current lambda and mu
             for (const auto& clause : wcnf_array) {
                 if (clause.literals.size() == 2) {
-                    int lit1 = clause.literals[0];
-                    int lit2 = clause.literals[1];
-                    int i = (lit1 < 0) ? -lit1 : -lit2;
-                    int j = (lit1 > 0) ? lit1 : lit2;
-                    pair<int, int> edge = {i, j};
+                    if (clause.weight<0){
+                        int lit1 = clause.literals[0];
+                        int lit2 = clause.literals[1];
+                        int i = (lit1 < 0) ? -lit1 : -lit2;
+                        int j = (lit1 > 0) ? lit1 : lit2;
+                        pair<int, int> edge = {i, j};
 
-                    double w_ij = clause.weight;
-                    double l_ij = lambda[edge];
-                    double m_ij = mu[edge];
+                        double w_ij = clause.weight;
+                        double l_ij = lambda[edge];
+                        double m_ij = mu[edge];
 
-                    obj_expr += (w_ij + l_ij + m_ij) * s[edge] - l_ij * y[j] + m_ij * y[i] - m_ij;
+                        obj_expr += (w_ij + l_ij + m_ij) * s[edge] - l_ij * y[j] + m_ij * y[i] - m_ij;
+                    }
 
                 } else if (clause.literals.size() == 1) {
                     int lit = clause.literals[0];

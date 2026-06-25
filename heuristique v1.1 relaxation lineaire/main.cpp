@@ -186,6 +186,10 @@ map<int, bool> solve_max2sat_implications_lp(const vector<Clause>& wcnf_array) {
 
                 // s_k + y_premise - y_conclusion <= 1
                 model.add(s_k + y[premise] - y[conclusion] <= 1.0);
+                if(weight < 0) {
+                    model.add(s_k >= y[conclusion]);
+                    model.add(s_k >= 1-y[premise]);
+                }
             }
         }
 
@@ -194,8 +198,16 @@ map<int, bool> solve_max2sat_implications_lp(const vector<Clause>& wcnf_array) {
         cplex.setOut(env.getNullStream()); // Suppress CPLEX logging
 
         if (cplex.solve()) {
+            // Randomized rounding: interpret LP values y[i] as probabilities
+            random_device rd_local;
+            mt19937 gen(rd_local());
+            uniform_real_distribution<> uni(0.0, 1.0);
+
             for (int i = 1; i <= max_var; ++i) {
-                assignments[i] = (round(cplex.getValue(y[i])) == 1.0);
+                double p = cplex.getValue(y[i]);
+                if (std::isnan(p)) p = 0.0;
+                p = std::min(1.0, std::max(0.0, p));
+                assignments[i] = (uni(gen) < p);
             }
         } else {
             cout << "LP Solver Status: " << cplex.getStatus() << endl;
@@ -331,8 +343,8 @@ vector<Clause> read_wcnf(const string& file_path, int& out_total_weight) {
 }
 // --- Main Execution ---
 int main() {
-    string input_folder = "./test_wcnf_files_20000_100000";   // Change to your folder path
-    string output_csv = "results_random_v1.1.csv";      // The desired output CSV name
+    string input_folder = "./wcnf_files";   // Change to your folder path
+    string output_csv = "results_random_rounding_v1.1.csv";      // The desired output CSV name
     
     // Create the folder for testing purposes if it doesn't exist
     if (!fs::exists(input_folder)) {
