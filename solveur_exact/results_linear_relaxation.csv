@@ -1,0 +1,2 @@
+Filename,Num_Variables,Num_Clauses,Total_Weight,Satisfied_Weight,Violated_Weight,Elapsed_Time,Linear_Relaxation_Objective
+grid80x80.f15_direct.wcnf,6400,31642,38199439,33052973,5146466,1.04229,317669
