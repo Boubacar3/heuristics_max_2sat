@@ -17,23 +17,23 @@ using namespace std;
 // =====================================================================
 
 struct Clause {
-    vector<int> literals;
+    vector<long long int> literals;
 };
 
 struct OrClause {
-    int u, v, w;
+    long long int u, v, w;
 };
 
 // =====================================================================
 // 1. ORIGINAL SCORE EVALUATOR
 // =====================================================================
 
-int get_original_score(const vector<bool>& assignment, const vector<Clause>& clauses, const vector<int>& weights) {
-    int score = 0;
+long long int get_original_score(const vector<bool>& assignment, const vector<Clause>& clauses, const vector<long long int>& weights) {
+    long long int score = 0;
     for (size_t idx = 0; idx < clauses.size(); ++idx) {
         bool satisfied = false;
-        for (int lit : clauses[idx].literals) {
-            int var_idx = abs(lit) - 1;
+        for (long long int lit : clauses[idx].literals) {
+            long long int var_idx = abs(lit) - 1;
             bool is_true = (lit > 0) ? assignment[var_idx] : !assignment[var_idx];
             if (is_true) {
                 satisfied = true;
@@ -51,8 +51,8 @@ int get_original_score(const vector<bool>& assignment, const vector<Clause>& cla
 // 2. HEURISTIC FUNCTIONS
 // =====================================================================
 
-int get_score(const vector<bool>& assignment, const vector<OrClause>& or_clauses, const vector<int>& neg_weights) {
-    int score = 0;
+long long int get_score(const vector<bool>& assignment, const vector<OrClause>& or_clauses, const vector<long long int>& neg_weights) {
+    long long int score = 0;
     for (const auto& clause : or_clauses) {
         if (assignment[clause.u] || assignment[clause.v]) {
             score += clause.w;
@@ -66,10 +66,10 @@ int get_score(const vector<bool>& assignment, const vector<OrClause>& or_clauses
     return score;
 }
 struct Edge {
-    int to;
-    int weight;
+    long long int to;
+    long long int weight;
 };
-pair<vector<bool>, int> solve_heuristic_cpp(int N, const vector<OrClause>& or_clauses, const vector<int>& neg_weights) {
+pair<vector<bool>, long long int> solve_heuristic_cpp(long long int N, const vector<OrClause>& or_clauses, const vector<long long int>& neg_weights) {
     // 1. Use uint8_t instead of vector<bool> for much faster memory access
     vector<uint8_t> assignment(N, 0);
 
@@ -80,74 +80,99 @@ pair<vector<bool>, int> solve_heuristic_cpp(int N, const vector<OrClause>& or_cl
         adj[clause.v].push_back({clause.u, clause.w});
     }
 
-    // 3. Delta Function: Flips a sequence of variables, updates assignment in-place,
-    // and returns the exact change in score in O(degree) time.
-    auto apply_flips = [&](const vector<int>& vars) -> int {
-        int delta = 0;
-        for (int v : vars) {
-            if (assignment[v]) { // Transitioning True -> False
-                delta += neg_weights[v];
-                for (const auto& edge : adj[v]) {
-                    if (!assignment[edge.to]) delta -= edge.weight;
-                }
-            } else { // Transitioning False -> True
-                delta -= neg_weights[v];
-                for (const auto& edge : adj[v]) {
-                    if (!assignment[edge.to]) delta += edge.weight;
-                }
+    // 3a. Single-flip Delta Function (Zero heap allocations)
+    auto apply_flip_single = [&](long long int v) -> long long int {
+        long long int delta = 0;
+        if (assignment[v]) { // True -> False
+            delta += neg_weights[v];
+            for (const auto& edge : adj[v]) {
+                if (!assignment[edge.to]) delta -= edge.weight;
             }
-            assignment[v] ^= 1; // Toggle state in-place
+        } else { // False -> True
+            delta -= neg_weights[v];
+            for (const auto& edge : adj[v]) {
+                if (!assignment[edge.to]) delta += edge.weight;
+            }
+        }
+        assignment[v] ^= 1; 
+        return delta;
+    };
+
+    // 3b. Multi-flip Delta Function
+    auto apply_flips = [&](const vector<long long int>& vars) -> long long int {
+        long long int delta = 0;
+        for (long long int v : vars) {
+            delta += apply_flip_single(v);
         }
         return delta;
     };
 
-    // Initialize base score (all zeros)
-    int current_score = 0;
-    for(int w : neg_weights) current_score += w;
+    // Initialize base score
+    long long int current_score = 0;
+    for(long long int w : neg_weights) current_score += w;
+
+    // Pre-allocate vectors outside the tight loops to prevent millions of allocations
+    vector<long long int> group;         group.reserve(100);
+    vector<long long int> rev_group;     rev_group.reserve(100);
+    vector<long long int> to_flip;       to_flip.reserve(100);
+    vector<long long int> drop_flips;    drop_flips.reserve(100);
 
     // =========================================================
-    // PHASE 1: Constructive Group Lookahead
+    // PHASE 1: Constructive Group Lookahead (Active Queue)
     // =========================================================
-    while (true) {
-        int best_gain = 0;
-        vector<int> best_group;
+    vector<long long int> queue_vars;
+    queue_vars.reserve(N * 2); // Avoid reallocation during pushes
+    vector<bool> in_queue(N, true);
+    for(long long int i = 0; i < N; ++i) queue_vars.push_back(i);
 
-        for (int v = 0; v < N; ++v) {
-            if (assignment[v]) continue;
+    long long int head = 0;
+    while(head < queue_vars.size()) {
+        long long int v = queue_vars[head++];
+        in_queue[v] = false;
 
-            // Try flipping just 'v'
-            int gain1 = apply_flips({v});
-            if (gain1 > best_gain) {
-                best_gain = gain1;
-                best_group = {v};
-            }
-            apply_flips({v}); // Revert immediately
+        if (assignment[v]) continue; // Only check False variables initially
 
-            // Try flipping 'v' and all of its currently false neighbors
-            vector<int> group = {v};
+        // Try 1-opt
+        long long int gain1 = apply_flip_single(v);
+        if (gain1 > 0) {
+            current_score += gain1;
             for (const auto& edge : adj[v]) {
-                if (!assignment[edge.to]) {
-                    group.push_back(edge.to);
+                if (!in_queue[edge.to]) {
+                    in_queue[edge.to] = true;
+                    queue_vars.push_back(edge.to);
                 }
             }
+            continue; 
+        }
+        apply_flip_single(v); // Revert
 
-            if (group.size() > 1) {
-                int gain2 = apply_flips(group);
-                if (gain2 > best_gain) {
-                    best_gain = gain2;
-                    best_group = group;
-                }
-                // Revert in reverse order to perfectly undo the delta calculation
-                vector<int> rev_group = group;
-                reverse(rev_group.begin(), rev_group.end());
-                apply_flips(rev_group); 
+        // Try group flip
+        group.clear();
+        group.push_back(v);
+        for (const auto& edge : adj[v]) {
+            if (!assignment[edge.to]) {
+                group.push_back(edge.to);
             }
         }
 
-        if (best_gain > 0) {
-            current_score += apply_flips(best_group); // Commit the best move
-        } else {
-            break;
+        if (group.size() > 1) {
+            long long int gain2 = apply_flips(group);
+            if (gain2 > 0) {
+                current_score += gain2;
+                for (long long int u : group) {
+                    for (const auto& edge : adj[u]) {
+                        if (!in_queue[edge.to]) {
+                            in_queue[edge.to] = true;
+                            queue_vars.push_back(edge.to);
+                        }
+                    }
+                }
+            } else {
+                // Revert
+                rev_group = group;
+                reverse(rev_group.begin(), rev_group.end());
+                apply_flips(rev_group); 
+            }
         }
     }
 
@@ -155,103 +180,89 @@ pair<vector<bool>, int> solve_heuristic_cpp(int N, const vector<OrClause>& or_cl
     // PHASES 2, 3, & 4: Refinement, Reversals, and Proactive Insertions
     // =========================================================
     bool changed = true;
-    for(int i=0;i<10;i++) { // Limit to 10 iterations to avoid infinite loops}
+    while (changed) {
         changed = false;
 
         // 1. Standard 1-opt Pruning
-        for (int v = 0; v < N; ++v) {
-            int gain = apply_flips({v});
+        for (long long int v = 0; v < N; ++v) {
+            long long int gain = apply_flip_single(v);
             if (gain > 0) {
                 current_score += gain;
                 changed = true;
             } else {
-                apply_flips({v}); // Revert
+                apply_flip_single(v); // Revert
             }
         }
         if (changed) continue;
 
         // 2. Cascading Swap (Reversal with smart repair)
-        for (int v = 0; v < N; ++v) {
+        for (long long int v = 0; v < N; ++v) {
             if (assignment[v]) {
-                vector<int> to_flip = {v};
+                to_flip.clear();
+                to_flip.push_back(v);
 
                 for (const auto& edge : adj[v]) {
-                    int other = edge.to;
-                    if (!assignment[other]) {
-                        if (edge.weight > neg_weights[other]) {
-                            to_flip.push_back(other);
-                        }
+                    long long int other = edge.to;
+                    if (!assignment[other] && edge.weight > neg_weights[other]) {
+                        to_flip.push_back(other);
                     }
                 }
 
-                int gain = apply_flips(to_flip);
+                long long int gain = apply_flips(to_flip);
                 if (gain > 0) {
                     current_score += gain;
                     changed = true;
                 } else {
-                    reverse(to_flip.begin(), to_flip.end());
-                    apply_flips(to_flip); // Revert
+                    rev_group = to_flip;
+                    reverse(rev_group.begin(), rev_group.end());
+                    apply_flips(rev_group); // Revert
                 }
             }
         }
         if (changed) continue;
 
-        // 3. Proactive Insertion
-        for (int v = 0; v < N; ++v) {
+        // 3. Proactive Insertion (Restricted Neighborhood Search)
+        for (long long int v = 0; v < N; ++v) {
             if (!assignment[v]) {
-                int initial_gain = apply_flips({v}); // Tentatively commit v=1
+                long long int initial_gain = apply_flip_single(v); // Tentatively commit v=1
+                long long int best_sub_gain = 0;
+                vector<long long int> best_sub_flips;
                 
-                // Copy state for the sub-search to avoid complicated backtracking logic
-                vector<uint8_t> test_assign = assignment;
-                int test_score = current_score + initial_gain;
-
-                bool sub_changed = true;
-                while (sub_changed) {
-                    sub_changed = false;
-
-                    for (int u = 0; u < N; ++u) {
-                        if (test_assign[u] && u != v) {
-                            vector<int> drop_flips = {u};
-                            
-                            for (const auto& edge : adj[u]) {
-                                int other = edge.to;
-                                if (!test_assign[other] && edge.weight > neg_weights[other]) {
-                                    drop_flips.push_back(other);
-                                }
-                            }
-
-                            // Inline fast delta for the local test array
-                            int delta = 0;
-                            for (int idx : drop_flips) {
-                                if (test_assign[idx]) {
-                                    delta += neg_weights[idx];
-                                    for (const auto& e : adj[idx]) if (!test_assign[e.to]) delta -= e.weight;
-                                } else {
-                                    delta -= neg_weights[idx];
-                                    for (const auto& e : adj[idx]) if (!test_assign[e.to]) delta += e.weight;
-                                }
-                                test_assign[idx] ^= 1; 
-                            }
-
-                            if (delta > 0) {
-                                test_score += delta;
-                                sub_changed = true;
-                            } else {
-                                // Revert local test flips
-                                for (int i = drop_flips.size() - 1; i >= 0; --i) {
-                                    test_assign[drop_flips[i]] ^= 1;
-                                }
+                // Only scan NEIGHBORS, not all N variables
+                for (const auto& edge : adj[v]) {
+                    long long int u = edge.to;
+                    if (assignment[u] && u != v) {
+                        drop_flips.clear();
+                        drop_flips.push_back(u);
+                        
+                        for (const auto& edge_u : adj[u]) {
+                            long long int other = edge_u.to;
+                            if (!assignment[other] && edge_u.weight > neg_weights[other]) {
+                                drop_flips.push_back(other);
                             }
                         }
+
+                        long long int sub_gain = apply_flips(drop_flips);
+                        if (sub_gain > best_sub_gain) {
+                            best_sub_gain = sub_gain;
+                            best_sub_flips = drop_flips;
+                        }
+                        
+                        // Undo immediately to fairly test the next neighbor
+                        rev_group = drop_flips;
+                        reverse(rev_group.begin(), rev_group.end());
+                        apply_flips(rev_group);
                     }
                 }
 
-                if (test_score > current_score) {
-                    assignment = test_assign;
-                    current_score = test_score;
+                if (initial_gain + best_sub_gain > 0) {
+                    current_score += (initial_gain + best_sub_gain);
+                    if (!best_sub_flips.empty()) {
+                        apply_flips(best_sub_flips); // Commit the chosen repair
+                    }
                     changed = true;
                 } else {
-                    apply_flips({v}); // Undo initial tentative v=1
+                    apply_flip_single(v); // Undo initial tentative v=1
                 }
             }
         }
@@ -259,7 +270,7 @@ pair<vector<bool>, int> solve_heuristic_cpp(int N, const vector<OrClause>& or_cl
 
     // Convert fast uint8_t array back to vector<bool> for the return signature
     vector<bool> final_assign(N);
-    for (int i = 0; i < N; ++i) final_assign[i] = assignment[i];
+    for (long long int i = 0; i < N; ++i) final_assign[i] = assignment[i];
 
     return {final_assign, current_score};
 }
@@ -267,24 +278,24 @@ pair<vector<bool>, int> solve_heuristic_cpp(int N, const vector<OrClause>& or_cl
 // 3. GENERATOR & L-REDUCTION
 // =====================================================================
 
-void generate_standard_max2sat(int num_vars, int num_clauses, int max_weight, vector<Clause>& clauses, vector<int>& weights) {
+void generate_standard_max2sat(long long int num_vars, long long int num_clauses, long long int max_weight, vector<Clause>& clauses, vector<long long int>& weights) {
     mt19937 rng(random_device{}());
-    uniform_int_distribution<int> size_dist(1, 2);
-    uniform_int_distribution<int> var_dist(1, num_vars);
-    uniform_int_distribution<int> sign_dist(0, 1);
-    uniform_int_distribution<int> weight_dist(1, max_weight);
+    uniform_int_distribution<long long int> size_dist(1, 2);
+    uniform_int_distribution<long long int> var_dist(1, num_vars);
+    uniform_int_distribution<long long int> sign_dist(0, 1);
+    uniform_int_distribution<long long int> weight_dist(1, max_weight);
 
     clauses.clear();
     weights.clear();
 
-    for (int i = 0; i < num_clauses; ++i) {
-        int size = size_dist(rng);
+    for (long long int i = 0; i < num_clauses; ++i) {
+        long long int size = size_dist(rng);
         Clause c;
-        int v1 = var_dist(rng);
+        long long int v1 = var_dist(rng);
         c.literals.push_back(sign_dist(rng) ? v1 : -v1);
         
         if (size == 2) {
-            int v2 = var_dist(rng);
+            long long int v2 = var_dist(rng);
             while (v2 == v1) v2 = var_dist(rng); // Ensure distinct variables
             c.literals.push_back(sign_dist(rng) ? v2 : -v2);
         }
@@ -293,48 +304,48 @@ void generate_standard_max2sat(int num_vars, int num_clauses, int max_weight, ve
     }
 }
 
-void reduce_to_weighted_restricted(int num_vars, const vector<Clause>& original_clauses, const vector<int>& weights, 
-                                   int& N_new, vector<OrClause>& or_clauses_arr, vector<int>& neg_weights) {
-    int V = num_vars;
+void reduce_to_weighted_restricted(long long int num_vars, const vector<Clause>& original_clauses, const vector<long long int>& weights, 
+                                   long long int& N_new, vector<OrClause>& or_clauses_arr, vector<long long int>& neg_weights) {
+    long long int V = num_vars;
     N_new = 2 * V;
     neg_weights.assign(N_new, 0);
-    map<pair<int, int>, int> or_clauses_dict;
+    map<pair<long long int, long long int>, long long int> or_clauses_dict;
 
-    auto get_var_idx = [V](int literal) {
-        int var_idx = abs(literal) - 1;
+    auto get_var_idx = [V](long long int literal) {
+        long long int var_idx = abs(literal) - 1;
         return (literal > 0) ? var_idx : var_idx + V;
     };
 
     // 1. Translate
     for (size_t idx = 0; idx < original_clauses.size(); ++idx) {
-        int w = weights[idx];
+        long long int w = weights[idx];
         if (original_clauses[idx].literals.size() == 2) {
-            int u = get_var_idx(original_clauses[idx].literals[0]);
-            int v = get_var_idx(original_clauses[idx].literals[1]);
+            long long int u = get_var_idx(original_clauses[idx].literals[0]);
+            long long int v = get_var_idx(original_clauses[idx].literals[1]);
             if (u > v) swap(u, v);
             or_clauses_dict[{u, v}] += w;
         } else if (original_clauses[idx].literals.size() == 1) {
-            int literal = original_clauses[idx].literals[0];
+            long long int literal = original_clauses[idx].literals[0];
             if (literal > 0) neg_weights[abs(literal) - 1 + V] += w;
             else neg_weights[abs(literal) - 1] += w;
         }
     }
 
     // 2. Weighted variable degrees
-    vector<int> degrees(V + 1, 0);
+    vector<long long int> degrees(V + 1, 0);
     for (size_t idx = 0; idx < original_clauses.size(); ++idx) {
-        int w = weights[idx];
-        for (int literal : original_clauses[idx].literals) {
+        long long int w = weights[idx];
+        for (long long int literal : original_clauses[idx].literals) {
             degrees[abs(literal)] += w;
         }
     }
 
     // 3. Consistency Gadgets
-    for (int i = 1; i <= V; ++i) {
-        int d_i = degrees[i];
+    for (long long int i = 1; i <= V; ++i) {
+        long long int d_i = degrees[i];
         if (d_i == 0) continue;
-        int u = i - 1;
-        int v = i - 1 + V;
+        long long int u = i - 1;
+        long long int v = i - 1 + V;
         or_clauses_dict[{u, v}] += (2 * d_i);
         neg_weights[u] += d_i;
         neg_weights[v] += d_i;
@@ -350,14 +361,14 @@ void reduce_to_weighted_restricted(int num_vars, const vector<Clause>& original_
 // 4. CPLEX EXACT SOLVER
 // =====================================================================
 
-pair<vector<bool>, int> solve_classical_max2sat_cplex(int num_vars, const vector<Clause>& clauses, const vector<int>& weights) {
+pair<vector<bool>, long long int> solve_classical_max2sat_cplex(long long int num_vars, const vector<Clause>& clauses, const vector<long long int>& weights) {
     IloEnv env;
     vector<bool> assignment(num_vars, false);
-    int opt_score = 0;
+    long long int opt_score = 0;
 
     try {
         IloModel model(env);
-        int M = clauses.size();
+        long long int M = clauses.size();
         
         // Variables
         IloBoolVarArray x(env, num_vars); 
@@ -365,17 +376,17 @@ pair<vector<bool>, int> solve_classical_max2sat_cplex(int num_vars, const vector
 
         // Objective: Maximize sum(weight_j * z_j)
         IloExpr objExpr(env);
-        for (int j = 0; j < M; ++j) {
-            objExpr += weights[j] * z[j];
+        for (long long int j = 0; j < M; ++j) {
+            objExpr += IloNum(weights[j]) * z[j];
         }
         model.add(IloMaximize(env, objExpr));
         objExpr.end();
 
         // Constraints: z_j <= sum(literals)
-        for (int j = 0; j < M; ++j) {
+        for (long long int j = 0; j < M; ++j) {
             IloExpr clauseExpr(env);
-            for (int literal : clauses[j].literals) {
-                int var_idx = abs(literal) - 1;
+            for (long long int literal : clauses[j].literals) {
+                long long int var_idx = abs(literal) - 1;
                 if (literal > 0) {
                     clauseExpr += x[var_idx];
                 } else {
@@ -393,7 +404,7 @@ pair<vector<bool>, int> solve_classical_max2sat_cplex(int num_vars, const vector
 
         if (cplex.solve()) {
             opt_score = round(cplex.getObjValue());
-            for (int i = 0; i < num_vars; ++i) {
+            for (long long int i = 0; i < num_vars; ++i) {
                 assignment[i] = (round(cplex.getValue(x[i])) == 1.0);
             }
         } else {
@@ -414,7 +425,7 @@ pair<vector<bool>, int> solve_classical_max2sat_cplex(int num_vars, const vector
 // 5. UNIFIED TEST RUNNER
 // =====================================================================
 
-void test_unified_pipeline(int num_tests) {
+void test_unified_pipeline(long long int num_tests) {
     cout << "\n--- UNIFIED CPLEX EXACT vs C++ HEURISTIC ---\n";
     cout << left << setw(15) << "Graph Size" << " | "
          << setw(10) << "CPLEX Exact" << " | "
@@ -423,14 +434,14 @@ void test_unified_pipeline(int num_tests) {
          << "Time Heur\n";
     cout << string(65, '-') << "\n";
 
-    for (int t = 0; t < num_tests; ++t) {
-        int V = 2000;
-        int M = 10000;
+    for (long long int t = 0; t < num_tests; ++t) {
+        long long int V = 1000;
+        long long int M = 10000;
 
 
         vector<Clause> orig_clauses;
-        vector<int> orig_weights;
-        generate_standard_max2sat(V, M, 1, orig_clauses, orig_weights);
+        vector<long long int> orig_weights;
+        generate_standard_max2sat(V, M, 100, orig_clauses, orig_weights);
 
         // 2. Solve exactly via CPLEX
         auto t0 = chrono::high_resolution_clock::now();
@@ -438,9 +449,9 @@ void test_unified_pipeline(int num_tests) {
         auto t1 = chrono::high_resolution_clock::now();
 
         // 3. L-Reduce and Solve via Heuristic
-        int N_red;
+        long long int N_red;
         vector<OrClause> or_clauses;
-        vector<int> neg_weights;
+        vector<long long int> neg_weights;
         reduce_to_weighted_restricted(V, orig_clauses, orig_weights, N_red, or_clauses, neg_weights);
 
         auto heur_res = solve_heuristic_cpp(N_red, or_clauses, neg_weights);
@@ -448,9 +459,9 @@ void test_unified_pipeline(int num_tests) {
 
         // 4. Evaluate Heuristic's assignment back on Original Graph
         vector<bool> heur_orig_assign(V);
-        for(int i = 0; i < V; ++i) heur_orig_assign[i] = heur_res.first[i];
+        for(long long int i = 0; i < V; ++i) heur_orig_assign[i] = heur_res.first[i];
         
-        int heur_true_score = get_original_score(heur_orig_assign, orig_clauses, orig_weights);
+        long long int heur_true_score = get_original_score(heur_orig_assign, orig_clauses, orig_weights);
 
         // 5. Format Output
         double cplex_time = chrono::duration<double, milli>(t1 - t0).count();
@@ -465,7 +476,6 @@ void test_unified_pipeline(int num_tests) {
              << heur_time << "ms\n";
     }
 }
-
 int main() {
     test_unified_pipeline(15);
     return 0;
