@@ -435,13 +435,13 @@ void test_unified_pipeline(long long int num_tests) {
     cout << string(65, '-') << "\n";
 
     for (long long int t = 0; t < num_tests; ++t) {
-        long long int V = 1000;
+        long long int V = 2000;
         long long int M = 10000;
-
+        long long int w = 100;
 
         vector<Clause> orig_clauses;
         vector<long long int> orig_weights;
-        generate_standard_max2sat(V, M, 100, orig_clauses, orig_weights);
+        generate_standard_max2sat(V, M, w, orig_clauses, orig_weights);
 
         // 2. Solve exactly via CPLEX
         auto t0 = chrono::high_resolution_clock::now();
