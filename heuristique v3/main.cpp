@@ -437,7 +437,7 @@ void test_unified_pipeline(long long int num_tests) {
     for (long long int t = 0; t < num_tests; ++t) {
         long long int V = 2000;
         long long int M = 10000;
-        long long int w = 100;
+        long long int w = 1;
 
         vector<Clause> orig_clauses;
         vector<long long int> orig_weights;
