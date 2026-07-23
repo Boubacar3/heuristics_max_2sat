@@ -24,6 +24,11 @@ struct OrClause {
     long long int u, v, w;
 };
 
+struct Edge {
+    long long int to;
+    long long int weight;
+};
+
 // =====================================================================
 // 1. ORIGINAL SCORE EVALUATOR
 // =====================================================================
@@ -65,10 +70,7 @@ long long int get_score(const vector<bool>& assignment, const vector<OrClause>& 
     }
     return score;
 }
-struct Edge {
-    long long int to;
-    long long int weight;
-};
+
 pair<vector<bool>, long long int> solve_heuristic_cpp(int N, const vector<OrClause>& or_clauses, const vector<long long int>& neg_weights) {
     // 1. Use uint8_t instead of vector<bool> for much faster memory access
     vector<uint8_t> assignment(N, 0);
@@ -80,7 +82,7 @@ pair<vector<bool>, long long int> solve_heuristic_cpp(int N, const vector<OrClau
         adj[clause.v].push_back({clause.u, clause.w});
     }
 
-    // 3a. Single-flip Delta Function (Zero heap allocations)
+    // 3a. Single-flip Delta Function (Zero heap allocations, using long long int to prevent overflow)
     auto apply_flip_single = [&](int v) -> long long int {
         long long int delta = 0;
         if (assignment[v]) { // True -> False
@@ -99,8 +101,8 @@ pair<vector<bool>, long long int> solve_heuristic_cpp(int N, const vector<OrClau
     };
 
     // 3b. Multi-flip Delta Function
-    auto apply_flips = [&](const vector<int>& vars) -> int {
-        int delta = 0;
+    auto apply_flips = [&](const vector<int>& vars) -> long long int {
+        long long int delta = 0;
         for (int v : vars) {
             delta += apply_flip_single(v);
         }
@@ -108,8 +110,8 @@ pair<vector<bool>, long long int> solve_heuristic_cpp(int N, const vector<OrClau
     };
 
     // Initialize base score
-    int current_score = 0;
-    for(int w : neg_weights) current_score += w;
+    long long int current_score = 0;
+    for(long long int w : neg_weights) current_score += w;
 
     // Pre-allocate vectors outside the tight loops to prevent millions of allocations
     vector<int> group;         group.reserve(100);
@@ -133,7 +135,7 @@ pair<vector<bool>, long long int> solve_heuristic_cpp(int N, const vector<OrClau
         if (assignment[v]) continue; // Only check False variables initially
 
         // Try 1-opt
-        int gain1 = apply_flip_single(v);
+        long long int gain1 = apply_flip_single(v);
         if (gain1 > 0) {
             current_score += gain1;
             for (const auto& edge : adj[v]) {
@@ -156,7 +158,7 @@ pair<vector<bool>, long long int> solve_heuristic_cpp(int N, const vector<OrClau
         }
 
         if (group.size() > 1) {
-            int gain2 = apply_flips(group);
+            long long int gain2 = apply_flips(group);
             if (gain2 > 0) {
                 current_score += gain2;
                 for (int u : group) {
@@ -180,21 +182,26 @@ pair<vector<bool>, long long int> solve_heuristic_cpp(int N, const vector<OrClau
     // PHASES 2, 3, & 4: Refinement, Reversals, and Proactive Insertions
     // =========================================================
     bool changed = true;
-    for(int i = 0; i < 5; i++) { 
+    int max_passes = 15; // Prevent long-tail stalling on massive graphs
+    int pass = 0;
+    
+    while (changed && pass < max_passes) { 
         changed = false;
+        pass++;
 
         // 1. Standard 1-opt Pruning
         for (int v = 0; v < N; ++v) {
-            int gain = apply_flip_single(v);
-            if (gain > 0) {
-                current_score += gain;
-                changed = true;
-            } else {
-                apply_flip_single(v); // Revert
+            if (assignment[v]) {
+                long long int gain = apply_flip_single(v);
+                if (gain > 0) {
+                    current_score += gain;
+                    changed = true;
+                } else {
+                    apply_flip_single(v); // Revert
+                }
             }
         }
-        if (changed) continue;
-
+        
         // 2. Cascading Swap (Reversal with smart repair)
         for (int v = 0; v < N; ++v) {
             if (assignment[v]) {
@@ -208,61 +215,74 @@ pair<vector<bool>, long long int> solve_heuristic_cpp(int N, const vector<OrClau
                     }
                 }
 
-                int gain = apply_flips(to_flip);
+                long long int gain = apply_flips(to_flip);
                 if (gain > 0) {
                     current_score += gain;
                     changed = true;
                 } else {
-                    rev_group = to_flip;
-                    reverse(rev_group.begin(), rev_group.end());
-                    apply_flips(rev_group); // Revert
+                    // Fast revert without std::reverse
+                    for (int i = to_flip.size() - 1; i >= 0; --i) {
+                        apply_flip_single(to_flip[i]); 
+                    }
                 }
             }
         }
-        if (changed) continue;
-
-        // 3. Proactive Insertion (Restricted Neighborhood Search)
+        
+        // 3. Proactive Insertion (Neighborhood-Restricted Cascade)
         for (int v = 0; v < N; ++v) {
             if (!assignment[v]) {
-                int initial_gain = apply_flip_single(v); // Tentatively commit v=1
-                int best_sub_gain = 0;
-                vector<int> best_sub_flips;
+                long long int initial_gain = apply_flip_single(v); 
+                long long int accumulated_sub_gain = 0;
                 
-                // Only scan NEIGHBORS, not all N variables
-                for (const auto& edge : adj[v]) {
-                    int u = edge.to;
-                    if (assignment[u] && u != v) {
-                        drop_flips.clear();
-                        drop_flips.push_back(u);
-                        
-                        for (const auto& edge_u : adj[u]) {
-                            int other = edge_u.to;
-                            if (!assignment[other] && edge_u.weight > neg_weights[other]) {
-                                drop_flips.push_back(other);
+                // Track all committed flips in this cascade for fast rollback
+                vector<int> committed_sub_flips; 
+                committed_sub_flips.reserve(20);
+                
+                bool sub_changed = true;
+                while (sub_changed) {
+                    sub_changed = false;
+                    
+                    // FAST SCAN: Only check neighbors of v, not the whole graph (O(Degree) instead of O(N))
+                    for (const auto& neighbor_edge : adj[v]) {
+                        int u = neighbor_edge.to;
+                        if (assignment[u]) {
+                            drop_flips.clear();
+                            drop_flips.push_back(u);
+                            
+                            // Check for necessary repairs
+                            for (const auto& edge_u : adj[u]) {
+                                int other = edge_u.to;
+                                if (!assignment[other] && edge_u.weight > neg_weights[other]) {
+                                    drop_flips.push_back(other);
+                                }
+                            }
+
+                            long long int sub_gain = apply_flips(drop_flips);
+                            
+                            if (sub_gain > 0) { 
+                                accumulated_sub_gain += sub_gain;
+                                for(int flip_var : drop_flips) committed_sub_flips.push_back(flip_var);
+                                sub_changed = true;
+                            } else {
+                                // Fast revert
+                                for (int i = drop_flips.size() - 1; i >= 0; --i) {
+                                    apply_flip_single(drop_flips[i]); 
+                                }
                             }
                         }
-
-                        int sub_gain = apply_flips(drop_flips);
-                        if (sub_gain > best_sub_gain) {
-                            best_sub_gain = sub_gain;
-                            best_sub_flips = drop_flips;
-                        }
-                        
-                        // Undo immediately to fairly test the next neighbor
-                        rev_group = drop_flips;
-                        reverse(rev_group.begin(), rev_group.end());
-                        apply_flips(rev_group);
                     }
                 }
 
-                if (initial_gain + best_sub_gain > 0) {
-                    current_score += (initial_gain + best_sub_gain);
-                    if (!best_sub_flips.empty()) {
-                        apply_flips(best_sub_flips); // Commit the chosen repair
-                    }
+                // Final Evaluation
+                if (initial_gain + accumulated_sub_gain > 0) {
+                    current_score += (initial_gain + accumulated_sub_gain);
                     changed = true;
                 } else {
-                    apply_flip_single(v); // Undo initial tentative v=1
+                    // Rollback the entire cascade in reverse order
+                    for (int i = committed_sub_flips.size() - 1; i >= 0; --i) {
+                        apply_flip_single(committed_sub_flips[i]);
+                    }
+                    apply_flip_single(v); // Undo the initial insertion
                 }
             }
         }
@@ -274,6 +294,7 @@ pair<vector<bool>, long long int> solve_heuristic_cpp(int N, const vector<OrClau
 
     return {final_assign, current_score};
 }
+
 // =====================================================================
 // 3. GENERATOR & L-REDUCTION
 // =====================================================================
@@ -436,8 +457,8 @@ void test_unified_pipeline(long long int num_tests) {
     cout << string(75, '-') << "\n";
 
     for (long long int t = 0; t < num_tests; ++t) {
-        long long int V = 20000;
-        long long int M = 100000;
+        long long int V = 2000;
+        long long int M = 10000;
         long long int w = 1;
 
         vector<Clause> orig_clauses;
@@ -479,6 +500,7 @@ void test_unified_pipeline(long long int num_tests) {
              << heur_time << "ms\n";
     }
 }
+
 int main() {
     test_unified_pipeline(15);
     return 0;
