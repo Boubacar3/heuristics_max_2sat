@@ -355,13 +355,14 @@ void test_unified_pipeline(long long int num_tests) {
     cout << left << setw(15) << "Graph Size" << " | "
          << setw(10) << "CPLEX Exact" << " | "
          << setw(10) << "Heur Score" << " | "
+         << setw(10) << "Heur/Exact" << " | "
          << setw(10) << "Time CPLEX" << " | "
          << "Time Heur\n";
-    cout << string(65, '-') << "\n";
+    cout << string(75, '-') << "\n";
 
     for (long long int t = 0; t < num_tests; ++t) {
-        long long int V = 40000;
-        long long int M = 200000;
+        long long int V = 140;
+        long long int M = 1200;
         long long int w = 1;
 
         vector<Clause> orig_clauses;
@@ -391,12 +392,14 @@ void test_unified_pipeline(long long int num_tests) {
         // 5. Format Output
         double cplex_time = chrono::duration<double, milli>(t1 - t0).count();
         double heur_time = chrono::duration<double, milli>(t2 - t1).count();
+        double score_ratio = (cplex_res.second > 0) ? static_cast<double>(heur_true_score) / cplex_res.second : 0.0;
 
         string graph_size = "V:" + to_string(V) + " E:" + to_string(M);
         
         cout << left << setw(15) << graph_size << " | "
              << setw(10) << cplex_res.second << " | "
              << setw(10) << heur_true_score << " | "
+             << setw(10) << fixed << setprecision(3) << score_ratio << " | "
              << fixed << setprecision(1) << cplex_time << "ms   | "
              << heur_time << "ms\n";
     }
