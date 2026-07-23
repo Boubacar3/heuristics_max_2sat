@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <algorithm>
 #include <map>
+#include <string>
 
 // CPLEX Header
 #include <ilcplex/ilocplex.h>
@@ -182,10 +183,11 @@ pair<vector<bool>, long long int> solve_heuristic_cpp(int N, const vector<OrClau
     // PHASES 2, 3, & 4: Refinement, Reversals, and Proactive Insertions
     // =========================================================
     bool changed = true;
-    int max_passes = 15; // Prevent long-tail stalling on massive graphs
+    int max_passes = 20; // Prevent long-tail stalling on massive graphs
     int pass = 0;
     
-    while (changed && pass < max_passes) { 
+    //while (changed && pass < max_passes) { 
+    while (changed) {
         changed = false;
         pass++;
 
@@ -314,7 +316,7 @@ void generate_standard_max2sat(long long int num_vars, long long int num_clauses
         Clause c;
         long long int v1 = var_dist(rng);
         c.literals.push_back(sign_dist(rng) ? v1 : -v1);
-        
+        size = 2; // Ensure at least two literals for the clause
         if (size == 2) {
             long long int v2 = var_dist(rng);
             while (v2 == v1) v2 = var_dist(rng); // Ensure distinct variables
@@ -382,7 +384,7 @@ void reduce_to_weighted_restricted(long long int num_vars, const vector<Clause>&
 // 4. CPLEX EXACT SOLVER
 // =====================================================================
 
-pair<vector<bool>, long long int> solve_classical_max2sat_cplex(long long int num_vars, const vector<Clause>& clauses, const vector<long long int>& weights) {
+pair<vector<bool>, long long int> solve_classical_max2sat_cplex(long long int num_vars, const vector<Clause>& clauses, const vector<long long int>& weights, long long int timeout_seconds = 0) {
     IloEnv env;
     vector<bool> assignment(num_vars, false);
     long long int opt_score = 0;
@@ -422,6 +424,10 @@ pair<vector<bool>, long long int> solve_classical_max2sat_cplex(long long int nu
         IloCplex cplex(model);
         cplex.setOut(env.getNullStream()); // Suppress CPLEX output
         cplex.setWarning(env.getNullStream());
+        cplex.setParam(IloCplex::Threads, 1);
+        if (timeout_seconds > 0) {
+            cplex.setParam(IloCplex::TiLim, static_cast<IloNum>(timeout_seconds));
+        }
 
         if (cplex.solve()) {
             opt_score = round(cplex.getObjValue());
@@ -446,7 +452,7 @@ pair<vector<bool>, long long int> solve_classical_max2sat_cplex(long long int nu
 // 5. UNIFIED TEST RUNNER
 // =====================================================================
 
-void test_unified_pipeline(long long int num_tests) {
+void test_unified_pipeline(long long int num_tests, long long int timeout_seconds) {
     cout << "\n--- UNIFIED CPLEX EXACT vs C++ HEURISTIC ---\n";
     cout << left << setw(15) << "Graph Size" << " | "
          << setw(10) << "CPLEX Exact" << " | "
@@ -455,6 +461,9 @@ void test_unified_pipeline(long long int num_tests) {
          << setw(10) << "Time CPLEX" << " | "
          << "Time Heur\n";
     cout << string(75, '-') << "\n";
+
+    double total_ratio = 0.0;
+    long long int completed_tests = 0;
 
     for (long long int t = 0; t < num_tests; ++t) {
         long long int V = 2000;
@@ -467,7 +476,7 @@ void test_unified_pipeline(long long int num_tests) {
 
         // 2. Solve exactly via CPLEX
         auto t0 = chrono::high_resolution_clock::now();
-        auto cplex_res = solve_classical_max2sat_cplex(V, orig_clauses, orig_weights);
+        auto cplex_res = solve_classical_max2sat_cplex(V, orig_clauses, orig_weights, timeout_seconds);
         auto t1 = chrono::high_resolution_clock::now();
 
         // 3. L-Reduce and Solve via Heuristic
@@ -490,6 +499,9 @@ void test_unified_pipeline(long long int num_tests) {
         double heur_time = chrono::duration<double, milli>(t2 - t1).count();
         double score_ratio = (cplex_res.second > 0) ? static_cast<double>(heur_true_score) / cplex_res.second : 0.0;
 
+        total_ratio += score_ratio;
+        completed_tests++;
+
         string graph_size = "V:" + to_string(V) + " E:" + to_string(M);
         
         cout << left << setw(15) << graph_size << " | "
@@ -499,9 +511,40 @@ void test_unified_pipeline(long long int num_tests) {
              << fixed << setprecision(1) << cplex_time << "ms   | "
              << heur_time << "ms\n";
     }
+
+    if (completed_tests > 0) {
+        cout << "\nAverage ratio over " << completed_tests << " tests: "
+             << fixed << setprecision(3) << (total_ratio / completed_tests) << "\n";
+    }
 }
 
-int main() {
-    test_unified_pipeline(15);
+int main(int argc, char** argv) {
+    long long int num_tests = 1;
+    long long int timeout_seconds = 1;
+
+    if (argc > 1) {
+        try {
+            num_tests = stoll(argv[1]);
+        } catch (...) {
+            cerr << "Invalid number of tests: " << argv[1] << endl;
+            return 1;
+        }
+    }
+    if (argc > 2) {
+        try {
+            timeout_seconds = stoll(argv[2]);
+        } catch (...) {
+            cerr << "Invalid timeout: " << argv[2] << endl;
+            return 1;
+        }
+    }
+
+    if (timeout_seconds > 0) {
+        cout << "CPLEX timeout set to " << timeout_seconds << " second(s).\n";
+    } else {
+        cout << "CPLEX timeout disabled.\n";
+    }
+
+    test_unified_pipeline(num_tests, timeout_seconds);
     return 0;
 }
